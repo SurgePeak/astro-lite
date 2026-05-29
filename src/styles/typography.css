@@ -44,7 +44,7 @@
     }
 
     img {
-      @apply border-border mx-auto border;
+      @apply mx-auto;
     }
 
     figcaption {
@@ -94,6 +94,7 @@
 
   html[data-theme="dark"] .astro-code {
     @apply bg-(--shiki-dark-bg) text-(--shiki-dark) [&_span]:text-(--shiki-dark);
+    background-color: var(--code-block-bg) !important;
   }
 
   /* Styles for Shiki transformers */

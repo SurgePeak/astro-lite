@@ -8,6 +8,7 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --font-app: var(--font-google-sans-code);
+  --code-block-bg: var(--muted);
 }
 
 /* Light theme values */
@@ -24,11 +25,12 @@
 
 /* Dark theme values */
 [data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
+  --background: #262624;
+  --foreground: #faf9f5;
   --accent: #ff6b01;
   --accent-foreground: #ffffff;
   --muted: #343f60;
   --muted-foreground: #afb9ca;
-  --border: #ab4b08;
+  --border: #dedcd14d;
+  --code-block-bg: #30302e80;
 }
