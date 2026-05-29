@@ -24,12 +24,17 @@
   --muted-foreground: #6b7280;
   --border: #ece9e9;
   --blockquote-border: #E4E3DF;
+  
+  /* 复选框 — 浅色深色共用 */
+  --checkbox-border: #626262;
+  --checkbox-bg: #3b3b3b;
+  --checkbox-checked-bg: #757575;
+  --checkbox-check: #3b3b3b;
 }
 
 /* Dark theme values */
 [data-theme="dark"] {
   --background: #262624;
-  /* --foreground: #faf9f5; */
   --foreground: #d4d0c8;
   --accent: #b8b0a5;
   --accent-foreground: #ffffff;
@@ -38,4 +43,5 @@
   --border: #48443c;
   --blockquote-border: #41413E;
   --code-block-bg: #2B2B29;
+  --inline-code-bg: #302d28;
 }

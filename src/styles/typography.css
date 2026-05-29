@@ -61,7 +61,7 @@
       line-height: var(--leading-heading);
     }
     h3 {
-      @apply text-foreground mb-1 mt-4 font-semibold italic;
+      @apply text-foreground mb-1 mt-4 font-semibold;
       font-size: var(--text-h3);
       line-height: var(--leading-heading);
     }
@@ -134,7 +134,8 @@
      * (less vertical, slightly more horizontal) for an elegant fit.
      */
     code {
-      @apply text-foreground bg-muted/75 rounded wrap-break-word before:content-none after:content-none;
+      @apply text-foreground rounded wrap-break-word before:content-none after:content-none;
+      background-color: var(--inline-code-bg, var(--muted));
       font-size: 0.9em;
       padding: 0.125rem 0.375rem;
     }
@@ -225,6 +226,35 @@
     }
     summary {
       @apply focus-visible:outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-dashed;
+    }
+
+    /* 复选框 — 隐藏原生样式，统一外观 */
+    input[type="checkbox"] {
+      appearance: none;
+      width: 1em;
+      height: 1em;
+      border: 1px solid var(--checkbox-border);
+      background-color: var(--checkbox-bg);
+      border-radius: 3px;
+      vertical-align: middle;
+      cursor: pointer;
+      position: relative;
+    }
+    input[type="checkbox"]:checked {
+      background-color: var(--checkbox-checked-bg);
+      border-color: var(--checkbox-border);
+    }
+    input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 45%;
+      width: 5px;
+      height: 9px;
+      border: 2px solid var(--checkbox-check);
+      border-top: none;
+      border-left: none;
+      transform: translate(-50%, -50%) rotate(45deg);
     }
 
     /* Code block focus — kept for accessibility */
