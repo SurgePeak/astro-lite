@@ -287,13 +287,18 @@
   /* Shiki transformer visual styles — diff, highlight, error */
   .astro-code {
     .line.diff.add {
-      @apply relative inline-block w-full bg-green-400/20 before:absolute before:-left-3 before:text-green-500 before:content-['+'];
+      @apply relative inline-block w-full before:absolute before:-left-3 before:content-['+'];
+      background-color: var(--diff-add-bg);
+      &::before { color: var(--diff-add-text); }
     }
     .line.diff.remove {
-      @apply relative inline-block w-full bg-red-500/20 before:absolute before:-left-3 before:text-red-500 before:content-['-'];
+      @apply relative inline-block w-full before:absolute before:-left-3 before:content-['-'];
+      background-color: var(--diff-remove-bg);
+      &::before { color: var(--diff-remove-text); }
     }
     .line.highlighted {
-      @apply inline-block w-full bg-slate-400/20;
+      @apply inline-block w-full;
+      background-color: var(--code-highlight-bg);
     }
     .highlighted-word {
       @apply border-border rounded-sm border px-0.5 py-px;

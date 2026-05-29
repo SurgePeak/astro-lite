@@ -16,32 +16,92 @@
 /* Light theme values */
 :root,
 [data-theme="light"] {
+  /* 页面背景色 */
   --background: #fdfdfd;
+  /* 主要文字色 */
   --foreground: #282728;
+  /* 强调色（链接、高亮） */
   --accent: #006cac;
+  /* 强调色上的文字色 */
   --accent-foreground: #ffffff;
+  /* 次要背景色（代码块、标签等） */
   --muted: #e6e6e6;
+  /* 次要文字色（时间、描述等） */
   --muted-foreground: #6b7280;
+  /* 边框色 */
   --border: #ece9e9;
+  /* 引用块左边框色 */
   --blockquote-border: #E4E3DF;
-  
-  /* 复选框 — 浅色深色共用 */
+  /* 行内代码背景色 */
+  --inline-code-bg: #e6e6e6;
+
+  /* 复选框边框色 */
   --checkbox-border: #626262;
+  /* 复选框背景色（未选中） */
   --checkbox-bg: #3b3b3b;
+  /* 复选框背景色（已选中） */
   --checkbox-checked-bg: #757575;
+  /* 复选框勾选符号色 */
   --checkbox-check: #3b3b3b;
+
+  /* diff 新增行背景色 */
+  --diff-add-bg: #4ade8033;
+  /* diff 新增行标记色 */
+  --diff-add-text: #22c55e;
+  /* diff 删除行背景色 */
+  --diff-remove-bg: #ef444433;
+  /* diff 删除行标记色 */
+  --diff-remove-text: #ef4444;
+  /* 代码高亮行背景色 */
+  --code-highlight-bg: #94a3b833;
+
+  /* 文件名标签绿点色 */
+  --filename-dot: #22c55e;
 }
 
 /* Dark theme values */
 [data-theme="dark"] {
+  /* 页面背景色 */
   --background: #262624;
+  /* 主要文字色 */
   --foreground: #d4d0c8;
+  /* 强调色（链接、高亮） */
   --accent: #b8b0a5;
+  /* 强调色上的文字色 */
   --accent-foreground: #ffffff;
+  /* 次要背景色（代码块、标签等） */
   --muted: #302d28;
+  /* 次要文字色（时间、描述等） */
   --muted-foreground: #a59e90;
+  /* 边框色 */
   --border: #48443c;
+  /* 引用块左边框色 */
   --blockquote-border: #41413E;
+  /* 代码块背景色（深色模式专用） */
   --code-block-bg: #2B2B29;
+  /* 行内代码背景色 */
   --inline-code-bg: #302d28;
+
+  /* 复选框边框色 */
+  --checkbox-border: #626262;
+  /* 复选框背景色（未选中） */
+  --checkbox-bg: #3b3b3b;
+  /* 复选框背景色（已选中） */
+  --checkbox-checked-bg: #757575;
+  /* 复选框勾选符号色 */
+  --checkbox-check: #3b3b3b;
+
+  /* diff 新增行背景色 */
+  --diff-add-bg: #4ade8033;
+  /* diff 新增行标记色 */
+  --diff-add-text: #22c55e;
+  /* diff 删除行背景色 */
+  --diff-remove-bg: #ef444433;
+  /* diff 删除行标记色 */
+  --diff-remove-text: #ef4444;
+  /* 代码高亮行背景色 */
+  --code-highlight-bg: #94a3b833;
+
+  /* 文件名标签绿点色 */
+  --filename-dot: #22c55e;
 }
