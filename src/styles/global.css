@@ -2,6 +2,11 @@
 @import "./theme.css";
 @import "./typography.css";
 
+/* Noto fonts for CJK fallback — subsetted by cn-font-split */
+@import "../assets/fonts/Noto-Sans/result.css";
+@import "../assets/fonts/Noto-Sans-Italic/result.css";
+@import "../assets/fonts/Noto-Serif-SC/result.css";
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @layer base {
@@ -9,6 +14,12 @@
     @apply border-border outline-accent/75;
     scrollbar-width: auto;
     scrollbar-color: var(--color-muted) transparent;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+  code, pre, kbd, samp {
+    font-family: var(--font-code);
   }
   a,
   button {

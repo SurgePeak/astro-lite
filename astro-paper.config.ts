@@ -1,15 +1,16 @@
 import { defineAstroPaperConfig } from "./src/types/config";
 
 export default defineAstroPaperConfig({
+  // SEO 声明信息
   site: {
-    url: "https://astro-paper.pages.dev/",
-    title: "AstroPaper",
-    description: "A minimal, responsive and SEO-friendly Astro blog theme.",
-    author: "Sat Naing",
-    profile: "https://satna.ing",
+    url: "https://blog.lhasa.icu/",
+    title: "Astro Lite",
+    description: "独立之精神，自由之思想",
+    author: "游钓四方",
+    profile: "https://lhasa.icu/",
     ogImage: "default-og.jpg",
-    lang: "en",
-    timezone: "Asia/Bangkok",
+    lang: "zh-CN",
+    timezone: "Asia/Shanghai",
     dir: "ltr",
   },
   posts: {
@@ -23,14 +24,13 @@ export default defineAstroPaperConfig({
     showArchives: true,
     showBackButton: true,
     editPost: {
-      enabled: true,
-      url: "https://github.com/satnaing/astro-paper/edit/main/",
+      enabled: false,
     },
     search: "pagefind",
   },
   socials: [
-    { name: "github",   url: "https://github.com/satnaing/astro-paper" },
-    { name: "x",        url: "https://x.com/username" },
+    { name: "github",   url: "https://github.com/achuanya/astro-lhasa" },
+    { name: "x",        url: "https://x.com/haibao1027" },
     { name: "linkedin", url: "https://www.linkedin.com/in/username/" },
     { name: "mail",     url: "mailto:yourmail@gmail.com" },
   ],

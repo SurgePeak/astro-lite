@@ -27,8 +27,8 @@ export default defineConfig({
     }),
   ],
   i18n: {
-    locales: ["zh-CN", "en"],
-    defaultLocale: "zh-CN",
+    locales: ["en"],
+    defaultLocale: "en",
     routing: {
       prefixDefaultLocale: false,
     },
@@ -52,13 +52,49 @@ export default defineConfig({
   },
   fonts: [
     {
-      name: "Google Sans Code",
-      cssVariable: "--font-google-sans-code",
-      provider: fontProviders.google(),
+      name: "Anthropic Serif Web Text",
+      cssVariable: "--font-anthropic-serif",
+      provider: fontProviders.local(),
+      fallbacks: ["serif"],
+      options: {
+        variants: [
+          {
+            src: ["./src/assets/fonts/Anthropic-Serif-Web-Text.woff2"],
+            weight: 400,
+            style: "normal",
+          },
+        ],
+      },
+    },
+    {
+      name: "Anthropic Sans Web Text",
+      cssVariable: "--font-anthropic-sans",
+      provider: fontProviders.local(),
+      fallbacks: ["sans-serif"],
+      options: {
+        variants: [
+          {
+            src: ["./src/assets/fonts/Anthropic Sans-Web-Text.woff2"],
+            weight: 400,
+            style: "normal",
+          },
+        ],
+      },
+    },
+    {
+      name: "Anthropic Mono Variable",
+      cssVariable: "--font-anthropic-mono",
+      provider: fontProviders.local(),
       fallbacks: ["monospace"],
-      weights: [300, 400, 500, 600, 700],
-      styles: ["normal", "italic"],
-      formats: ["woff", "ttf"],
+      options: {
+        variants: [
+          {
+            src: ["./src/assets/fonts/Anthropic-Mono-Variable.woff2"],
+            weight: 400,
+            style: "normal",
+          },
+        ],
+      },
     },
   ],
   env: {

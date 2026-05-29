@@ -7,7 +7,9 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --font-app: var(--font-google-sans-code);
+  --font-app: var(--font-anthropic-serif), "Noto Serif SC ExtraLight", serif;
+  --font-heading: var(--font-anthropic-sans), "Noto Sans", sans-serif;
+  --font-code: var(--font-anthropic-mono), monospace;
   --code-block-bg: var(--muted);
 }
 
@@ -26,11 +28,13 @@
 /* Dark theme values */
 [data-theme="dark"] {
   --background: #262624;
-  --foreground: #faf9f5;
-  --accent: #ff6b01;
+  /* --foreground: #faf9f5; */
+  --foreground: #d4d0c8;
+  --accent: #b8b0a5;
   --accent-foreground: #ffffff;
-  --muted: #343f60;
-  --muted-foreground: #afb9ca;
-  --border: #dedcd14d;
-  --code-block-bg: #30302e80;
+  --muted: #302d28;
+  --muted-foreground: #a59e90;
+  --border: #48443c;
+  --code-block-bg: #30302E;
+  --heading: #e6e0d4;
 }

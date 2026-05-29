@@ -1,104 +1,256 @@
 @plugin "@tailwindcss/typography";
 
 @layer base {
-  /* ===== Override default Tailwind Typography styles ===== */
+  /* ========================================
+     Typography Design Tokens
+
+     Principles adapted from Typora Claude Dark:
+     - Compact hierarchy with modest size jumps
+     - Tight heading-to-body coupling
+     - Relaxed body leading for comfortable reading
+     - Generous code block breathing room
+     - Refined spacing throughout
+     ======================================== */
+  :root {
+    /* Size scale — modest increases over body text.
+       Typora uses minimal size differentiation; hierarchy comes from
+       weight + spacing rather than dramatic font-size jumps. */
+    --text-h1: 1.375rem;
+    --text-h2: 1.125rem;
+    --text-h3: 1rem;
+    --text-h4: 1rem;
+    --text-h5: 0.875rem;
+    --text-h6: 0.875rem;
+
+    /* Line-height rhythm — relaxed body, tighter headings.
+       Typora uses ~1.5 for body; we use 1.65 for better readability
+       with sans-serif faces common in AstroPaper. */
+    --leading-body: 1.65;
+    --leading-heading: 1.35;
+
+    /* Heading spacing — tight bottom pulls content close.
+       Typora uses negative bottom margins; we use minimal positive
+       margins to avoid layout edge cases while preserving the
+       dense heading-to-content relationship. */
+    --heading-mt: 1.5rem;
+    --heading-mb: 0.25rem;
+
+    /* Inter-block gap — replaces paragraph margins.
+       Typora uses flex gap: 0.75rem; we mirror this as a consistent
+       vertical rhythm unit between block-level elements. */
+    --block-gap: 0.75rem;
+
+    /* Prose measure — narrow column for comfortable reading.
+       Typora uses 752px; 720px = 45rem = widely accepted optimal
+       line length (45-75 characters). */
+    --prose-max-width: 720px;
+  }
+
+  /* ===== Prose overrides ===== */
   .app-prose {
     @apply prose;
+    max-width: var(--prose-max-width);
 
-    h1,
-    h2,
-    h3,
-    h4,
-    th {
-      @apply text-foreground mb-3;
+    /*
+     * Headings — modest sizes, tight spacing.
+     * Typora's headings are only slightly larger than body text (h1 = 1.375rem).
+     * We use font-weight (semibold) and spacing rather than size for hierarchy.
+     * Top margins follow a natural Fibonacci-like sequence (6-5-4-3).
+     */
+    h1 {
+      @apply text-foreground mb-1 mt-6 font-semibold;
+      font-size: var(--text-h1);
+      line-height: var(--leading-heading);
     }
-
+    h2 {
+      @apply text-foreground mb-1 mt-5 font-semibold;
+      font-size: var(--text-h2);
+      line-height: var(--leading-heading);
+    }
     h3 {
-      @apply italic;
+      @apply text-foreground mb-1 mt-4 font-semibold italic;
+      font-size: var(--text-h3);
+      line-height: var(--leading-heading);
+    }
+    h4 {
+      @apply text-foreground mb-1 mt-4 font-semibold;
+      font-size: var(--text-h4);
+      line-height: var(--leading-heading);
+    }
+    h5 {
+      @apply text-foreground mb-1 mt-3 font-semibold;
+      font-size: var(--text-h5);
+      line-height: var(--leading-heading);
+    }
+    h6 {
+      @apply text-foreground mb-1 mt-3 font-semibold;
+      font-size: var(--text-h6);
+      line-height: var(--leading-heading);
     }
 
-    p,
-    strong,
-    ol,
-    ul,
-    figcaption,
-    table,
-    code {
+    /*
+     * Body text — Typora sets margin:0 on paragraphs, relying on
+     * flex gap for spacing. In a normal flow layout we use a compact
+     * bottom margin + relaxed line-height for the same dense rhythm.
+     */
+    p {
+      @apply text-foreground;
+      line-height: var(--leading-body);
+      margin-top: 0;
+      margin-bottom: var(--block-gap);
+    }
+
+    strong {
       @apply text-foreground;
     }
 
+    /*
+     * Links — dashed underline follows Typora's subtle link styling.
+     * Hover shifts to accent color (warm terracotta in Typora).
+     */
     a {
       @apply text-foreground hover:text-accent wrap-break-word decoration-dashed underline-offset-4 focus-visible:no-underline;
     }
 
+    /*
+     * Lists — tight vertical rhythm matching paragraph line-height.
+     * Nested lists collapse margins to avoid spacing drift in
+     * deeply indented structures.
+     */
+    ol,
     ul {
-      @apply overflow-x-clip;
+      @apply text-foreground overflow-x-clip;
+      margin-top: 0;
+      margin-bottom: var(--block-gap);
     }
-
     li {
       @apply marker:text-accent;
+      margin-top: 0;
+      margin-bottom: 0;
+      line-height: var(--leading-body);
+    }
+    li > ul,
+    li > ol {
+      margin-top: 0;
+      margin-bottom: 0;
     }
 
-    hr {
-      @apply border-border;
-    }
-
-    img {
-      @apply mx-auto;
-    }
-
-    figcaption {
-      @apply opacity-75;
-    }
-
-    table {
-      th,
-      td {
-        @apply border-border border p-2;
-      }
-
-      th {
-        @apply py-1.5;
-      }
-    }
-
+    /*
+     * Inline code — Typora uses a tinted background + subtle border.
+     * We keep the muted background approach with refined padding
+     * (less vertical, slightly more horizontal) for an elegant fit.
+     */
     code {
-      @apply bg-muted/75 text-foreground rounded p-1 wrap-break-word before:content-none after:content-none;
+      @apply text-foreground bg-muted/75 rounded wrap-break-word before:content-none after:content-none;
+      font-size: 0.9em;
+      padding: 0.125rem 0.375rem;
     }
 
+    /*
+     * Code blocks — Typora uses generous top padding for a language
+     * label area. We add consistent padding + rounded corners.
+     * Border/shiki colors are handled by .astro-code rule below.
+     */
+    pre {
+      @apply rounded-lg;
+      padding: 1.25rem 1rem;
+    }
     .astro-code code {
       @apply flex-[1_0_100%] bg-inherit p-0;
     }
 
+    /*
+     * Blockquotes — Typora uses a thick 4px left border with no opacity
+     * reduction on the text. We remove the generic opacity-80 in favor
+     * of a clean accent border. Inner paragraph margins are collapsed
+     * to keep the quote visually tight.
+     */
     blockquote {
-      @apply border-s-accent/80 wrap-break-word opacity-80;
+      @apply border-s-accent/80;
+      border-left-width: 4px;
+      padding-left: 1rem;
+      margin-top: 0;
+      margin-bottom: var(--block-gap);
+    }
+    blockquote p:first-of-type {
+      margin-top: 0;
+    }
+    blockquote p:last-of-type {
+      margin-bottom: 0;
     }
 
+    /*
+     * Horizontal rules — centered in the rhythm with consistent
+     * block-gap spacing above and below.
+     */
+    hr {
+      @apply border-border;
+      margin-top: var(--block-gap);
+      margin-bottom: var(--block-gap);
+    }
+
+    /*
+     * Images — centered and spaced consistently within the prose flow.
+     */
+    img {
+      @apply mx-auto;
+      margin-top: var(--block-gap);
+      margin-bottom: var(--block-gap);
+    }
+
+    figcaption {
+      @apply text-foreground opacity-75;
+    }
+
+    /*
+     * Tables — compact and lightweight.
+     * Typora uses 0.5px borders and tight padding; we use 1px borders
+     * (minimum for 1x screens) with reduced cell padding.
+     * Explicit font-size/line-height keeps tables from feeling bulky.
+     */
+    table {
+      @apply text-foreground w-full border-collapse;
+      font-size: 0.875rem;
+      line-height: 1.7;
+    }
+    th,
+    td {
+      @apply text-left;
+      padding: 0.375rem 0.5rem;
+    }
+    th {
+      @apply text-foreground font-semibold border-b-2 border-border;
+    }
+    td {
+      @apply border-b-2 border-border/30;
+    }
+
+    /* Details / summaries — kept as-is for AstroPaper compatibility */
     details {
       @apply text-foreground inline-block cursor-pointer select-none [&_p]:hidden [&_ul]:my-0!;
     }
-
     summary {
       @apply focus-visible:outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-dashed;
     }
 
-    pre {
-      @apply focus-visible:outline-accent focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-dashed;
+    /* Code block focus — kept for accessibility */
+    pre:focus-visible {
+      @apply outline-accent border-transparent outline-2 outline-dashed;
     }
   }
 
   /* ===== Code Blocks & Syntax Highlighting ===== */
+  /* AstroPaper's Shiki integration — colors driven by CSS variables */
   .astro-code {
     @apply outline-border flex border bg-(--shiki-light-bg) text-(--shiki-light) [&_span]:text-(--shiki-light);
   }
 
   html[data-theme="dark"] .astro-code {
-    @apply bg-(--shiki-dark-bg) text-(--shiki-dark) [&_span]:text-(--shiki-dark);
+    @apply text-(--shiki-dark) [&_span]:text-(--shiki-dark);
     background-color: var(--code-block-bg) !important;
   }
 
-  /* Styles for Shiki transformers */
-  /* https://shiki.style/packages/transformers */
+  /* Shiki transformer visual styles — diff, highlight, error */
   .astro-code {
     .line.diff.add {
       @apply relative inline-block w-full bg-green-400/20 before:absolute before:-left-3 before:text-green-500 before:content-['+'];
