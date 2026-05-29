@@ -23,6 +23,7 @@
   --muted: #e6e6e6;
   --muted-foreground: #6b7280;
   --border: #ece9e9;
+  --blockquote-border: #E4E3DF;
 }
 
 /* Dark theme values */
@@ -35,6 +36,6 @@
   --muted: #302d28;
   --muted-foreground: #a59e90;
   --border: #48443c;
-  --code-block-bg: #30302E;
-  --heading: #e6e0d4;
+  --blockquote-border: #41413E;
+  --code-block-bg: #2B2B29;
 }

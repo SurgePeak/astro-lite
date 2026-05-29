@@ -97,7 +97,7 @@ function greet(name) {
 console.log(greet('Astro'));
 ```
 
-```python
+```python file=astro.config.ts
 # Python
 def fibonacci(n):
     a, b = 0, 1
@@ -106,7 +106,7 @@ def fibonacci(n):
         a, b = b, a + b
 ```
 
-```html
+```html 
 <!-- HTML -->
 <div class="card">
   <h3>测试卡片</h3>
@@ -114,7 +114,7 @@ def fibonacci(n):
 </div>
 ```
 
-```css
+```css file=astro.config.ts
 /* CSS */
 .markdown-body {
   line-height: 1.8;

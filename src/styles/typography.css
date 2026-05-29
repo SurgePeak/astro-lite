@@ -28,13 +28,6 @@
     --leading-body: 1.65;
     --leading-heading: 1.35;
 
-    /* Heading spacing — tight bottom pulls content close.
-       Typora uses negative bottom margins; we use minimal positive
-       margins to avoid layout edge cases while preserving the
-       dense heading-to-content relationship. */
-    --heading-mt: 1.5rem;
-    --heading-mb: 0.25rem;
-
     /* Inter-block gap — replaces paragraph margins.
        Typora uses flex gap: 0.75rem; we mirror this as a consistent
        vertical rhythm unit between block-level elements. */
@@ -153,10 +146,11 @@
      */
     pre {
       @apply rounded-lg;
-      padding: 1.25rem 1rem;
+      padding: 0;
     }
     .astro-code code {
-      @apply flex-[1_0_100%] bg-inherit p-0;
+      @apply flex-[1_0_100%] bg-inherit;
+      padding: 1.25rem 1rem;
     }
 
     /*
@@ -166,7 +160,7 @@
      * to keep the quote visually tight.
      */
     blockquote {
-      @apply border-s-accent/80;
+      border-left-color: var(--blockquote-border);
       border-left-width: 4px;
       padding-left: 1rem;
       margin-top: 0;
@@ -248,6 +242,16 @@
   html[data-theme="dark"] .astro-code {
     @apply text-(--shiki-dark) [&_span]:text-(--shiki-dark);
     background-color: var(--code-block-bg) !important;
+  }
+
+  html[data-theme="dark"] .copy-code {
+    background-color: var(--code-block-bg) !important;
+    border-color: var(--code-block-bg) !important;
+  }
+
+  html[data-theme="dark"] .astro-code > span {
+    background-color: var(--code-block-bg) !important;
+    border-color: var(--code-block-bg) !important;
   }
 
   /* Shiki transformer visual styles — diff, highlight, error */
