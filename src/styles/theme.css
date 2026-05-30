@@ -16,51 +16,83 @@
 /* Light theme values */
 :root,
 [data-theme="light"] {
+  /* ===== 基础 ===== */
   /* 页面背景色 */
-  --background: #fdfdfd;
+  --background: #faf9f5;
   /* 主要文字色 */
-  --foreground: #282728;
+  --foreground: #141413;
   /* 强调色（链接、高亮） */
   --accent: #006cac;
   /* 强调色上的文字色 */
   --accent-foreground: #ffffff;
-  /* 次要背景色（代码块、标签等） */
+  /* 次要背景色（标签等） */
   --muted: #e6e6e6;
   /* 次要文字色（时间、描述等） */
   --muted-foreground: #6b7280;
   /* 边框色 */
-  --border: #ece9e9;
+  --border: #1f1e1d;
+
+  /* ===== 链接 ===== */
+  /* 链接下划线色（前景色低透明度，弱化视觉噪音） */
+  --link-underline: #14141340;
+  /* 链接悬停下划线色 */
+  --link-underline-hover: var(--accent);
+
+  /* ===== 引用块 ===== */
   /* 引用块左边框色 */
-  --blockquote-border: #E4E3DF;
+  --blockquote-border: var(--code-block-border);
+  /* 引用块文字色 */
+  --blockquote-text: #3d3d3a;
+
+  /* ===== 代码 ===== */
+  /* 浅色模式和深色模式下的代码块配色不一样，不能直接复用变量 */
+  /* 代码块背景色 */
+  --code-block-bg: #ffffff;
+  /* 代码块边框色 */
+  --code-block-border: #1f1e1d26;
   /* 行内代码背景色 */
-  --inline-code-bg: #e6e6e6;
-
-  /* 复选框边框色 */
-  --checkbox-border: #626262;
-  /* 复选框背景色（未选中） */
-  --checkbox-bg: #3b3b3b;
-  /* 复选框背景色（已选中） */
-  --checkbox-checked-bg: #757575;
-  /* 复选框勾选符号色 */
-  --checkbox-check: #3b3b3b;
-
-  /* diff 新增行背景色 */
-  --diff-add-bg: #4ade8033;
-  /* diff 新增行标记色 */
-  --diff-add-text: #22c55e;
-  /* diff 删除行背景色 */
-  --diff-remove-bg: #ef444433;
-  /* diff 删除行标记色 */
-  --diff-remove-text: #ef4444;
+  --code-inline-bg: var(--code-block-bg);
+  /* 复制按钮背景色 */
+  --code-copy-bg: var(--code-block-bg);
+  /* 复制按钮边框色 */
+  --code-copy-border: var(--code-block-bg);
+  /* 文件名标签绿点色 */
+  --code-filename-dot: #22c55e;
   /* 代码高亮行背景色 */
   --code-highlight-bg: #94a3b833;
+  /* diff 新增行背景色 */
+  --code-diff-add-bg: #4ade8033;
+  /* diff 新增行标记色 */
+  --code-diff-add-text: #22c55e;
+  /* diff 删除行背景色 */
+  --code-diff-remove-bg: #ef444433;
+  /* diff 删除行标记色 */
+  --code-diff-remove-text: #ef4444;
 
-  /* 文件名标签绿点色 */
-  --filename-dot: #22c55e;
+  /* ===== 表格 ===== */
+  /* 表头分隔线色 */
+  --table-header-border: var(--border);
+  /* 表格行分隔线色 */
+  --table-row-border: var(--border);
+
+  /* ===== 列表 ===== */
+  /* 列表标记色（有序、无序、任务列表通用） */
+  --list-marker: var(--foreground);
+
+  /* ===== 复选框 ===== */
+  /* 复选框边框色 */
+  --checkbox-border: #d0cfce;
+  /* 复选框背景色（未选中） */
+  --checkbox-bg: #f7f6f5;
+  /* 复选框背景色（已选中） */
+  --checkbox-checked-bg: #d0d0cf;
+  /* 复选框勾选符号色 */
+  --checkbox-check: #6b6b6b;
 }
 
 /* Dark theme values */
 [data-theme="dark"] {
+  /* ===== 基础 ===== */
   /* 页面背景色 */
   --background: #262624;
   /* 主要文字色 */
@@ -69,19 +101,60 @@
   --accent: #b8b0a5;
   /* 强调色上的文字色 */
   --accent-foreground: #ffffff;
-  /* 次要背景色（代码块、标签等） */
+  /* 次要背景色（标签等） */
   --muted: #302d28;
   /* 次要文字色（时间、描述等） */
   --muted-foreground: #a59e90;
   /* 边框色 */
   --border: #48443c;
-  /* 引用块左边框色 */
-  --blockquote-border: #41413E;
-  /* 代码块背景色（深色模式专用） */
-  --code-block-bg: #2B2B29;
-  /* 行内代码背景色 */
-  --inline-code-bg: #302d28;
 
+  /* ===== 链接 ===== */
+  /* 链接下划线色（前景色低透明度，弱化视觉噪音） */
+  --link-underline: #d4d0c840;
+  /* 链接悬停下划线色 */
+  --link-underline-hover: var(--accent);
+
+  /* ===== 引用块 ===== */
+  /* 引用块左边框色 */
+  --blockquote-border: var(--border);
+  /* 引用块文字色 */
+  --blockquote-text: #c2c0b6;
+
+  /* ===== 代码 ===== */
+  /* 代码块背景色 */
+  --code-block-bg: #2B2B29;
+  /* 代码块边框色 */
+  --code-block-border: var(--border);
+  /* 行内代码背景色 */
+  --code-inline-bg: var(--code-block-bg);
+  /* 复制按钮背景色 */
+  --code-copy-bg: var(--code-block-bg);
+  /* 复制按钮边框色（与代码块背景同色，视觉融合） */
+  --code-copy-border: var(--code-block-bg);
+  /* 文件名标签绿点色 */
+  --code-filename-dot: #22c55e;
+  /* 代码高亮行背景色 */
+  --code-highlight-bg: #94a3b833;
+  /* diff 新增行背景色 */
+  --code-diff-add-bg: #4ade8033;
+  /* diff 新增行标记色 */
+  --code-diff-add-text: #22c55e;
+  /* diff 删除行背景色 */
+  --code-diff-remove-bg: #ef444433;
+  /* diff 删除行标记色 */
+  --code-diff-remove-text: #ef4444;
+
+  /* ===== 表格 ===== */
+  /* 表头分隔线色 */
+  --table-header-border: var(--border);
+  /* 表格行分隔线色 */
+  --table-row-border: var(--border);
+
+  /* ===== 列表 ===== */
+  /* 列表标记色（有序、无序、任务列表通用） */
+  --list-marker: var(--foreground);
+
+  /* ===== 复选框 ===== */
   /* 复选框边框色 */
   --checkbox-border: #626262;
   /* 复选框背景色（未选中） */
@@ -90,18 +163,4 @@
   --checkbox-checked-bg: #757575;
   /* 复选框勾选符号色 */
   --checkbox-check: #3b3b3b;
-
-  /* diff 新增行背景色 */
-  --diff-add-bg: #4ade8033;
-  /* diff 新增行标记色 */
-  --diff-add-text: #22c55e;
-  /* diff 删除行背景色 */
-  --diff-remove-bg: #ef444433;
-  /* diff 删除行标记色 */
-  --diff-remove-text: #ef4444;
-  /* 代码高亮行背景色 */
-  --code-highlight-bg: #94a3b833;
-
-  /* 文件名标签绿点色 */
-  --filename-dot: #22c55e;
 }

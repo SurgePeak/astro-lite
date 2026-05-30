@@ -98,11 +98,19 @@
     }
 
     /*
-     * Links — dashed underline follows Typora's subtle link styling.
-     * Hover shifts to accent color (warm terracotta in Typora).
+     * Links — 细实线下划线，颜色弱化以减少视觉噪音；
+     * 悬停时下划线与文字同步切换到强调色。
      */
     a {
-      @apply text-foreground hover:text-accent wrap-break-word decoration-dashed underline-offset-4 focus-visible:no-underline;
+      @apply text-foreground hover:text-accent wrap-break-word focus-visible:no-underline;
+      text-decoration-line: underline;
+      text-decoration-color: var(--link-underline);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.15s ease;
+    }
+    a:hover {
+      text-decoration-color: var(--link-underline-hover);
     }
 
     /*
@@ -117,10 +125,12 @@
       margin-bottom: var(--block-gap);
     }
     li {
-      @apply marker:text-accent;
       margin-top: 0;
       margin-bottom: 0;
       line-height: var(--leading-body);
+    }
+    li::marker {
+      color: var(--list-marker);
     }
     li > ul,
     li > ol {
@@ -135,7 +145,7 @@
      */
     code {
       @apply text-foreground rounded wrap-break-word before:content-none after:content-none;
-      background-color: var(--inline-code-bg, var(--muted));
+      background-color: var(--code-inline-bg);
       font-size: 0.9em;
       padding: 0.125rem 0.375rem;
     }
@@ -166,6 +176,12 @@
       padding-left: 1rem;
       margin-top: 0;
       margin-bottom: var(--block-gap);
+      color: var(--blockquote-text);
+      font-style: normal;
+    }
+    blockquote p {
+      color: var(--blockquote-text);
+      font-style: normal;
     }
     blockquote p:first-of-type {
       margin-top: 0;
@@ -194,7 +210,7 @@
     }
 
     figcaption {
-      @apply text-foreground opacity-75;
+      @apply text-muted-foreground;
     }
 
     /*
@@ -214,10 +230,11 @@
       padding: 0.375rem 0.5rem;
     }
     th {
-      @apply text-foreground font-semibold border-b-2 border-border;
+      @apply text-foreground font-semibold;
+      border-bottom: 2px solid var(--table-header-border);
     }
     td {
-      @apply border-b-2 border-border/30;
+      border-bottom: 1px solid var(--table-row-border);
     }
 
     /* Details / summaries — kept as-is for AstroPaper compatibility */
@@ -266,35 +283,39 @@
   /* ===== Code Blocks & Syntax Highlighting ===== */
   /* AstroPaper's Shiki integration — colors driven by CSS variables */
   .astro-code {
-    @apply outline-border flex border bg-(--shiki-light-bg) text-(--shiki-light) [&_span]:text-(--shiki-light);
+    @apply flex border text-(--shiki-light) [&_span]:text-(--shiki-light);
+    background-color: var(--code-block-bg) !important;
+    border-color: var(--code-block-border) !important;
+    outline-color: var(--code-block-border);
+  }
+
+  .astro-code > span {
+    background-color: var(--code-block-bg) !important;
+    border-color: var(--code-block-border) !important;
   }
 
   html[data-theme="dark"] .astro-code {
     @apply text-(--shiki-dark) [&_span]:text-(--shiki-dark);
-    background-color: var(--code-block-bg) !important;
   }
 
-  html[data-theme="dark"] .copy-code {
-    background-color: var(--code-block-bg) !important;
-    border-color: var(--code-block-bg) !important;
-  }
-
-  html[data-theme="dark"] .astro-code > span {
-    background-color: var(--code-block-bg) !important;
-    border-color: var(--code-block-bg) !important;
+  .copy-code {
+    /* 隐藏复制按钮：保留 JS 注入的 wrapper 作为文件名标签的定位上下文 */
+    display: none;
+    background-color: var(--code-copy-bg) !important;
+    border-color: var(--code-copy-border) !important;
   }
 
   /* Shiki transformer visual styles — diff, highlight, error */
   .astro-code {
     .line.diff.add {
       @apply relative inline-block w-full before:absolute before:-left-3 before:content-['+'];
-      background-color: var(--diff-add-bg);
-      &::before { color: var(--diff-add-text); }
+      background-color: var(--code-diff-add-bg);
+      &::before { color: var(--code-diff-add-text); }
     }
     .line.diff.remove {
       @apply relative inline-block w-full before:absolute before:-left-3 before:content-['-'];
-      background-color: var(--diff-remove-bg);
-      &::before { color: var(--diff-remove-text); }
+      background-color: var(--code-diff-remove-bg);
+      &::before { color: var(--code-diff-remove-text); }
     }
     .line.highlighted {
       @apply inline-block w-full;
