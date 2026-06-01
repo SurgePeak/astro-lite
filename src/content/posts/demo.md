@@ -1,8 +1,8 @@
 ---
-author: Simon Smale
-pubDatetime: 2026-05-29T16:10:08Z
+author: 游钓四方
+pubDatetime: 2026-06-01T12:01:00+08:00
 title: demo
-featured: false
+featured: true
 draft: false
 tags:
   - docs

@@ -2,10 +2,10 @@
 import { getEntry, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
-import Breadcrumb from "@/components/Breadcrumb.astro";
 import Main from "@/components/Main.astro";
 import Footer from "@/components/Footer.astro";
 import config from "@/config";
+import { getPostsMetrics } from "@/utils/getPostsMetrics";
 
 const about = await getEntry("pages", "about");
 
@@ -16,6 +16,7 @@ if (!about) {
 }
 
 const { Content } = await render(about);
+const blogStats = await getPostsMetrics();
 ---
 
 <Layout
@@ -24,13 +25,169 @@ const { Content } = await render(about);
   ogImage={about.data.ogImage}
   canonicalURL={about.data.canonicalURL}
 >
-  <Header />
+  <Header pageTitle={about.data.title} />
 
-  <Breadcrumb />
-
-  <Main pageTitle={about.data.title} class="app-prose">
+  <Main class="app-prose">
+    <div
+      id="blog-stats-data"
+      data-running-days={blogStats.runningDays}
+      data-total-posts={blogStats.totalPosts}
+      data-total-words={blogStats.totalWordsInWan}
+      data-start-year="2018"
+      data-start-month="8"
+      data-start-day="31"
+      style="display: none;"
+    >
+    </div>
     <Content />
   </Main>
 
+  <Footer />
+</Layout>
+
+<script>
+  function animateNumber(
+    element: HTMLElement,
+    targetValue: number,
+    duration: number = 2000,
+    isDecimal: boolean = false
+  ) {
+    const startTime = performance.now();
+
+    function updateNumber(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentValue = targetValue * easeOutQuart;
+
+      element.textContent = isDecimal
+        ? currentValue.toFixed(1)
+        : Math.floor(currentValue).toString();
+
+      if (progress < 1) {
+        requestAnimationFrame(updateNumber);
+      } else {
+        element.textContent = isDecimal
+          ? targetValue.toFixed(1)
+          : targetValue.toString();
+      }
+    }
+
+    requestAnimationFrame(updateNumber);
+  }
+
+  function startAnimations() {
+    const statsData = document.getElementById("blog-stats-data");
+    if (!statsData) return;
+
+    const runningDays = parseInt(statsData.dataset.runningDays || "0");
+    const totalPosts = parseInt(statsData.dataset.totalPosts || "0");
+    const totalWords = parseFloat(statsData.dataset.totalWords || "0");
+    const startYear = parseInt(statsData.dataset.startYear || "2018");
+    const startMonth = parseInt(statsData.dataset.startMonth || "8");
+    const startDay = parseInt(statsData.dataset.startDay || "31");
+
+    const elements = [
+      { id: "start-year", value: startYear, duration: 1000 },
+      { id: "start-month", value: startMonth, duration: 800 },
+      { id: "start-day", value: startDay, duration: 600 },
+      { id: "running-days", value: runningDays, duration: 2000 },
+      { id: "total-posts", value: totalPosts, duration: 1500 },
+      { id: "total-words", value: totalWords, duration: 2500, isDecimal: true },
+    ];
+
+    const setMinWidth = (el: HTMLElement, len: number) => {
+      el.style.display = "inline-block";
+      el.style.minWidth = `${len}ch`;
+      el.style.textAlign = "center";
+    };
+
+    const widths: Array<[string, number]> = [
+      ["start-year", String(startYear).length],
+      ["start-month", String(startMonth).length],
+      ["start-day", String(startDay).length],
+      ["running-days", String(runningDays).length],
+      ["total-posts", String(totalPosts).length],
+      ["total-words", totalWords.toFixed(1).length],
+    ];
+    widths.forEach(([id, len]) => {
+      const el = document.getElementById(id);
+      if (el) setMinWidth(el, len);
+    });
+
+    elements.forEach((item, index) => {
+      const element = document.getElementById(item.id);
+      if (element) {
+        setTimeout(() => {
+          animateNumber(
+            element as HTMLElement,
+            item.value,
+            item.duration,
+            item.isDecimal || false
+          );
+        }, index * 200);
+      }
+    });
+  }
+
+  function renderTimeline() {
+    const timeline = document.getElementById("blog-timeline");
+    const dataEl = document.getElementById("blog-timeline-data");
+
+    if (!timeline || !dataEl) return;
+    if (timeline.dataset.initialized === "true") return;
+
+    try {
+      const events = JSON.parse(dataEl.textContent || "[]");
+      const frag = document.createDocumentFragment();
+
+      events.forEach((evt: { date: string; text: string }) => {
+        const li = document.createElement("li");
+        li.className = "flex items-center gap-2 leading-6";
+
+        const date = document.createElement("span");
+        date.className = "text-right tabular-nums text-sm opacity-80";
+        date.textContent = evt.date || "";
+
+        const sep = document.createElement("span");
+        sep.className = "opacity-80";
+        sep.textContent = "»";
+
+        const text = document.createElement("span");
+        text.className = "flex-1 text-sm text-accent truncate";
+        text.textContent = evt.text;
+
+        li.append(date, sep, text);
+        frag.appendChild(li);
+      });
+
+      timeline.appendChild(frag);
+      timeline.dataset.initialized = "true";
+    } catch {
+      /* 忽略渲染错误 */
+    }
+  }
+
+  function initializeAnimations() {
+    setTimeout(() => {
+      startAnimations();
+      renderTimeline();
+    }, 300);
+  }
+
+  document.addEventListener("astro:page-load", initializeAnimations);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeAnimations);
+  } else {
+    initializeAnimations();
+  }
+</script>
+in>
+
+  <Footer />
+</Layout>
+ <Footer />
+</Layout>
   <Footer />
 </Layout>

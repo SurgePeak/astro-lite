@@ -16,11 +16,17 @@ import {
 } from "@shikijs/transformers";
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import config from "./astro-paper.config";
+import photosuite from 'photosuite';
 
 export default defineConfig({
   site: config.site.url,
   integrations: [
     mdx(),
+    photosuite({
+      scope: "#main-content",
+      imageBase: "https://cos.lhasa.icu/dist/images/",
+      fileDir: true,
+    }),
     sitemap({
       filter: page =>
         config.features?.showArchives !== false || !page.endsWith("/archives/"),

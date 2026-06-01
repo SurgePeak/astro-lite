@@ -14,6 +14,7 @@ import BackButton from "./_components/BackButton.astro";
 import BackToTopButton from "./_components/BackToTopButton.astro";
 import AdjacentPostNav from "./_components/AdjacentPostNav.astro";
 import config from "@/config";
+import "photosuite/dist/photosuite.css";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -101,23 +102,20 @@ const ogImage = ogImageUrl
   pubDatetime={pubDatetime}
   modDatetime={modDatetime}
 >
-  <Header />
+  <Header
+    pageTitle={title}
+    titleClass="text-accent text-xl font-semibold sm:text-2xl"
+    viewTransitionName={slugifyStr(title.replaceAll(".", "-"))}
+  />
 
   <BackButton />
 
   <main
     id="main-content"
-    class:list={["app-layout", { "mt-8": !config.features.showBackButton }]}
+    class:list={["app-layout", { "mt-0": !config.features.showBackButton }]}
     data-pagefind-body
   >
-    <h1
-      style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
-      class="text-accent inline-block text-2xl font-bold sm:text-3xl"
-    >
-      {title}
-    </h1>
-
-    <div class="my-2 flex items-center gap-2">
+    <!-- <div class="my-2 flex items-center gap-2">
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
       <span
         aria-hidden="true"
@@ -129,12 +127,12 @@ const ogImage = ogImageUrl
         |
       </span>
       <EditPost {hideEditPost} {post} class="max-sm:hidden" />
-    </div>
+    </div> -->
 
     <article
       id="article"
       class:list={[
-        "mt-8 w-full",
+        "w-full",
         "app-prose max-w-app",
         "prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)",
       ]}
