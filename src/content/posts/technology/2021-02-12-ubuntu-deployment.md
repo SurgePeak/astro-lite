@@ -1,7 +1,7 @@
 ---
 author: 游钓四方
 pubDatetime: 2021-02-12T12:44:00+08:00
-title: Ubuntu Server部署日记
+title: Ubuntu Server 部署日记
 featured: false
 draft: false
 tags:

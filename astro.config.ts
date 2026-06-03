@@ -23,7 +23,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     photosuite({
-      scope: "#main-content",
+      scope: "#article",
       imageBase: "https://cos.lhasa.icu/dist/images/",
       fileDir: true,
     }),

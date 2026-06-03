@@ -5,6 +5,7 @@ export default {
     home: "Home",
     posts: "Posts",
     tags: "Tags",
+    categories: "Categories",
     about: "About",
     archives: "Archives",
     search: "Search",
@@ -43,6 +44,12 @@ export default {
 
     tagsTitle: "Tags",
     tagsDesc: "All the tags used in posts.",
+
+    categoriesTitle: "Categories",
+    categoriesDesc: "Browse posts by category.",
+    categoryTitle: "Category",
+    categoryDesc: "All the articles in this category.",
+    categoryPostCount: (count: number) => ` (${count}篇)`,
 
     postsTitle: "Posts",
     postsDesc: "All the articles I've posted.",

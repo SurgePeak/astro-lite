@@ -1,7 +1,7 @@
 ---
 author: 游钓四方
 pubDatetime: 2025-01-26T00:10:00+08:00
-title: 博客功能更新记录
+title: 博客功能更新记录(2025-01)
 featured: false
 draft: false
 tags:

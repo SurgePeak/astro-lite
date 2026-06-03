@@ -46,3 +46,44 @@
 :target {
   scroll-margin-block: 1rem;
 }
+
+/* Theme toggle — View Transitions clip-path reveal */
+html[data-theme-transition]::view-transition-old(root),
+html[data-theme-transition]::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html[data-theme-transition]::view-transition-old(root) {
+  z-index: 1;
+}
+
+html[data-theme-transition]::view-transition-new(root) {
+  z-index: 2;
+}
+
+html[data-theme-transition="down"]::view-transition-new(root) {
+  animation: theme-reveal-down 0.45s ease-in-out forwards;
+}
+
+html[data-theme-transition="up"]::view-transition-new(root) {
+  animation: theme-reveal-up 0.45s ease-in-out forwards;
+}
+
+@keyframes theme-reveal-down {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes theme-reveal-up {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}

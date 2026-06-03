@@ -38,9 +38,13 @@ const monthFormatter = new Intl.DateTimeFormat(locale, { month: "long" });
       )
         .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
         .map(([year, yearGroup]) => (
-          <div>
-            <span class="text-2xl font-bold">{year}</span>
-            <sup class="text-muted-foreground text-sm">{yearGroup.length}</sup>
+          <section class="mb-12">
+            <div class="mb-4">
+              <span class="text-3xl font-bold">{year}</span>
+              <sup class="text-muted-foreground ml-1 text-sm">
+                {yearGroup.length}
+              </sup>
+            </div>
             {Object.entries(
               getPostsByGroupCondition(
                 yearGroup,
@@ -49,18 +53,18 @@ const monthFormatter = new Intl.DateTimeFormat(locale, { month: "long" });
             )
               .sort(([monthA], [monthB]) => Number(monthB) - Number(monthA))
               .map(([month, monthGroup]) => (
-                <div class="flex flex-col sm:flex-row">
-                  <div class="mt-6 min-w-36 text-lg sm:my-6">
+                <div class="mb-8 flex flex-col sm:flex-row">
+                  <div class="mb-4 min-w-36 text-lg sm:mt-1 sm:mb-0">
                     <span class="font-bold">
                       {monthFormatter.format(
                         new Date(2000, Number(month) - 1, 1)
                       )}
                     </span>
-                    <sup class="text-muted-foreground text-xs">
+                    <sup class="text-muted-foreground ml-1 text-xs">
                       {monthGroup.length}
                     </sup>
                   </div>
-                  <ul>
+                  <ul class="flex-1 space-y-4">
                     {monthGroup
                       .sort(
                         (a, b) =>
@@ -77,7 +81,7 @@ const monthFormatter = new Intl.DateTimeFormat(locale, { month: "long" });
                   </ul>
                 </div>
               ))}
-          </div>
+          </section>
         ))
     }
   </Main>

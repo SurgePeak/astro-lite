@@ -2,6 +2,8 @@ const THEME_KEY = "theme";
 const LIGHT = "light";
 const DARK = "dark";
 
+type RevealDirection = "down" | "up";
+
 function getPreferredTheme(): string {
   const stored = localStorage.getItem(THEME_KEY);
   if (stored) return stored;
@@ -14,6 +16,10 @@ function getPreferredTheme(): string {
 let themeValue: string =
   (window as unknown as { __theme?: { value: string } }).__theme?.value ??
   getPreferredTheme();
+
+let revealDirection: RevealDirection = "down";
+let isTransitioning = false;
+let themeBtnHandler: (() => void) | null = null;
 
 function persist(): void {
   localStorage.setItem(THEME_KEY, themeValue);
@@ -32,12 +38,56 @@ function reflect(): void {
     ?.setAttribute("content", bg);
 }
 
+function setThemeBtnDisabled(disabled: boolean): void {
+  const btn = document.querySelector<HTMLButtonElement>("#theme-btn");
+  if (!btn) return;
+  btn.disabled = disabled;
+  btn.style.pointerEvents = disabled ? "none" : "";
+  btn.style.opacity = disabled ? "0.6" : "";
+}
+
+function applyTheme(nextTheme: string): void {
+  themeValue = nextTheme;
+  persist();
+}
+
+function toggleTheme(): void {
+  if (isTransitioning) return;
+
+  const nextTheme = themeValue === LIGHT ? DARK : LIGHT;
+  const direction = revealDirection;
+  revealDirection = direction === "down" ? "up" : "down";
+
+  if (!document.startViewTransition) {
+    applyTheme(nextTheme);
+    return;
+  }
+
+  isTransitioning = true;
+  setThemeBtnDisabled(true);
+  document.documentElement.setAttribute("data-theme-transition", direction);
+
+  const transition = document.startViewTransition(() => applyTheme(nextTheme));
+
+  transition.finished.finally(() => {
+    isTransitioning = false;
+    setThemeBtnDisabled(false);
+    document.documentElement.removeAttribute("data-theme-transition");
+  });
+}
+
 function setup(): void {
   reflect();
-  document.querySelector("#theme-btn")?.addEventListener("click", () => {
-    themeValue = themeValue === LIGHT ? DARK : LIGHT;
-    persist();
-  });
+
+  const btn = document.querySelector<HTMLButtonElement>("#theme-btn");
+  if (!btn) return;
+
+  if (themeBtnHandler) {
+    btn.removeEventListener("click", themeBtnHandler);
+  }
+
+  themeBtnHandler = toggleTheme;
+  btn.addEventListener("click", themeBtnHandler);
 }
 
 setup();
@@ -62,6 +112,7 @@ document.addEventListener("astro:before-swap", event => {
 window
   .matchMedia("(prefers-color-scheme: dark)")
   .addEventListener("change", ({ matches }) => {
+    if (isTransitioning) return;
     themeValue = matches ? DARK : LIGHT;
     persist();
   });

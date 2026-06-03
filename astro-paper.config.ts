@@ -14,25 +14,26 @@ export default defineAstroPaperConfig({
     dir: "ltr",
   },
   posts: {
-    perPage: 9,
-    perIndex: 6,
+    perPage: 6,
+    perIndex: 7,
     scheduledPostMargin: 15 * 60 * 1000,
   },
   features: {
     lightAndDarkMode: true,
     dynamicOgImage: false,
-    showArchives: true,
+    showArchives: false,
+    showTags: false,
     showBackButton: false,
     editPost: {
       enabled: false,
     },
-    search: "pagefind",
+    search: false,
+    coverUrl: "https://cos.lhasa.icu/dist/images",
   },
   socials: [
     { name: "github",   url: "https://github.com/achuanya/astro-lhasa" },
     { name: "x",        url: "https://x.com/haibao1027" },
-    { name: "linkedin", url: "https://www.linkedin.com/in/username/" },
-    { name: "mail",     url: "mailto:yourmail@gmail.com" },
+    { name: "mail",     url: "mailto:haibao1027@gmail.com" },
   ],
   shareLinks: [
     { name: "whatsapp", url: "https://wa.me/?text=" },

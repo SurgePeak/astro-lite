@@ -9,7 +9,7 @@ tags:
   - Subnautica
   - Docker
   - 游戏服务器搭建
-cover: cover.svg
+cover: low-ms.png
 description: 4 月 25 日，英国知名游戏服务器托管服务商 LOW.MS 为了打好提前量，发布一篇有关 深海迷航2 架构的文章...
 ---
 

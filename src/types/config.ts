@@ -44,6 +44,8 @@ interface FeaturesConfig {
   dynamicOgImage?: boolean;
   /** Show the /archives page and link it in nav. Defaults to true. */
   showArchives?: boolean;
+  /** Show the /tags page and link it in nav. Defaults to true. */
+  showTags?: boolean;
   /** Show back button on post detail pages. Defaults to true. */
   showBackButton?: boolean;
   /** "Edit page" link shown on post detail pages. */
@@ -59,6 +61,8 @@ interface FeaturesConfig {
    * Set to false to disable search entirely.
    */
   search?: "pagefind" | false;
+  /** Base URL for article cover images, e.g. "https://cos.lhasa.icu/dist/images" */
+  coverUrl?: string;
 }
 
 interface SocialLink {

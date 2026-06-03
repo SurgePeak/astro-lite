@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import { getPostUrl } from "@/utils/getPostPaths";
 import { slugifyStr } from "@/utils/slugify";
 import Datetime from "./Datetime.astro";
+import config from "@/config";
 
 type Props = {
   variant?: "h2" | "h3";
@@ -10,22 +11,48 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
-const { title, description, ...props } = data;
+const { title, description, cover, ...props } = data;
+
+const buildCoverSrc = (): string | undefined => {
+  const src = typeof cover === "string" ? cover.trim() : "";
+  if (!src) return undefined;
+  if (src.startsWith("http://") || src.startsWith("https://")) return src;
+  if (src.includes("cos.lhasa.icu")) return src;
+  const segments = id.split("/").filter(Boolean);
+  const slug = segments.length ? segments[segments.length - 1] : "";
+  return `${config.features.coverUrl}/${slug}/${src}`;
+};
+
+const coverSrc = buildCoverSrc();
 ---
 
 <li>
-  <a
-    href={getPostUrl(id, filePath, Astro.currentLocale)}
-    class:list={[
-      "text-accent inline-block text-lg font-medium",
-      "decoration-dashed underline-offset-4 hover:underline",
-      "focus-visible:no-underline focus-visible:underline-offset-0",
-    ]}
-  >
-    <Heading transition:name={slugifyStr(title.replaceAll(".", "-"))}>
-      {title}
-    </Heading>
-  </a>
-  <Datetime {...props} />
-  <!-- <p>{description}</p> -->
+  <div class="flex items-start gap-3">
+    {coverSrc && (
+      <img
+        src={coverSrc}
+        alt={title}
+        loading="lazy"
+        class="w-[50px] h-[50px] object-cover rounded-md shrink-0"
+      />
+    )}
+    <div class="min-w-0 flex-1">
+      <a
+        href={getPostUrl(id, filePath, Astro.currentLocale)}
+        class:list={[
+          "text-accent inline-block text-lg font-medium",
+          "decoration-dashed underline-offset-4 hover:underline",
+          "focus-visible:no-underline focus-visible:underline-offset-0",
+        ]}
+      >
+        <Heading
+          transition:name={`${id.replaceAll(/[/\\]/g, "-").replaceAll(".", "-")}-${slugifyStr(title.replaceAll(".", "-"))}`}
+        >
+          {title}
+        </Heading>
+      </a>
+      <Datetime {...props} />
+      <!-- <p>{description}</p> -->
+    </div>
+  </div>
 </li>
