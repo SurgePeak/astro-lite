@@ -88,6 +88,12 @@
   --checkbox-checked-bg: #d0d0cf;
   /* 复选框勾选符号色 */
   --checkbox-check: #6b6b6b;
+
+  /* ===== 年度进度条 ===== */
+  /* 用强调色高亮已过去的部分 */
+  --year-progress-fill: var(--accent);
+  /* 未到部分的轨道色 */
+  --year-progress-track: color-mix(in oklab, #e5e9f0 70%, transparent);
 }
 
 /* Dark theme values */
@@ -163,4 +169,10 @@
   --checkbox-checked-bg: #757575;
   /* 复选框勾选符号色 */
   --checkbox-check: #3b3b3b;
+
+  /* ===== 年度进度条 ===== */
+  /* 暗色下直接用强调色高亮 */
+  --year-progress-fill: var(--accent);
+  /* 未到部分的轨道色（沿用边框色） */
+  --year-progress-track: color-mix(in oklab, var(--border) 70%, transparent);
 }

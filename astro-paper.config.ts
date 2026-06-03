@@ -4,7 +4,7 @@ export default defineAstroPaperConfig({
   // SEO 声明信息
   site: {
     url: "https://blog.lhasa.icu/",
-    title: "Astro Lite",
+    title: "游钓四方",
     description: "独立之精神，自由之思想",
     author: "游钓四方",
     profile: "https://lhasa.icu/",
@@ -14,8 +14,8 @@ export default defineAstroPaperConfig({
     dir: "ltr",
   },
   posts: {
-    perPage: 6,
-    perIndex: 7,
+    perPage: 5,
+    perIndex: 10,
     scheduledPostMargin: 15 * 60 * 1000,
   },
   features: {

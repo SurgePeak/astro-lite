@@ -1,0 +1,202 @@
+---
+---
+
+<div
+  id="year-progress"
+  class="relative mx-auto mt-2 w-full max-w-3xl"
+  role="progressbar"
+  aria-label="Year progress"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  aria-valuenow="0"
+>
+  <div
+    class="h-[3px] w-full overflow-hidden rounded"
+    style="background-color: var(--year-progress-track);"
+    aria-hidden="true"
+  >
+    <div
+      id="year-progress-fill"
+      class="h-full w-0 rounded"
+      style="background-color: var(--year-progress-fill);"
+    ></div>
+  </div>
+
+  <span
+    id="year-progress-cover"
+    class="bg-background pointer-events-none absolute top-0 z-10 h-[3px] opacity-0 transition-opacity duration-[1000ms] ease-out"
+  ></span>
+
+  <span
+    id="year-progress-label"
+    class="text-accent/70 pointer-events-none absolute top-1/2 z-20 -translate-y-1/2 text-xs whitespace-nowrap opacity-0 transition-opacity duration-[1000ms] ease-out"
+  >0.0%</span>
+
+  <div
+    id="year-progress-popup"
+    class="bg-background border-border text-foreground pointer-events-none absolute top-0 z-30 -translate-y-[calc(100%+8px)] rounded border px-3 py-1.5 text-xs whitespace-nowrap opacity-0 shadow transition-opacity duration-300 ease-out"
+  ></div>
+</div>
+
+<script>
+  const ANIMATION_DURATION = 1200;
+  const POPUP_HIDE_DELAY = 2000;
+  const HOVER_HIDE_DELAY = 1000;
+  const LABEL_GAP = 6;
+
+  type Elements = {
+    root: HTMLElement;
+    fill: HTMLElement;
+    label: HTMLElement;
+    cover: HTMLElement;
+    popup: HTMLElement;
+  };
+
+  function getElements(): Elements | null {
+    const root = document.getElementById("year-progress");
+    const fill = document.getElementById("year-progress-fill");
+    const label = document.getElementById("year-progress-label");
+    const cover = document.getElementById("year-progress-cover");
+    const popup = document.getElementById("year-progress-popup");
+    if (!root || !fill || !label || !cover || !popup) return null;
+    return { root, fill, label, cover, popup };
+  }
+
+  function calcProgress(): number {
+    const now = new Date();
+    const year = now.getFullYear();
+    const start = new Date(year, 0, 1).getTime();
+    const end = new Date(year + 1, 0, 1).getTime();
+    return Math.max(0, Math.min(1, (now.getTime() - start) / (end - start)));
+  }
+
+  function calcDaysLeft(): number {
+    const now = new Date();
+    const end = new Date(now.getFullYear() + 1, 0, 1).getTime();
+    return Math.max(0, Math.ceil((end - now.getTime()) / 86_400_000));
+  }
+
+  function positionLabel(els: Elements, progress: number) {
+    const cw = els.root.clientWidth;
+    const lw = els.label.offsetWidth;
+    const pw = els.popup.offsetWidth;
+    const labelX = Math.max(0, Math.min(cw * progress + LABEL_GAP, cw - lw));
+    const popupX = Math.max(0, Math.min(cw * progress + LABEL_GAP, cw - pw));
+    els.label.style.left = `${labelX}px`;
+    els.cover.style.left = `${labelX}px`;
+    els.cover.style.width = `${lw}px`;
+    els.popup.style.left = `${popupX}px`;
+  }
+
+  // 动画每帧的轻量写入：只动 width / textContent / 位置，避免触发 a11y 树和原生 tooltip 更新
+  function paint(els: Elements, progress: number) {
+    els.fill.style.width = `${(progress * 100).toFixed(3)}%`;
+    els.label.textContent = `${(progress * 100).toFixed(1)}%`;
+    positionLabel(els, progress);
+  }
+
+  // 动画收尾 / SPA 切换时调用：补齐 aria-valuenow 和 title
+  function commit(els: Elements, progress: number) {
+    const pct = (progress * 100).toFixed(1);
+    paint(els, progress);
+    els.root.setAttribute("aria-valuenow", pct);
+    els.root.setAttribute("title", `${pct}%`);
+  }
+
+  // 快进慢出：hover 用 300ms 快速显示，自动隐藏回到 1000ms 缓慢淡出
+  function show(el: HTMLElement) {
+    el.classList.add("duration-300", "opacity-100");
+  }
+  function hide(el: HTMLElement) {
+    el.classList.remove("duration-300", "opacity-100");
+  }
+
+  // 返回当前动画进度的 getter，供 hover 定位使用，避免单独再跑一条 rAF 循环
+  function animate(
+    els: Elements,
+    target: number,
+    onDone?: () => void,
+  ): () => number {
+    let current = 0;
+    const startTs = performance.now();
+    function step(ts: number) {
+      const t = Math.min(1, (ts - startTs) / ANIMATION_DURATION);
+      current = target * t;
+      if (t < 1) {
+        paint(els, current);
+        requestAnimationFrame(step);
+      } else {
+        current = target;
+        commit(els, target);
+        onDone?.();
+      }
+    }
+    requestAnimationFrame(step);
+    return () => current;
+  }
+
+  function bindEvents(els: Elements, getProgress: () => number) {
+    if (els.root.dataset.bound === "1") return;
+    els.root.dataset.bound = "1";
+
+    let hoverTimer = 0;
+    let popupTimer = 0;
+
+    els.root.addEventListener("mouseenter", () => {
+      window.clearTimeout(hoverTimer);
+      positionLabel(els, getProgress());
+      show(els.label);
+      show(els.cover);
+    });
+
+    els.root.addEventListener("mouseleave", () => {
+      hoverTimer = window.setTimeout(() => {
+        hide(els.label);
+        hide(els.cover);
+      }, HOVER_HIDE_DELAY);
+    });
+
+    els.root.addEventListener("click", () => {
+      const days = calcDaysLeft();
+      els.popup.textContent =
+        days > 0
+          ? `今年还剩下 ${days} 天，要珍惜时间啊！`
+          : "新的一年开始了，加油！";
+      positionLabel(els, getProgress());
+      show(els.popup);
+      window.clearTimeout(popupTimer);
+      popupTimer = window.setTimeout(() => hide(els.popup), POPUP_HIDE_DELAY);
+    });
+  }
+
+  function init() {
+    const els = getElements();
+    if (!els) return;
+
+    const target = calcProgress();
+
+    show(els.label);
+    show(els.cover);
+
+    const getCurrent = animate(els, target, () => {
+      window.setTimeout(() => {
+        hide(els.label);
+        hide(els.cover);
+      }, POPUP_HIDE_DELAY);
+    });
+
+    bindEvents(els, () => getCurrent() || target);
+  }
+
+  // SPA 切换：直接定格到当前进度，不重放动画
+  function update() {
+    const els = getElements();
+    if (!els) return;
+    const target = calcProgress();
+    commit(els, target);
+    bindEvents(els, () => target);
+  }
+
+  init();
+  document.addEventListener("astro:after-swap", update);
+</script>

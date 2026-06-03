@@ -6,6 +6,7 @@ import IconX from "@/assets/icons/IconX.svg";
 import { stripBase, stripLocale } from "@/utils/withBase";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
+import YearProgress from "@/components/YearProgress.astro";
 
 type Props = {
   pageTitle?: string;
@@ -29,7 +30,7 @@ const pathWithoutTrailingSlash =
 const currentPath = stripLocale(pathWithoutTrailingSlash, locale);
 
 const displayTitle = pageTitle || site.title;
-const defaultTitleClass = "text-foreground text-xl font-semibold whitespace-nowrap sm:text-2xl";
+const defaultTitleClass = "text-foreground text-base font-normal whitespace-nowrap";
 
 const isActive = (path: string) => {
   const currentPathArray = currentPath.split("/").filter(p => p.trim());
@@ -49,7 +50,7 @@ const rssHref = `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`;
 </a>
 
 <header class="app-layout pt-8">
-  <div class="relative flex items-end gap-2">
+  <div class="relative flex items-end gap-2 leading-none">
     <h1
       class:list={[titleClass || defaultTitleClass]}
       style={viewTransitionName ? { viewTransitionName } : {}}
@@ -62,15 +63,15 @@ const rssHref = `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`;
       title="RSS Feed"
       class="text-accent hover:text-foreground inline-flex translate-y-[-4px]"
     >
-      <IconRss class="size-5" />
+      <IconRss class="size-4" />
     </a>
   </div>
 
-  <div class="border-border mt-4 border-b"></div>
+  <YearProgress />
 
   <nav
     id="nav-menu"
-    class="relative mt-4 mb-4 flex items-center justify-between"
+    class="relative mt-2 mb-2 flex items-center justify-between leading-none"
   >
     <button
       id="menu-btn"
