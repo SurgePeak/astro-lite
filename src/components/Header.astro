@@ -112,7 +112,12 @@ const rssHref = `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`;
           {t.nav.categories}
         </a>
       </li>
-      {
+      {/*
+        标签导航入口已隐藏，但标签页 /tags/[tag]/ 仍可正常访问（如外链、文章页跳转）。
+        如需重新在导航栏显示标签入口，取消下面的注释即可；无需改动 features.showTags。
+        注意：features.showTags 控制的是「是否生成标签页」，关掉会导致所有 /tags/* 路径 404。
+      */}
+      {/*
         features.showTags && (
           <li>
             <a
@@ -126,7 +131,7 @@ const rssHref = `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`;
             </a>
           </li>
         )
-      }
+      */}
       <li>
         <a
           href={getRelativeLocaleUrl(locale, "about")}
