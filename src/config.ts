@@ -36,6 +36,11 @@ const config: ResolvedAstroPaperConfig = {
     search: userConfig.features?.search ?? "pagefind",
     coverUrl: userConfig.features?.coverUrl ?? "",
   },
+  timeBasedTheme: {
+    enabled: userConfig.timeBasedTheme?.enabled ?? false,
+    lightStart: userConfig.timeBasedTheme?.lightStart ?? "09:00",
+    darkStart: userConfig.timeBasedTheme?.darkStart ?? "17:00",
+  },
   socials: userConfig.socials ?? [],
   shareLinks: userConfig.shareLinks ?? [],
 };

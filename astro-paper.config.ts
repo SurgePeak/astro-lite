@@ -30,6 +30,11 @@ export default defineAstroPaperConfig({
     search: false,
     coverUrl: "https://cos.lhasa.icu/dist/images",
   },
+  timeBasedTheme: {
+    enabled: true,
+    lightStart: "09:00",
+    darkStart: "17:00",
+  },
   socials: [
     { name: "github",   url: "https://github.com/achuanya/astro-lhasa" },
     { name: "x",        url: "https://x.com/haibao1027" },

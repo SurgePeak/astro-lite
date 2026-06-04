@@ -106,13 +106,48 @@ const rssHref = getRelativeLocaleUrl(
       Inline FOUC-prevention script: sets data-theme on <html> before
       the browser paints. Runs synchronously, no defer/async.
     -->
-    <script is:inline>
+    <script
+      is:inline
+      define:vars={{ timeBasedTheme: config.timeBasedTheme }}
+    >
       (function () {
+        function parseTimeToMinutes(value) {
+          if (typeof value !== "string") return undefined;
+          const match = /^(\d{1,2}):(\d{2})$/.exec(value);
+          if (!match) return undefined;
+          const h = Number(match[1]);
+          const m = Number(match[2]);
+          if (h < 0 || h > 23 || m < 0 || m > 59) return undefined;
+          return h * 60 + m;
+        }
+        function getTimeBasedTheme(cfg) {
+          if (!cfg || !cfg.enabled) return undefined;
+          const light = parseTimeToMinutes(cfg.lightStart);
+          const dark = parseTimeToMinutes(cfg.darkStart);
+          if (light === undefined || dark === undefined) return undefined;
+          const now = new Date();
+          const cur = now.getHours() * 60 + now.getMinutes();
+          // Interval [lightStart, darkStart) wraps if lightStart >= darkStart.
+          const inLight =
+            light < dark
+              ? cur >= light && cur < dark
+              : cur >= light || cur < dark;
+          return inLight ? "light" : "dark";
+        }
         const stored = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-        const theme = stored ?? (prefersDark ? "dark" : "light");
+        let theme;
+        if (stored) {
+          theme = stored;
+        } else {
+          const auto = getTimeBasedTheme(timeBasedTheme);
+          if (auto) {
+            theme = auto;
+          } else {
+            theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+          }
+        }
         document.firstElementChild?.setAttribute("data-theme", theme);
         // Expose value so theme.ts can skip re-detection.
         window.__theme = { value: theme };

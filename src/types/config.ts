@@ -96,10 +96,30 @@ interface ShareLink {
   linkTitle?: string;
 }
 
+interface TimeBasedThemeConfig {
+  /** Enable automatic theme switching based on local time. Defaults to false. */
+  enabled?: boolean;
+  /**
+   * Local time (24h "HH:mm") at which the light theme starts.
+   * Defaults to "09:00".
+   */
+  lightStart?: string;
+  /**
+   * Local time (24h "HH:mm") at which the dark theme starts.
+   * Defaults to "17:00".
+   */
+  darkStart?: string;
+}
+
 interface AstroPaperConfig {
   site: SiteConfig;
   posts?: PostsConfig;
   features?: FeaturesConfig;
+  /**
+   * Pick the default theme by local time when the user hasn't manually
+   * chosen one. Has no effect after a manual selection is stored.
+   */
+  timeBasedTheme?: TimeBasedThemeConfig;
   /** Social profile links shown in header/footer */
   socials?: SocialLink[];
   /** Share links shown on post detail pages */
@@ -125,6 +145,7 @@ export interface ResolvedAstroPaperConfig {
   site: ResolvedSiteConfig;
   posts: Required<PostsConfig>;
   features: Required<FeaturesConfig>;
+  timeBasedTheme: Required<TimeBasedThemeConfig>;
   socials: SocialLink[];
   shareLinks: ShareLink[];
 }

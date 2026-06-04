@@ -1,12 +1,38 @@
+import config from "@/config";
+
 const THEME_KEY = "theme";
 const LIGHT = "light";
 const DARK = "dark";
 
 type RevealDirection = "down" | "up";
 
+function parseTimeToMinutes(value: string): number | undefined {
+  const match = /^(\d{1,2}):(\d{2})$/.exec(value);
+  if (!match) return undefined;
+  const h = Number(match[1]);
+  const m = Number(match[2]);
+  if (h < 0 || h > 23 || m < 0 || m > 59) return undefined;
+  return h * 60 + m;
+}
+
+function getTimeBasedTheme(): string | undefined {
+  const { enabled, lightStart, darkStart } = config.timeBasedTheme;
+  if (!enabled) return undefined;
+  const light = parseTimeToMinutes(lightStart);
+  const dark = parseTimeToMinutes(darkStart);
+  if (light === undefined || dark === undefined) return undefined;
+  const now = new Date();
+  const cur = now.getHours() * 60 + now.getMinutes();
+  const inLight =
+    light < dark ? cur >= light && cur < dark : cur >= light || cur < dark;
+  return inLight ? LIGHT : DARK;
+}
+
 function getPreferredTheme(): string {
   const stored = localStorage.getItem(THEME_KEY);
   if (stored) return stored;
+  const auto = getTimeBasedTheme();
+  if (auto) return auto;
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? DARK
     : LIGHT;
@@ -21,11 +47,6 @@ let revealDirection: RevealDirection = "down";
 let isTransitioning = false;
 let themeBtnHandler: (() => void) | null = null;
 
-function persist(): void {
-  localStorage.setItem(THEME_KEY, themeValue);
-  reflect();
-}
-
 function reflect(): void {
   document.firstElementChild?.setAttribute("data-theme", themeValue);
   document.querySelector("#theme-btn")?.setAttribute("aria-label", themeValue);
@@ -38,6 +59,16 @@ function reflect(): void {
     ?.setAttribute("content", bg);
 }
 
+function persist(): void {
+  localStorage.setItem(THEME_KEY, themeValue);
+  reflect();
+}
+
+function applyAutoTheme(nextTheme: string): void {
+  themeValue = nextTheme;
+  reflect();
+}
+
 function setThemeBtnDisabled(disabled: boolean): void {
   const btn = document.querySelector<HTMLButtonElement>("#theme-btn");
   if (!btn) return;
@@ -46,7 +77,7 @@ function setThemeBtnDisabled(disabled: boolean): void {
   btn.style.opacity = disabled ? "0.6" : "";
 }
 
-function applyTheme(nextTheme: string): void {
+function applyManualTheme(nextTheme: string): void {
   themeValue = nextTheme;
   persist();
 }
@@ -59,7 +90,7 @@ function toggleTheme(): void {
   revealDirection = direction === "down" ? "up" : "down";
 
   if (!document.startViewTransition) {
-    applyTheme(nextTheme);
+    applyManualTheme(nextTheme);
     return;
   }
 
@@ -67,7 +98,9 @@ function toggleTheme(): void {
   setThemeBtnDisabled(true);
   document.documentElement.setAttribute("data-theme-transition", direction);
 
-  const transition = document.startViewTransition(() => applyTheme(nextTheme));
+  const transition = document.startViewTransition(() =>
+    applyManualTheme(nextTheme)
+  );
 
   transition.finished.finally(() => {
     isTransitioning = false;
@@ -108,11 +141,13 @@ document.addEventListener("astro:before-swap", event => {
   }
 });
 
-// Sync with OS-level dark/light preference changes.
+// Sync with OS-level dark/light preference changes, but only when the user
+// hasn't manually chosen a theme and time-based theming isn't in charge.
 window
   .matchMedia("(prefers-color-scheme: dark)")
   .addEventListener("change", ({ matches }) => {
     if (isTransitioning) return;
-    themeValue = matches ? DARK : LIGHT;
-    persist();
+    if (localStorage.getItem(THEME_KEY)) return;
+    if (config.timeBasedTheme.enabled) return;
+    applyAutoTheme(matches ? DARK : LIGHT);
   });
