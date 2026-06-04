@@ -33,8 +33,7 @@ export interface UIStrings {
     allPosts: string;
   };
   footer: {
-    copyright: string;
-    allRightsReserved: string;
+    copyright: (year: number) => string;
   };
   pages: {
     tagTitle: string;

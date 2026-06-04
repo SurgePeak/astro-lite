@@ -40,14 +40,14 @@ const tagsWithCount = tags
   <Header pageTitle={t.pages.tagsTitle} />
 
   <Main>
-    <ul class="flex flex-wrap gap-2">
+    <ul id="tags-justified" class="flex flex-wrap gap-2">
       {
         tagsWithCount.map(({ tag, tagName }) => (
-          <li>
+          <li class="tag-item">
             <a
               href={getRelativeLocaleUrl(locale, `tags/${tag}/`)}
               transition:name={tag}
-              class="bg-foreground/10 hover:bg-foreground/20 inline-flex items-center gap-1 rounded-md px-3 py-1.5 text-sm transition-colors"
+              class="bg-foreground/10 hover:bg-foreground/20 flex h-full items-center justify-center gap-1 rounded-md px-3 py-1.5 text-sm whitespace-nowrap transition-colors"
             >
               <span class="opacity-60">#</span>
               <span>{tagName}</span>
@@ -60,3 +60,65 @@ const tagsWithCount = tags
 
   <Footer />
 </Layout>
+
+<script>
+  // Justified Gallery Algorithm for tag layout.
+  // Greedy row packing → per-row proportional scaling → cap stretch ratio so
+  // sparse rows (and the last row) don't stretch individual tags too wide.
+  function layoutTags() {
+    const container = document.getElementById("tags-justified");
+    if (!container) return;
+    const items = Array.from(container.children) as HTMLElement[];
+    if (items.length === 0) return;
+
+    const maxScale = 1.6;
+    const gap = parseFloat(getComputedStyle(container).columnGap || "8") || 8;
+
+    // Reset widths to measure natural sizes.
+    for (const li of items) li.style.width = "";
+
+    const containerWidth = container.clientWidth;
+    const widths = items.map(li => li.getBoundingClientRect().width);
+
+    // Greedy pack into rows.
+    const rows: number[][] = [];
+    let row: number[] = [];
+    let rowWidth = 0;
+    for (let i = 0; i < items.length; i++) {
+      const w = widths[i];
+      const need = row.length === 0 ? w : rowWidth + gap + w;
+      if (row.length > 0 && need > containerWidth) {
+        rows.push(row);
+        row = [i];
+        rowWidth = w;
+      } else {
+        row.push(i);
+        rowWidth = need;
+      }
+    }
+    if (row.length) rows.push(row);
+
+    // Justify each row except the last; skip rows whose scale would exceed cap.
+    rows.forEach((idxs, rIdx) => {
+      const isLast = rIdx === rows.length - 1;
+      if (isLast) return;
+      const sumW = idxs.reduce((s, i) => s + widths[i], 0);
+      const avail = containerWidth - (idxs.length - 1) * gap;
+      const scale = avail / sumW;
+      if (scale <= 1 || scale > maxScale) return;
+      for (const i of idxs) {
+        items[i].style.width = widths[i] * scale + "px";
+      }
+    });
+  }
+
+  let raf = 0;
+  function schedule() {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(layoutTags);
+  }
+
+  document.addEventListener("astro:page-load", schedule);
+  window.addEventListener("resize", schedule);
+  schedule();
+</script>

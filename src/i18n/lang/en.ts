@@ -35,8 +35,7 @@ export default {
     allPosts: "All Posts",
   },
   footer: {
-    copyright: "Copyright",
-    allRightsReserved: "All rights reserved.",
+    copyright: (year: number) => `© 2018 - ${year} Astro & Artalk`,
   },
   pages: {
     tagTitle: "Tag",

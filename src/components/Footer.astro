@@ -18,13 +18,11 @@ const currentYear = new Date().getFullYear();
   {...attrs}
 >
   <div
-    class="border-border flex flex-col items-center justify-between border-t py-6 sm:flex-row-reverse sm:py-4"
+    class="border-border mt-8 flex flex-col items-center justify-between border-t py-8 sm:mt-12 sm:flex-row-reverse sm:py-6"
   >
     <Socials />
-    <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
-      <span>{t.footer.copyright} &#169; {currentYear}</span>
-      <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
-      <span>{t.footer.allRightsReserved}</span>
+    <div class="my-2 flex items-center whitespace-nowrap">
+      <span>{t.footer.copyright(currentYear)}</span>
     </div>
   </div>
 </footer>
