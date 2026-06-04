@@ -9,7 +9,7 @@ export default defineAstroPaperConfig({
     author: "游钓四方",
     profile: "https://lhasa.icu/",
     ogImage: "default-og.jpg",
-    lang: "en",
+    lang: "zh",
     timezone: "Asia/Shanghai",
     dir: "ltr",
   },

@@ -57,6 +57,10 @@ export interface UIStrings {
     searchTitle: string;
     searchDesc: string;
   };
+  theme: {
+    light: string;
+    dark: string;
+  };
   a11y: {
     skipToContent: string;
     openMenu: string;

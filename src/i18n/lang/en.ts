@@ -59,6 +59,10 @@ export default {
     searchTitle: "Search",
     searchDesc: "Search any article ...",
   },
+  theme: {
+    light: "Light",
+    dark: "Dark",
+  },
   a11y: {
     skipToContent: "Skip to content",
     openMenu: "Open menu",
