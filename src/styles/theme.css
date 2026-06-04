@@ -7,9 +7,12 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --font-app: var(--font-anthropic-serif), "Noto Serif SC ExtraLight", serif;
-  --font-heading: var(--font-anthropic-sans), "Noto Sans", sans-serif;
-  --font-code: var(--font-anthropic-mono), monospace;
+  --font-app: "SF Pro Text", "苹方_中等", sans-serif;
+  --font-heading: "SF Pro Display", "苹方_粗体", sans-serif;
+  --font-heading-sub: "PingFang SC", "苹方_中等", "SF Pro Display", "苹方_粗体", sans-serif;
+  --font-ui: "PingFang SC", "苹方_中等", "SF Pro Text", sans-serif;
+  --font-code: "SF Pro Text", monospace;
+  --font-bold: "SF Pro Text", "苹方_粗体", sans-serif;
   --code-block-bg: var(--muted);
 }
 

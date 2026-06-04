@@ -2,10 +2,11 @@
 @import "./theme.css";
 @import "./typography.css";
 
-/* Noto fonts for CJK fallback — subsetted by cn-font-split */
-@import "../assets/fonts/Noto-Sans/result.css";
-@import "../assets/fonts/Noto-Sans-Italic/result.css";
-@import "../assets/fonts/Noto-Serif-SC/result.css";
+@import "../assets/fonts/SF-Pro-Display-Bold/result.css";
+@import "../assets/fonts/SF-Pro-Text-Regular/result.css";
+@import "../assets/fonts/SF-Pro-Text-Bold/result.css";
+@import "../assets/fonts/PingFangSC-Regular/result.css";
+@import "../assets/fonts/PingFangSC-Medium/result.css";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
@@ -19,11 +20,23 @@
     scrollbar-width: auto;
     scrollbar-color: var(--color-muted) transparent;
   }
-  h1, h2, h3, h4, h5, h6 {
+  h1 {
     font-family: var(--font-heading);
+  }
+  h2, h3 {
+    font-family: var(--font-heading-sub);
+  }
+  h4, h5, h6 {
+    font-family: var(--font-heading-sub);
   }
   code, pre, kbd, samp {
     font-family: var(--font-code);
+  }
+  strong, b {
+    font-family: var(--font-bold);
+  }
+  nav {
+    font-family: var(--font-ui);
   }
   a,
   button {

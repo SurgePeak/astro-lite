@@ -1,26 +1,20 @@
 import type { APIRoute } from "astro";
 import satori from "satori";
 import sharp from "sharp";
-import { fontData, experimental_getFontFileURL } from "astro:assets";
-import { getFontPathByWeight } from "@/utils/getFontPathByWeight";
+import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import config from "@/config";
 
-export const GET: APIRoute = async context => {
-  const fonts = fontData["--font-anthropic-sans"];
-  const regularFontPath = getFontPathByWeight(fonts, 400);
-  const boldFontPath = getFontPathByWeight(fonts, 400);
-
-  if (regularFontPath === undefined || boldFontPath === undefined) {
-    throw new Error("Cannot find the font path.");
+export const GET: APIRoute = async () => {
+  if (!config.features.dynamicOgImage) {
+    return new Response(null, { status: 404, statusText: "Not found" });
   }
 
+  const fontsDir = resolve(new URL(".", import.meta.url).pathname, "../assets/fonts");
+
   const [regularData, boldData] = await Promise.all([
-    fetch(experimental_getFontFileURL(regularFontPath, context.url)).then(res =>
-      res.arrayBuffer()
-    ),
-    fetch(experimental_getFontFileURL(boldFontPath, context.url)).then(res =>
-      res.arrayBuffer()
-    ),
+    readFile(resolve(fontsDir, "SF-Pro-Text-Regular", "131cd98248528c7be5a15a7dd42496e4.woff2")),
+    readFile(resolve(fontsDir, "SF-Pro-Text-Bold", "5281606a28cdd0449ae5c517641cbc21.woff2")),
   ]);
 
   const svg = await satori(
@@ -34,7 +28,7 @@ export const GET: APIRoute = async context => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontFamily: "Anthropic Sans Web Text",
+          fontFamily: "SF Pro Text",
         },
         children: [
           {
@@ -145,16 +139,16 @@ export const GET: APIRoute = async context => {
       embedFont: true,
       fonts: [
         {
-          name: "Anthropic Sans Web Text",
+          name: "SF Pro Text",
           data: regularData,
-          weight: 400,
-          style: "normal",
+          weight: 400 as const,
+          style: "normal" as const,
         },
         {
-          name: "Anthropic Sans Web Text",
+          name: "SF Pro Text",
           data: boldData,
-          weight: 700,
-          style: "normal",
+          weight: 700 as const,
+          style: "normal" as const,
         },
       ],
     }

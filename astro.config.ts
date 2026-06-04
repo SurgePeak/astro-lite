@@ -1,7 +1,6 @@
 import {
   defineConfig,
   envField,
-  fontProviders,
   svgoOptimizer,
 } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
@@ -56,53 +55,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  fonts: [
-    {
-      name: "Anthropic Serif Web Text",
-      cssVariable: "--font-anthropic-serif",
-      provider: fontProviders.local(),
-      fallbacks: ["serif"],
-      options: {
-        variants: [
-          {
-            src: ["./src/assets/fonts/Anthropic-Serif-Web-Text.woff2"],
-            weight: 400,
-            style: "normal",
-          },
-        ],
-      },
-    },
-    {
-      name: "Anthropic Sans Web Text",
-      cssVariable: "--font-anthropic-sans",
-      provider: fontProviders.local(),
-      fallbacks: ["sans-serif"],
-      options: {
-        variants: [
-          {
-            src: ["./src/assets/fonts/Anthropic Sans-Web-Text.woff2"],
-            weight: 400,
-            style: "normal",
-          },
-        ],
-      },
-    },
-    {
-      name: "Anthropic Mono Variable",
-      cssVariable: "--font-anthropic-mono",
-      provider: fontProviders.local(),
-      fallbacks: ["monospace"],
-      options: {
-        variants: [
-          {
-            src: ["./src/assets/fonts/Anthropic-Mono-Variable.woff2"],
-            weight: 400,
-            style: "normal",
-          },
-        ],
-      },
-    },
-  ],
   env: {
     schema: {
       PUBLIC_GOOGLE_SITE_VERIFICATION: envField.string({
