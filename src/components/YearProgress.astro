@@ -3,7 +3,7 @@
 
 <div
   id="year-progress"
-  class="relative mx-auto mt-2 w-full max-w-3xl"
+  class="relative mx-auto mt-2 w-full max-w-3xl before:absolute before:inset-x-0 before:-top-3 before:-bottom-3 before:content-['']"
   role="progressbar"
   aria-label="Year progress"
   aria-valuemin="0"
@@ -160,7 +160,7 @@
       const days = calcDaysLeft();
       els.popup.textContent =
         days > 0
-          ? `今年还剩下 ${days} 天，要珍惜时间啊！`
+          ? `时间走的太快了，今年只剩下 ${days} 天了...`
           : "新的一年开始了，加油！";
       positionLabel(els, getProgress());
       show(els.popup);
@@ -183,6 +183,11 @@
         hide(els.label);
         hide(els.cover);
       }, POPUP_HIDE_DELAY);
+
+      els.popup.textContent = "欢迎观临，随喜入座";
+      positionLabel(els, target);
+      show(els.popup);
+      window.setTimeout(() => hide(els.popup), POPUP_HIDE_DELAY);
     });
 
     bindEvents(els, () => getCurrent() || target);
