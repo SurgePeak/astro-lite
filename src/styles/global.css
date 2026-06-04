@@ -36,7 +36,18 @@
 }
 
 @utility app-layout {
-  @apply max-w-app mx-auto w-full px-4;
+  @apply max-w-app mx-auto w-full px-4 sm:px-0;
+}
+
+/* 外层画布背景：桌面端展示 --page-background，移动端回退为内卡同色，等价于无外框 */
+.site-outer-bg {
+  background-color: var(--page-background);
+}
+
+@media (max-width: 639px) {
+  .site-outer-bg {
+    background-color: var(--background);
+  }
 }
 
 @utility active-nav {

@@ -104,13 +104,11 @@
     a {
       @apply text-foreground hover:text-accent wrap-break-word focus-visible:no-underline;
       text-decoration-line: underline;
-      text-decoration-color: var(--link-underline);
+      text-decoration-color: currentColor;
       text-decoration-thickness: 1px;
+      text-decoration-skip-ink: none;
       text-underline-offset: 3px;
-      transition: text-decoration-color 0.15s ease;
-    }
-    a:hover {
-      text-decoration-color: var(--link-underline-hover);
+      transition: color 0.15s ease;
     }
 
     /*

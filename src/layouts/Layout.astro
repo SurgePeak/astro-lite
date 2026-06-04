@@ -122,9 +122,18 @@ const rssHref = getRelativeLocaleUrl(
     <ClientRouter />
   </head>
   <body
-    class="bg-background font-app text-foreground selection:bg-accent/75 selection:text-accent-foreground flex min-h-svh flex-col"
+    class="site-outer-bg font-app text-foreground selection:bg-accent/75 selection:text-accent-foreground flex min-h-svh flex-col"
   >
-    <slot />
+    <!-- 站点框架容器：桌面端 768px 居中白卡 + 阴影；移动端全宽无阴影 -->
+    <div
+      id="site-frame"
+      class="mx-auto flex w-full flex-1 flex-col
+             sm:mt-[7vh] sm:w-[820px] sm:max-w-[72rem]
+             sm:bg-background sm:px-[3.75rem] sm:pt-[1.875rem]
+             sm:shadow-[0_8px_24px_rgba(0,0,0,0.15)]"
+    >
+      <slot />
+    </div>
     <script>
       import "@/scripts/theme";
     </script>

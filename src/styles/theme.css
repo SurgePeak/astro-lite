@@ -17,12 +17,14 @@
 :root,
 [data-theme="light"] {
   /* ===== 基础 ===== */
-  /* 页面背景色 */
-  --background: #faf9f5;
+  /* 页面背景色（内卡片） */
+  --background: #fdfdfd;
+  /* 外层画布色（桌面端可见，移动端会被覆盖为 --background） */
+  --page-background: #f1f0ea;
   /* 主要文字色 */
   --foreground: #141413;
   /* 强调色（链接、高亮） */
-  --accent: #006cac;
+  --accent: #2ea9df;
   /* 强调色上的文字色 */
   --accent-foreground: #ffffff;
   /* 次要背景色（标签等） */
@@ -31,12 +33,6 @@
   --muted-foreground: #6b7280;
   /* 边框色 */
   --border: #1f1e1d;
-
-  /* ===== 链接 ===== */
-  /* 链接下划线色（前景色低透明度，弱化视觉噪音） */
-  --link-underline: #14141340;
-  /* 链接悬停下划线色 */
-  --link-underline-hover: var(--accent);
 
   /* ===== 引用块 ===== */
   /* 引用块左边框色 */
@@ -99,8 +95,10 @@
 /* Dark theme values */
 [data-theme="dark"] {
   /* ===== 基础 ===== */
-  /* 页面背景色 */
+  /* 页面背景色（内卡片） */
   --background: #262624;
+  /* 外层画布色（桌面端可见，移动端会被覆盖为 --background） */
+  --page-background: #2a2a28;
   /* 主要文字色 */
   --foreground: #d4d0c8;
   /* 强调色（链接、高亮） */
@@ -113,12 +111,6 @@
   --muted-foreground: #a59e90;
   /* 边框色 */
   --border: #48443c;
-
-  /* ===== 链接 ===== */
-  /* 链接下划线色（前景色低透明度，弱化视觉噪音） */
-  --link-underline: #d4d0c840;
-  /* 链接悬停下划线色 */
-  --link-underline-hover: var(--accent);
 
   /* ===== 引用块 ===== */
   /* 引用块左边框色 */
