@@ -2,8 +2,8 @@
 author: 游钓四方
 pubDatetime: 2026-06-01T21:07:00+08:00
 title: Subnautica 2 游戏服务器搭建
-featured: false
-draft: false
+featured: true
+draft: true
 tags:
   - 技术
   - Subnautica

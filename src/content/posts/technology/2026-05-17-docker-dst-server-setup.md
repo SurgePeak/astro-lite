@@ -2,8 +2,8 @@
 author: 游钓四方
 pubDatetime: 2026-05-16T21:07:00+08:00
 title: Docker 部署饥荒服务器
-featured: false
-draft: false
+featured: true
+draft: true
 tags:
   - 技术
   - 游戏服务器搭建

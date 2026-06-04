@@ -1,6 +1,6 @@
 ---
 author: 游钓四方
-pubDatetime: 2026-06-01T00:01:00+08:00
+pubDatetime: 2026-06-05T00:01:00+08:00
 title: 自行车市场崩盘
 featured: true
 draft: true
