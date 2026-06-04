@@ -40,18 +40,17 @@ const tagsWithCount = tags
   <Header pageTitle={t.pages.tagsTitle} />
 
   <Main>
-    <ul class="flex flex-wrap gap-x-2 gap-y-3">
+    <ul class="flex flex-wrap gap-2">
       {
-        tagsWithCount.map(({ tag, tagName, count }) => (
+        tagsWithCount.map(({ tag, tagName }) => (
           <li>
             <a
               href={getRelativeLocaleUrl(locale, `tags/${tag}/`)}
               transition:name={tag}
-              class="border-foreground/20 hover:border-accent hover:text-accent inline-flex items-center gap-1 rounded-full border px-3 py-1 text-sm transition-colors"
+              class="bg-foreground/10 hover:bg-foreground/20 hover:text-accent inline-flex items-center gap-1 rounded-md px-3 py-1.5 text-sm transition-colors"
             >
               <span class="opacity-60">#</span>
               <span>{tagName}</span>
-              <span class="text-foreground/50 text-xs">{count}</span>
             </a>
           </li>
         ))
