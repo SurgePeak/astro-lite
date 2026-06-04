@@ -9,6 +9,10 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+@theme {
+  --breakpoint-sm: 820px;
+}
+
 @layer base {
   * {
     @apply border-border outline-accent/75;
@@ -44,7 +48,7 @@
   background-color: var(--page-background);
 }
 
-@media (max-width: 639px) {
+@media (max-width: 819px) {
   .site-outer-bg {
     background-color: var(--background);
   }

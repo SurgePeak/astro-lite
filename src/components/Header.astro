@@ -1,8 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
 import IconRss from "@/assets/icons/IconRss.svg";
-import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
-import IconX from "@/assets/icons/IconX.svg";
 import { stripBase, stripLocale } from "@/utils/withBase";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
@@ -73,22 +71,9 @@ const rssHref = `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`;
     id="nav-menu"
     class="relative mt-2 mb-2 flex items-center justify-between leading-none"
   >
-    <button
-      id="menu-btn"
-      class="focus-outline p-1 sm:hidden"
-      aria-label={t.a11y.openMenu}
-      aria-expanded="false"
-      aria-controls="menu-items"
-      data-label-open={t.a11y.openMenu}
-      data-label-close={t.a11y.closeMenu}
-    >
-      <IconX id="close-icon" class="hidden" />
-      <IconMenuDeep id="menu-icon" />
-    </button>
-
     <ul
       id="menu-items"
-      class="hidden w-full flex-wrap items-center gap-x-5 gap-y-2 text-sm sm:flex sm:w-auto"
+      class="flex w-full flex-wrap items-center gap-x-5 gap-y-2 text-sm sm:w-auto"
     >
       <li>
         <a
@@ -190,32 +175,3 @@ const rssHref = `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`;
   </nav>
 </header>
 
-<script>
-  function toggleNav() {
-    const menuBtn = document.querySelector<HTMLButtonElement>("#menu-btn");
-    const menuItems = document.querySelector("#menu-items");
-    const menuIcon = document.querySelector("#menu-icon");
-    const closeIcon = document.querySelector("#close-icon");
-
-    if (!menuBtn || !menuItems || !menuIcon || !closeIcon) return;
-
-    const openLabel = menuBtn.dataset.labelOpen ?? "Open menu";
-    const closeLabel = menuBtn.dataset.labelClose ?? "Close menu";
-
-    menuBtn.addEventListener("click", () => {
-      const openMenu = menuBtn.getAttribute("aria-expanded") === "true";
-
-      menuBtn.setAttribute("aria-expanded", openMenu ? "false" : "true");
-      menuBtn.setAttribute("aria-label", openMenu ? openLabel : closeLabel);
-
-      menuItems.classList.toggle("hidden");
-      menuItems.classList.toggle("flex");
-      menuIcon.classList.toggle("hidden");
-      closeIcon.classList.toggle("hidden");
-    });
-  }
-
-  toggleNav();
-
-  document.addEventListener("astro:after-swap", toggleNav);
-</script>
