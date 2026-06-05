@@ -36,6 +36,10 @@ const config: ResolvedAstroPaperConfig = {
     search: userConfig.features?.search ?? "pagefind",
     coverUrl: userConfig.features?.coverUrl ?? "",
   },
+  friends: {
+    dataUrl: userConfig.friends?.dataUrl ?? "",
+    defaultAvatar: userConfig.friends?.defaultAvatar ?? "",
+  },
   timeBasedTheme: {
     enabled: userConfig.timeBasedTheme?.enabled ?? false,
     lightStart: userConfig.timeBasedTheme?.lightStart ?? "08:00",

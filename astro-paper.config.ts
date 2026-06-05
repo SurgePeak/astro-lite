@@ -30,6 +30,10 @@ export default defineAstroPaperConfig({
     search: false,
     coverUrl: "https://cos.lhasa.icu/dist/images",
   },
+  friends: {
+    dataUrl: "https://cos.lhasa.icu/lhasaRSS/data.json",
+    defaultAvatar: "https://cos.lhasa.icu/dist/avatar/default.png",
+  },
   timeBasedTheme: {
     enabled: true,
     lightStart: "08:00",

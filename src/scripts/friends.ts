@@ -1,0 +1,144 @@
+import config from "@/config";
+
+const PER_PAGE = config.posts.perPage;
+const DEFAULT_AVATAR = config.friends.defaultAvatar;
+const DATA_URL = config.friends.dataUrl;
+
+interface FriendsItem {
+  blog_name: string;
+  title: string;
+  published: string;
+  link: string;
+  avatar: string;
+}
+
+let allItems: FriendsItem[] = [];
+let currentIndex = 0;
+let isLoading = false;
+let observer: IntersectionObserver | null = null;
+
+function createCard(item: FriendsItem): HTMLLIElement {
+  const li = document.createElement("li");
+
+  const outerDiv = document.createElement("div");
+  outerDiv.className = "flex items-start gap-3";
+
+  const img = document.createElement("img");
+  img.src = item.avatar || DEFAULT_AVATAR;
+  img.alt = item.blog_name;
+  img.loading = "lazy";
+  img.className = "w-[50px] h-[50px] object-cover rounded-md shrink-0";
+  img.onerror = function () {
+    this.onerror = null;
+    this.src = DEFAULT_AVATAR;
+  };
+
+  const innerDiv = document.createElement("div");
+  innerDiv.className = "min-w-0 flex-1";
+
+  const a = document.createElement("a");
+  a.href = item.link;
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  a.className =
+    "inline-block text-base font-normal decoration-solid underline-offset-4 hover:underline";
+
+  const heading = document.createElement("h2");
+  heading.textContent = item.title;
+  a.appendChild(heading);
+
+  const dateDiv = document.createElement("div");
+  dateDiv.className = "text-muted-foreground flex items-center gap-x-2 text-sm";
+  const time = document.createElement("time");
+  time.textContent = item.published;
+  dateDiv.appendChild(time);
+
+  if (item.blog_name) {
+    const separator = document.createTextNode(" - ");
+    const authorSpan = document.createElement("span");
+    authorSpan.textContent = item.blog_name;
+    dateDiv.appendChild(separator);
+    dateDiv.appendChild(authorSpan);
+  }
+
+  innerDiv.appendChild(a);
+  innerDiv.appendChild(dateDiv);
+  outerDiv.appendChild(img);
+  outerDiv.appendChild(innerDiv);
+  li.appendChild(outerDiv);
+
+  return li;
+}
+
+function appendItems(): boolean {
+  const list = document.getElementById("post-list");
+  if (!list) return false;
+
+  const end = Math.min(currentIndex + PER_PAGE, allItems.length);
+  if (currentIndex >= end) return false;
+
+  const fragment = document.createDocumentFragment();
+  for (let i = currentIndex; i < end; i++) {
+    fragment.appendChild(createCard(allItems[i]));
+  }
+  list.appendChild(fragment);
+
+  currentIndex = end;
+  return currentIndex < allItems.length;
+}
+
+function setupScroll(): void {
+  if (observer) {
+    observer.disconnect();
+  }
+
+  const sentinel = document.getElementById("infinite-scroll-sentinel");
+  if (!sentinel) return;
+
+  function loadBatch() {
+    observer!.disconnect();
+    const hasMore = appendItems();
+    if (hasMore) {
+      observer!.observe(sentinel!);
+    } else {
+      sentinel!.remove();
+    }
+  }
+
+  observer = new IntersectionObserver(
+    (entries) => {
+      const entry = entries[0];
+      if (!entry?.isIntersecting) return;
+      loadBatch();
+    },
+    { rootMargin: "300px" },
+  );
+
+  observer.observe(sentinel);
+}
+
+export async function initFriends(): Promise<void> {
+  const sentinel = document.getElementById("infinite-scroll-sentinel");
+  const list = document.getElementById("post-list");
+  if (!sentinel || !list) return;
+
+  try {
+    const res = await fetch(DATA_URL);
+    const data = await res.json();
+    allItems = data.items || [];
+    currentIndex = 0;
+
+    while (list.firstChild) {
+      list.removeChild(list.firstChild);
+    }
+
+    const hasMore = appendItems();
+    if (hasMore) {
+      setupScroll();
+    } else {
+      sentinel.remove();
+    }
+  } catch {
+    list.innerHTML = "<li>Failed to load data, please try again later.</li>";
+  }
+}

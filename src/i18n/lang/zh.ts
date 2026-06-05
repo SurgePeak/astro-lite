@@ -5,6 +5,7 @@ export default {
     home: "首页",
     posts: "文章",
     tags: "标签",
+    friends: "友联",
     categories: "分类",
     about: "关于",
     archives: "归档",

@@ -111,6 +111,13 @@ interface TimeBasedThemeConfig {
   darkStart?: string;
 }
 
+interface FriendsConfig {
+  /** JSON data URL for friends page */
+  dataUrl?: string;
+  /** Default avatar URL for friends page */
+  defaultAvatar?: string;
+}
+
 interface AstroPaperConfig {
   site: SiteConfig;
   posts?: PostsConfig;
@@ -120,6 +127,8 @@ interface AstroPaperConfig {
    * chosen one. Has no effect after a manual selection is stored.
    */
   timeBasedTheme?: TimeBasedThemeConfig;
+  /** Friends page config */
+  friends?: FriendsConfig;
   /** Social profile links shown in header/footer */
   socials?: SocialLink[];
   /** Share links shown on post detail pages */
@@ -146,6 +155,7 @@ export interface ResolvedAstroPaperConfig {
   posts: Required<PostsConfig>;
   features: Required<FeaturesConfig>;
   timeBasedTheme: Required<TimeBasedThemeConfig>;
+  friends: Required<FriendsConfig>;
   socials: SocialLink[];
   shareLinks: ShareLink[];
 }

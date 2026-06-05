@@ -5,6 +5,7 @@ export default {
     home: "Home",
     posts: "Posts",
     tags: "Tags",
+    friends: "Friends",
     categories: "Categories",
     about: "About",
     archives: "Archives",
