@@ -72,6 +72,19 @@ export interface UIStrings {
     goToPreviousPage: string;
     goToNextPage: string;
   };
+  relativeTime: {
+    secondsAgo: string;
+    minuteAgo: string;
+    minutesAgo: (n: number) => string;
+    hourAgo: string;
+    hoursAgo: (n: number) => string;
+    dayAgo: string;
+    daysAgo: (n: number) => string;
+    monthAgo: string;
+    monthsAgo: (n: number) => string;
+    yearAgo: string;
+    yearsAgo: (n: number) => string;
+  };
   notFound: {
     title: string;
     message: string;

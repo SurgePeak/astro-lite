@@ -1,8 +1,14 @@
 import config from "@/config";
+import zh from "@/i18n/lang/zh";
+import en from "@/i18n/lang/en";
+import { parseDate, relativeTime } from "@/utils/relativeTime";
 
 const PER_PAGE = config.posts.perPage;
 const DEFAULT_AVATAR = config.friends.defaultAvatar;
 const DATA_URL = config.friends.dataUrl;
+
+const locale = document.documentElement.lang || "zh";
+const rt = locale === "zh" ? zh.relativeTime : en.relativeTime;
 
 interface FriendsItem {
   blog_name: string;
@@ -47,11 +53,12 @@ function createCard(item: FriendsItem): HTMLLIElement {
   heading.textContent = item.title;
   a.appendChild(heading);
 
-  const dateDiv = document.createElement("div");
-  dateDiv.className = "text-muted-foreground flex items-center gap-x-2 text-sm";
-  const time = document.createElement("time");
-  time.textContent = item.published;
-  dateDiv.appendChild(time);
+const dateDiv = document.createElement("div");
+dateDiv.className = "text-muted-foreground flex items-center gap-x-2 text-sm";
+const time = document.createElement("time");
+time.textContent = relativeTime(item.published, rt);
+time.setAttribute("datetime", parseDate(item.published).toISOString());
+dateDiv.appendChild(time);
 
   if (item.blog_name) {
     const separator = document.createTextNode(" - ");
@@ -139,6 +146,6 @@ export async function initFriends(): Promise<void> {
       sentinel.remove();
     }
   } catch {
-    list.innerHTML = "<li>Failed to load data, please try again later.</li>";
+    list.innerHTML = "<li>不是哥们，我加载失败了</li>";
   }
 }
