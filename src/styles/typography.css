@@ -1,3 +1,17 @@
+/**
+ * 排版与正文样式
+ *
+ * 作用：基于 @tailwindcss/typography 插件，定义 .app-prose 下的全部排版规则，
+ *       包括标题层级、段落、链接、列表、代码块、引用块、表格、复选框等。
+ *       风格参考 Typora Claude Dark，以紧凑层级和克制字号跳跃为原则。
+ *
+ * 注意：
+ * - 颜色均通过 Tailwind utility class 引用主题 token（如 text-foreground），
+ *   修改配色应在 theme-light / theme-dark 中进行，此处不做颜色硬编码；
+ * - 排版尺寸变量（--text-h*、--leading-*、--block-gap 等）定义在 :root 中，
+ *   修改排版节奏直接调整这些变量即可；
+ * - .astro-code 相关样式与 Shiki 语法高亮集成，注意不要破坏其 DOM 结构。
+ */
 @plugin "@tailwindcss/typography";
 
 @layer base {
@@ -129,7 +143,7 @@
       line-height: var(--leading-body);
     }
     li::marker {
-      color: var(--list-marker);
+      @apply text-list-marker;
     }
     li > ul,
     li > ol {
@@ -143,8 +157,7 @@
      * (less vertical, slightly more horizontal) for an elegant fit.
      */
     code {
-      @apply text-foreground rounded wrap-break-word before:content-none after:content-none;
-      background-color: var(--code-inline-bg);
+      @apply text-foreground bg-code-inline-bg rounded wrap-break-word before:content-none after:content-none;
       font-size: 0.9em;
       padding: 0.125rem 0.375rem;
     }
@@ -170,16 +183,15 @@
      * to keep the quote visually tight.
      */
     blockquote {
-      border-left-color: var(--blockquote-border);
+      @apply border-l-blockquote-border text-blockquote-text;
       border-left-width: 4px;
       padding-left: 1rem;
       margin-top: 0;
       margin-bottom: var(--block-gap);
-      color: var(--blockquote-text);
       font-style: normal;
     }
     blockquote p {
-      color: var(--blockquote-text);
+      @apply text-blockquote-text;
       font-style: normal;
     }
     blockquote p:first-of-type {
@@ -229,11 +241,10 @@
       padding: 0.375rem 0.5rem;
     }
     th {
-      @apply text-foreground font-semibold;
-      border-bottom: 2px solid var(--table-header-border);
+      @apply text-foreground font-semibold border-b-2 border-b-table-header-border;
     }
     td {
-      border-bottom: 1px solid var(--table-row-border);
+      @apply border-b border-b-table-row-border;
     }
 
     /* Details / summaries — kept as-is for AstroPaper compatibility */
@@ -246,28 +257,26 @@
 
     /* 复选框 — 隐藏原生样式，统一外观 */
     input[type="checkbox"] {
+      @apply border border-checkbox-border bg-checkbox-bg;
       appearance: none;
       width: 1em;
       height: 1em;
-      border: 1px solid var(--checkbox-border);
-      background-color: var(--checkbox-bg);
       border-radius: 3px;
       vertical-align: middle;
       cursor: pointer;
       position: relative;
     }
     input[type="checkbox"]:checked {
-      background-color: var(--checkbox-checked-bg);
-      border-color: var(--checkbox-border);
+      @apply bg-checkbox-checked-bg border-checkbox-border;
     }
     input[type="checkbox"]:checked::after {
+      @apply border-2 border-checkbox-check;
       content: '';
       position: absolute;
       left: 50%;
       top: 45%;
       width: 5px;
       height: 9px;
-      border: 2px solid var(--checkbox-check);
       border-top: none;
       border-left: none;
       transform: translate(-50%, -50%) rotate(45deg);
@@ -282,15 +291,11 @@
   /* ===== Code Blocks & Syntax Highlighting ===== */
   /* AstroPaper's Shiki integration — colors driven by CSS variables */
   .astro-code {
-    @apply flex border text-(--shiki-light) [&_span]:text-(--shiki-light);
-    background-color: var(--code-block-bg) !important;
-    border-color: var(--code-block-border) !important;
-    outline-color: var(--code-block-border);
+    @apply flex border text-(--shiki-light) [&_span]:text-(--shiki-light) !bg-code-block-bg !border-code-block-border outline-code-block-border;
   }
 
   .astro-code > span {
-    background-color: var(--code-block-bg) !important;
-    border-color: var(--code-block-border) !important;
+    @apply !bg-code-block-bg !border-code-block-border;
   }
 
   html[data-theme="dark"] .astro-code {
@@ -299,26 +304,22 @@
 
   .copy-code {
     /* 隐藏复制按钮：保留 JS 注入的 wrapper 作为文件名标签的定位上下文 */
+    @apply !bg-code-copy-bg !border-code-copy-border;
     display: none;
-    background-color: var(--code-copy-bg) !important;
-    border-color: var(--code-copy-border) !important;
   }
 
   /* Shiki transformer visual styles — diff, highlight, error */
   .astro-code {
     .line.diff.add {
-      @apply relative inline-block w-full before:absolute before:-left-3 before:content-['+'];
-      background-color: var(--code-diff-add-bg);
-      &::before { color: var(--code-diff-add-text); }
+      @apply relative inline-block w-full before:absolute before:-left-3 before:content-['+'] bg-code-diff-add-bg;
+      &::before { @apply text-code-diff-add-text; }
     }
     .line.diff.remove {
-      @apply relative inline-block w-full before:absolute before:-left-3 before:content-['-'];
-      background-color: var(--code-diff-remove-bg);
-      &::before { color: var(--code-diff-remove-text); }
+      @apply relative inline-block w-full before:absolute before:-left-3 before:content-['-'] bg-code-diff-remove-bg;
+      &::before { @apply text-code-diff-remove-text; }
     }
     .line.highlighted {
-      @apply inline-block w-full;
-      background-color: var(--code-highlight-bg);
+      @apply inline-block w-full bg-code-highlight-bg;
     }
     .highlighted-word {
       @apply border-border rounded-sm border px-0.5 py-px;

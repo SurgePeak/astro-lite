@@ -1,5 +1,7 @@
 @import "tailwindcss";
-@import "./theme.css";
+@import "./theme-inline.css";
+@import "./theme-light.css";
+@import "./theme-dark.css";
 @import "./typography.css";
 
 @import "../assets/fonts/SF-Pro-Display-Bold/result.css";
@@ -58,12 +60,12 @@
 
 /* 外层画布背景：桌面端展示 --page-background，移动端回退为内卡同色，等价于无外框 */
 .site-outer-bg {
-  background-color: var(--page-background);
+  @apply bg-page-background;
 }
 
 @media (max-width: 819px) {
   .site-outer-bg {
-    background-color: var(--background);
+    @apply bg-background;
   }
 }
 
@@ -73,16 +75,16 @@
 
 /* 导航栏文字配色 */
 nav a {
-  color: var(--color-nav-link);
+  @apply text-nav-link;
 }
 nav a:hover,
 nav a.active-nav {
-  color: var(--color-nav-link-active);
+  @apply text-nav-link-active;
 }
 
 /* 文章标题配色 */
 .post-title {
-  color: var(--color-post-title);
+  @apply text-post-title;
 }
 
 :target {

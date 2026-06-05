@@ -1,0 +1,78 @@
+/**
+ * Tailwind v4 主题桥接层
+ *
+ * 作用：通过 @theme inline 将 CSS 自定义属性映射为 Tailwind v4 可识别的
+ *       design token（如 --color-foreground → text-foreground），
+ *       使得 theme-light / theme-dark 中定义的变量能以 utility class 使用。
+ *
+ * 注意：
+ * - 此文件不定义颜色值，仅做一一映射；
+ * - 新增主题变量时必须在此同步添加对应的 --color-* 映射条目；
+ * - 字体变量（--font-*）直接在此定义，不依赖外部主题文件。
+ */
+@theme inline {
+  /* ===== 字体 ===== */
+  --font-app: "SF Pro Text", "苹方_中等", sans-serif;
+  --font-heading: "SF Pro Display", "苹方_粗体", sans-serif;
+  --font-heading-sub: "PingFang SC", "苹方_中等", "SF Pro Display", "苹方_粗体", sans-serif;
+  --font-ui: "PingFang SC", "苹方_中等", "SF Pro Text", sans-serif;
+  --font-code: "SF Pro Text", monospace;
+  --font-bold: "SF Pro Text", "苹方_粗体", sans-serif;
+  
+  /* ===== 基础 ===== */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-page-background: var(--page-background);
+
+  /* ===== 引用块 ===== */
+  --color-blockquote-border: var(--blockquote-border);
+  --color-blockquote-text: var(--blockquote-text);
+
+  /* ===== 代码 ===== */
+  --color-code-block-bg: var(--code-block-bg);
+  --color-code-block-border: var(--code-block-border);
+  --color-code-inline-bg: var(--code-inline-bg);
+  --color-code-copy-bg: var(--code-copy-bg);
+  --color-code-copy-border: var(--code-copy-border);
+  --color-code-filename-dot: var(--code-filename-dot);
+  --color-code-highlight-bg: var(--code-highlight-bg);
+  --color-code-diff-add-bg: var(--code-diff-add-bg);
+  --color-code-diff-add-text: var(--code-diff-add-text);
+  --color-code-diff-remove-bg: var(--code-diff-remove-bg);
+  --color-code-diff-remove-text: var(--code-diff-remove-text);
+
+  /* ===== 表格 ===== */
+  --color-table-header-border: var(--table-header-border);
+  --color-table-row-border: var(--table-row-border);
+
+  /* ===== 列表 ===== */
+  --color-list-marker: var(--list-marker);
+
+  /* ===== 复选框 ===== */
+  --color-checkbox-border: var(--checkbox-border);
+  --color-checkbox-bg: var(--checkbox-bg);
+  --color-checkbox-checked-bg: var(--checkbox-checked-bg);
+  --color-checkbox-check: var(--checkbox-check);
+
+  /* ===== 年度进度条 ===== */
+  --color-year-progress-fill: var(--year-progress-fill);
+  --color-year-progress-track: var(--year-progress-track);
+
+  /* ===== 导航栏 ===== */
+  --color-nav-link: var(--nav-link);
+  --color-nav-link-active: var(--nav-link-active);
+  --color-nav-title: var(--nav-title);
+  --color-post-title: var(--post-title);
+
+  /* ===== 标签 ===== */
+  --color-tag-bg: var(--tag-bg);
+  --color-tag-bg-hover: var(--tag-bg-hover);
+
+  /* ===== 分类封面 ===== */
+  --color-category-cover-text: var(--category-cover-text);
+}

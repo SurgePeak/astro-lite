@@ -28,7 +28,7 @@ const pathWithoutTrailingSlash =
 const currentPath = stripLocale(pathWithoutTrailingSlash, locale);
 
 const displayTitle = pageTitle || site.title;
-const defaultTitleClass = "text-foreground text-base font-normal whitespace-nowrap";
+const defaultTitleClass = "text-nav-title text-base font-normal whitespace-nowrap";
 
 const isActive = (path: string) => {
   const currentPathArray = currentPath.split("/").filter(p => p.trim());
