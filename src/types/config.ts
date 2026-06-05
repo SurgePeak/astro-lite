@@ -101,12 +101,12 @@ interface TimeBasedThemeConfig {
   enabled?: boolean;
   /**
    * Local time (24h "HH:mm") at which the light theme starts.
-   * Defaults to "09:00".
+   * Defaults to "08:00".
    */
   lightStart?: string;
   /**
    * Local time (24h "HH:mm") at which the dark theme starts.
-   * Defaults to "17:00".
+   * Defaults to "18:00".
    */
   darkStart?: string;
 }

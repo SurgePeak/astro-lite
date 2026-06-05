@@ -38,8 +38,8 @@ const config: ResolvedAstroPaperConfig = {
   },
   timeBasedTheme: {
     enabled: userConfig.timeBasedTheme?.enabled ?? false,
-    lightStart: userConfig.timeBasedTheme?.lightStart ?? "09:00",
-    darkStart: userConfig.timeBasedTheme?.darkStart ?? "17:00",
+    lightStart: userConfig.timeBasedTheme?.lightStart ?? "08:00",
+    darkStart: userConfig.timeBasedTheme?.darkStart ?? "18:00",
   },
   socials: userConfig.socials ?? [],
   shareLinks: userConfig.shareLinks ?? [],

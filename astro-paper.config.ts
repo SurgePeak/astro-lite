@@ -32,8 +32,8 @@ export default defineAstroPaperConfig({
   },
   timeBasedTheme: {
     enabled: true,
-    lightStart: "09:00",
-    darkStart: "17:00",
+    lightStart: "08:00",
+    darkStart: "18:00",
   },
   socials: [
     { name: "github",   url: "https://github.com/achuanya/astro-lhasa" },
