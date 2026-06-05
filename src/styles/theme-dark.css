@@ -4,13 +4,32 @@
  * 作用：为 [data-theme="dark"] 选择器定义深色模式下的全套 CSS 自定义属性，
  *       覆盖颜色、边框、代码块、表格等所有主题色。
  *
+ * 编码规范 — 变量分区及顺序：
+ *   1. 字体 — 全局字体定义（inline 独有，此文件无此项）
+ *   2. 基础 — 页面底层色
+ *   3. 年度进度条 — 页面底部
+ *   4. 导航栏 — 顶部导航
+ *   5. 文章标题 — 标题色
+ *   6. 标签 — 标签背景
+ *   7. 分类封面 — 封面文字
+ *   8. 引用块 — 正文引用
+ *   9. 列表 — 正文列表
+ *  10. 复选框 — 任务列表
+ *  11. 代码 — 代码块/行内代码
+ *  12. 表格 — 正文表格
+ *
+ * 新增类别时：
+ *   - 根据语义确定应插入的序号位置；
+ *   - 在 theme-inline.css、theme-light.css、theme-dark.css 中同步插入对应分区及变量；
+ *   - 更新本注释中的序号列表以保持连续。
+ *
  * 注意：
  * - 此文件仅含变量声明，不包含任何样式规则；
  * - 变量会被 theme-inline.css 映射为 Tailwind v4 的 @theme token 后才能在
  *   utility class 中使用，修改变量名时需同步更新 theme-inline.css；
  * - 修改颜色值时注意与 theme-light.css 保持语义对应（同一变量、两套色值）。
-
  */
+
 [data-theme="dark"] {
   /* ===== 基础 ===== */
   /* 页面背景色 */
@@ -30,21 +49,61 @@
   /* 边框色 */
   --border: #48443c;
 
+  /* ===== 年度进度条 ===== */
+  /* 暗色下直接用强调色高亮 */
+  --year-progress-fill: var(--accent);
+  /* 未到部分的轨道色 */
+  --year-progress-track: color-mix(in oklab, var(--border) 70%, transparent);
+
+  /* ===== 导航栏 ===== */
+  /* 导航栏链接默认色 */
+  --nav-link: var(--foreground);
+  /* 导航栏链接悬停/激活色 */
+  --nav-link-active: #f0ede6;
+  /* 导航栏标题色 */
+  --nav-title: var(--foreground);
+
+  /* ===== 文章标题 ===== */
+  /* 文章标题色 */
+  --post-title: var(--foreground);
+
+  /* ===== 标签 ===== */
+  /* 标签背景色 */
+  --tag-bg: color-mix(in oklab, var(--foreground) 10%, transparent);
+  /* 标签悬停背景色 */
+  --tag-bg-hover: color-mix(in oklab, var(--foreground) 20%, transparent);
+
+  /* ===== 分类封面 ===== */
+  /* 分类封面文字色 */
+  --category-cover-text: #d4d0c8;
+
   /* ===== 引用块 ===== */
   /* 引用块左边框色 */
   --blockquote-border: var(--border);
   /* 引用块文字色 */
   --blockquote-text: var(--muted-foreground);
 
-  /* ===== 代码块 ===== */
+  /* ===== 列表 ===== */
+  /* 列表标记色（有序、无序、任务列表通用） */
+  --list-marker: var(--foreground);
+
+  /* ===== 复选框 ===== */
+  /* 复选框边框色 */
+  --checkbox-border: #626262;
+  /* 复选框背景色（未选中） */
+  --checkbox-bg: #3b3b3b;
+  /* 复选框背景色（已选中） */
+  --checkbox-checked-bg: #757575;
+  /* 复选框勾选符号色 */
+  --checkbox-check: #3b3b3b;
+
+  /* ===== 代码 ===== */
   /* 代码块背景色 */
   --code-block-bg: rgba(43, 43, 41, 0.5);
-  /* 复制按钮背景色 */
-  --code-copy-bg: var(--code-block-bg);
-
   /* 行内代码背景色 */
   --code-inline-bg: var(--code-block-bg);
-
+  /* 复制按钮背景色 */
+  --code-copy-bg: var(--code-block-bg);
   /* 文件名标签绿点色 */
   --code-filename-dot: #22c55e;
   /* 代码高亮行背景色 */
@@ -63,44 +122,4 @@
   --table-header-border: var(--border);
   /* 表格行分隔线色 */
   --table-row-border: var(--border);
-
-  /* ===== 列表 ===== */
-  /* 列表标记色（有序、无序、任务列表通用） */
-  --list-marker: var(--foreground);
-
-  /* ===== 复选框 ===== */
-  /* 复选框边框色 */
-  --checkbox-border: #626262;
-  /* 复选框背景色（未选中） */
-  --checkbox-bg: #3b3b3b;
-  /* 复选框背景色（已选中） */
-  --checkbox-checked-bg: #757575;
-  /* 复选框勾选符号色 */
-  --checkbox-check: #3b3b3b;
-
-  /* ===== 年度进度条 ===== */
-  /* 暗色下直接用强调色高亮 */
-  --year-progress-fill: var(--accent);
-  /* 未到部分的轨道色 */
-  --year-progress-track: color-mix(in oklab, var(--border) 70%, transparent);
-
-  /* ===== 导航栏 ===== */
-  /* 导航栏链接默认色 */
-  --nav-link: var(--foreground);
-  /* 导航栏链接悬停/激活色 */
-  --nav-link-active: #f0ede6;
-  /* 导航栏标题色 */
-  --nav-title: var(--foreground);
-  /* 文章标题色 */
-  --post-title: var(--foreground);
-
-  /* ===== 标签 ===== */
-  /* 标签背景色 */
-  --tag-bg: color-mix(in oklab, var(--foreground) 10%, transparent);
-  /* 标签悬停背景色 */
-  --tag-bg-hover: color-mix(in oklab, var(--foreground) 20%, transparent);
-
-  /* ===== 分类封面 ===== */
-  /* 分类封面文字色 */
-  --category-cover-text: #d4d0c8;
 }
