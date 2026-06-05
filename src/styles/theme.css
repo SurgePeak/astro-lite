@@ -10,6 +10,8 @@
   --color-nav-link: var(--nav-link);
   --color-nav-link-active: var(--nav-link-active);
   --color-post-title: var(--post-title);
+  --color-tag-bg: var(--tag-bg);
+  --color-tag-bg-hover: var(--tag-bg-hover);
   --font-app: "SF Pro Text", "苹方_中等", sans-serif;
   --font-heading: "SF Pro Display", "苹方_粗体", sans-serif;
   --font-heading-sub: "PingFang SC", "苹方_中等", "SF Pro Display", "苹方_粗体", sans-serif;
@@ -104,6 +106,12 @@
   --nav-link-active: #000000;
   /* 文章标题色 */
   --post-title: var(--accent);
+
+  /* ===== 标签 ===== */
+  /* 标签背景色 */
+  --tag-bg: #F5F5F7;
+  /* 标签悬停背景色 */
+  --tag-bg-hover: #E8E8ED;
 }
 
 /* Dark theme values */
@@ -122,7 +130,7 @@
   /* 次要背景色（标签等） */
   --muted: #302d28;
   /* 次要文字色（时间、描述等） */
-  --muted-foreground: #a59e90;
+  --muted-foreground: #8a8578;
   /* 边框色 */
   --border: #48443c;
 
@@ -130,7 +138,7 @@
   /* 引用块左边框色 */
   --blockquote-border: var(--border);
   /* 引用块文字色 */
-  --blockquote-text: #c2c0b6;
+  --blockquote-text: var(--muted-foreground);
 
   /* ===== 代码 ===== */
   /* 代码块背景色 */
@@ -189,4 +197,10 @@
   --nav-link-active: var(--foreground);
   /* 文章标题色 */
   --post-title: var(--foreground);
+
+  /* ===== 标签 ===== */
+  /* 标签背景色（深色模式沿用原 foreground/10 视觉） */
+  --tag-bg: color-mix(in oklab, var(--foreground) 10%, transparent);
+  /* 标签悬停背景色 */
+  --tag-bg-hover: color-mix(in oklab, var(--foreground) 20%, transparent);
 }
