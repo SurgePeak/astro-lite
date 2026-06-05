@@ -68,7 +68,21 @@
 }
 
 @utility active-nav {
-  @apply text-accent font-medium;
+  @apply font-medium;
+}
+
+/* 导航栏文字配色 */
+nav a {
+  color: var(--color-nav-link);
+}
+nav a:hover,
+nav a.active-nav {
+  color: var(--color-nav-link-active);
+}
+
+/* 文章标题配色 */
+.post-title {
+  color: var(--color-post-title);
 }
 
 :target {

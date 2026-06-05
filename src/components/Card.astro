@@ -40,9 +40,10 @@ const coverSrc = buildCoverSrc();
       <a
         href={getPostUrl(id, filePath, Astro.currentLocale)}
         class:list={[
-          "text-accent inline-block text-base font-normal",
-          "decoration-dashed underline-offset-4 hover:underline",
+          "inline-block text-base font-normal",
+          "decoration-solid underline-offset-4 hover:underline",
           "focus-visible:no-underline focus-visible:underline-offset-0",
+          "post-title",
         ]}
       >
         <Heading

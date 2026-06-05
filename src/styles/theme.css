@@ -7,6 +7,9 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+  --color-nav-link: var(--nav-link);
+  --color-nav-link-active: var(--nav-link-active);
+  --color-post-title: var(--post-title);
   --font-app: "SF Pro Text", "苹方_中等", sans-serif;
   --font-heading: "SF Pro Display", "苹方_粗体", sans-serif;
   --font-heading-sub: "PingFang SC", "苹方_中等", "SF Pro Display", "苹方_粗体", sans-serif;
@@ -41,7 +44,7 @@
   /* 引用块左边框色 */
   --blockquote-border: var(--code-block-border);
   /* 引用块文字色 */
-  --blockquote-text: #3d3d3a;
+  --blockquote-text: #6e6e73;
 
   /* ===== 代码 ===== */
   /* 浅色模式和深色模式下的代码块配色不一样，不能直接复用变量 */
@@ -93,6 +96,14 @@
   --year-progress-fill: var(--accent);
   /* 未到部分的轨道色 */
   --year-progress-track: color-mix(in oklab, #e5e9f0 70%, transparent);
+
+  /* ===== 导航栏 ===== */
+  /* 导航栏链接默认色 */
+  --nav-link: rgba(0, 0, 0, 0.8);
+  /* 导航栏链接悬停/激活色 */
+  --nav-link-active: #000000;
+  /* 文章标题色 */
+  --post-title: var(--accent);
 }
 
 /* Dark theme values */
@@ -170,4 +181,12 @@
   --year-progress-fill: var(--accent);
   /* 未到部分的轨道色（沿用边框色） */
   --year-progress-track: color-mix(in oklab, var(--border) 70%, transparent);
+
+  /* ===== 导航栏 ===== */
+  /* 导航栏链接默认色 */
+  --nav-link: var(--foreground);
+  /* 导航栏链接悬停/激活色 */
+  --nav-link-active: var(--foreground);
+  /* 文章标题色 */
+  --post-title: var(--foreground);
 }
