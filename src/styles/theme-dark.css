@@ -9,12 +9,13 @@
  * - 变量会被 theme-inline.css 映射为 Tailwind v4 的 @theme token 后才能在
  *   utility class 中使用，修改变量名时需同步更新 theme-inline.css；
  * - 修改颜色值时注意与 theme-light.css 保持语义对应（同一变量、两套色值）。
+
  */
 [data-theme="dark"] {
   /* ===== 基础 ===== */
-  /* 页面背景色（内卡片） */
+  /* 页面背景色 */
   --background: #262624;
-  /* 外层画布色（桌面端可见，移动端会被覆盖为 --background） */
+  /* 外层画布色 */
   --page-background: #2a2a28;
   /* 主要文字色 */
   --foreground: #d4d0c8;
@@ -25,7 +26,7 @@
   /* 次要背景色（标签等） */
   --muted: #302d28;
   /* 次要文字色（时间、描述等） */
-  --muted-foreground: #8a8578;
+  --muted-foreground: #b8b3a8;
   /* 边框色 */
   --border: #48443c;
 
@@ -35,7 +36,7 @@
   /* 引用块文字色 */
   --blockquote-text: var(--muted-foreground);
 
-  /* ===== 代码 ===== */
+  /* ===== 代码块 ===== */
   /* 代码块背景色 */
   --code-block-bg: rgba(43, 43, 41, 0.5);
   /* 复制按钮背景色 */

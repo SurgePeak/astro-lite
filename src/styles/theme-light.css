@@ -13,9 +13,9 @@
  */
 :root,[data-theme="light"] {
   /* ===== 基础 ===== */
-  /* 页面背景色（内卡片） */
+  /* 页面背景色 */
   --background: #ffffff;
-  /* 外层画布色（桌面端可见，移动端会被覆盖为 --background） */
+  /* 外层画布色 */
   --page-background: #f5f5f7;
   /* 主要文字色 */
   --foreground: #1d1d1f;
@@ -32,12 +32,11 @@
 
   /* ===== 引用块 ===== */
   /* 引用块左边框色 */
-  --blockquote-border: #1f1e1d26;
+  --blockquote-border: var(--border);
   /* 引用块文字色 */
-  --blockquote-text: #6e6e73;
+  --blockquote-text: var(--muted-foreground);
 
-  /* ===== 代码 ===== */
-  /* 浅色模式和深色模式下的代码块配色不一样，不能直接复用变量 */
+  /* ===== 代码块 ===== */
   /* 代码块背景色 */
   --code-block-bg: rgba(245, 245, 247, 0.5);
   /* 复制按钮背景色 */
