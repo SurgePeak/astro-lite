@@ -37,15 +37,13 @@
 
   /* ===== 代码 ===== */
   /* 代码块背景色 */
-  --code-block-bg: #2B2B29;
-  /* 代码块边框色 */
-  --code-block-border: var(--border);
-  /* 行内代码背景色 */
-  --code-inline-bg: var(--code-block-bg);
+  --code-block-bg: rgba(43, 43, 41, 0.5);
   /* 复制按钮背景色 */
   --code-copy-bg: var(--code-block-bg);
-  /* 复制按钮边框色 */
-  --code-copy-border: var(--code-block-bg);
+
+  /* 行内代码背景色 */
+  --code-inline-bg: var(--code-block-bg);
+
   /* 文件名标签绿点色 */
   --code-filename-dot: #22c55e;
   /* 代码高亮行背景色 */

@@ -35,10 +35,10 @@
 
   /* ===== 代码 ===== */
   --color-code-block-bg: var(--code-block-bg);
-  --color-code-block-border: var(--code-block-border);
+  
   --color-code-inline-bg: var(--code-inline-bg);
   --color-code-copy-bg: var(--code-copy-bg);
-  --color-code-copy-border: var(--code-copy-border);
+  
   --color-code-filename-dot: var(--code-filename-dot);
   --color-code-highlight-bg: var(--code-highlight-bg);
   --color-code-diff-add-bg: var(--code-diff-add-bg);

@@ -284,18 +284,18 @@
 
     /* Code block focus — kept for accessibility */
     pre:focus-visible {
-      @apply outline-accent border-transparent outline-2 outline-dashed;
+      @apply outline-accent outline-2 outline-dashed;
     }
   }
 
   /* ===== Code Blocks & Syntax Highlighting ===== */
   /* AstroPaper's Shiki integration — colors driven by CSS variables */
   .astro-code {
-    @apply flex border text-(--shiki-light) [&_span]:text-(--shiki-light) !bg-code-block-bg !border-code-block-border outline-code-block-border;
+    @apply flex text-(--shiki-light) [&_span]:text-(--shiki-light) !bg-code-block-bg;
   }
 
   .astro-code > span {
-    @apply !bg-code-block-bg !border-code-block-border;
+    @apply !bg-code-block-bg;
   }
 
   html[data-theme="dark"] .astro-code {
@@ -304,8 +304,13 @@
 
   .copy-code {
     /* 隐藏复制按钮：保留 JS 注入的 wrapper 作为文件名标签的定位上下文 */
-    @apply !bg-code-copy-bg !border-code-copy-border;
+    @apply !bg-code-copy-bg !border-0;
     display: none;
+  }
+  
+  /* 移除代码块文件名标签的边框 */
+  .astro-code span.absolute {
+    @apply !border-0;
   }
 
   /* Shiki transformer visual styles — diff, highlight, error */
