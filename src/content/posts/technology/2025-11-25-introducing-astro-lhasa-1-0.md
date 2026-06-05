@@ -89,7 +89,7 @@ Markdown/MDX 扩展 - `remark-math`、`rehype-katex`、`rehype-figure`、`rehype
 图片灯箱 - [GLightbox](https://biati-digital.github.io/glightbox/)  
 OG 图像 - [Satori](https://github.com/vercel/satori) + [Resvg](https://github.com/RazrFalcon/resvg)（站点与文章均支持）  
 构建优化 - `astro-compressor`、`@zokki/astro-minify`  
-友联订阅 - [RSS Lhasa](https://github.com/achuanya/rss-lhasa)  
+友链订阅 - [RSS Lhasa](https://github.com/achuanya/rss-lhasa)  
 评论系统 - [Artalk ui](https://github.com/achuanya/artalk-ui)   
 部署 - Docker/Nginx/Pm2（含 `Dockerfile`、`docker-compose.yml`、`ecosystem.config.cjs`）  
 代码规范 - [ESLint 9](https://eslint.org/) + [Prettier 3](https://prettier.io/)
