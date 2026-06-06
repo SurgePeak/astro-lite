@@ -29,12 +29,19 @@ const coverSrc = buildCoverSrc();
 <li>
   <div class="flex items-start gap-3">
     {coverSrc && (
-      <img
-        src={coverSrc}
-        alt={title}
-        loading="lazy"
-        class="w-[50px] h-[50px] object-cover rounded-md shrink-0"
-      />
+      <div class="relative h-[50px] w-[50px] shrink-0 overflow-hidden rounded-md">
+        <div
+          data-skeleton-ph
+          class="skeleton skeleton-shimmer absolute inset-0"
+        />
+        <img
+          src={coverSrc}
+          alt={title}
+          loading="lazy"
+          data-skeleton
+          class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500"
+        />
+      </div>
     )}
     <div class="min-w-0 flex-1">
       <a

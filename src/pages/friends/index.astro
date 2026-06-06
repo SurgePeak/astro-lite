@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import PostCardSkeleton from "@/components/skeleton/PostCardSkeleton.astro";
 import config from "@/config";
 import { useTranslations } from "@/i18n";
 
@@ -17,7 +18,9 @@ const t = useTranslations(locale);
     class="app-layout"
   >
     <section id="recent-posts" class="pb-0">
+      {/* 初始加载骨架屏：friends.ts fetch 成功后会清空并替换为真实列表 */}
       <ul id="post-list" class="space-y-4">
+        {Array.from({ length: 6 }).map(() => <PostCardSkeleton />)}
       </ul>
       <div id="infinite-scroll-sentinel" />
     </section>

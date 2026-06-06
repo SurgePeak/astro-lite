@@ -2,6 +2,7 @@ import config from "@/config";
 import zh from "@/i18n/lang/zh";
 import en from "@/i18n/lang/en";
 import { parseDate, relativeTime } from "@/utils/relativeTime";
+import { attachImageSkeleton } from "@/scripts/imageSkeleton";
 
 const PER_PAGE = config.posts.perPage;
 const DEFAULT_AVATAR = config.friends.defaultAvatar;
@@ -29,15 +30,30 @@ function createCard(item: FriendsItem): HTMLLIElement {
   const outerDiv = document.createElement("div");
   outerDiv.className = "flex items-start gap-3";
 
+  // 头像占位：底层 shimmer 骨架 + 上层淡入图片
+  const avatar = document.createElement("div");
+  avatar.className =
+    "relative h-[50px] w-[50px] shrink-0 overflow-hidden rounded-md";
+
+  const avatarPh = document.createElement("div");
+  avatarPh.className = "skeleton skeleton-shimmer absolute inset-0";
+  avatarPh.setAttribute("data-skeleton-ph", "");
+
   const img = document.createElement("img");
   img.src = item.avatar || DEFAULT_AVATAR;
   img.alt = item.blog_name;
   img.loading = "lazy";
-  img.className = "w-[50px] h-[50px] object-cover rounded-md shrink-0";
+  img.setAttribute("data-skeleton", "");
+  img.className =
+    "absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500";
   img.onerror = function () {
     this.onerror = null;
     this.src = DEFAULT_AVATAR;
   };
+
+  avatar.appendChild(avatarPh);
+  avatar.appendChild(img);
+  attachImageSkeleton(img);
 
   const innerDiv = document.createElement("div");
   innerDiv.className = "min-w-0 flex-1";
@@ -72,7 +88,7 @@ function createCard(item: FriendsItem): HTMLLIElement {
 
   innerDiv.appendChild(a);
   innerDiv.appendChild(dateDiv);
-  outerDiv.appendChild(img);
+  outerDiv.appendChild(avatar);
   outerDiv.appendChild(innerDiv);
   li.appendChild(outerDiv);
 

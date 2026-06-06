@@ -20,12 +20,19 @@ const href = getRelativeLocaleUrl(locale, `categories/${slug}/`);
 >
 {
   imageUrl ? (
-    <img
-      src={imageUrl}
-      alt={`${name} 封面图`}
-      loading="lazy"
-      class="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-    />
+    <Fragment>
+      <div
+        data-skeleton-ph
+        class="skeleton skeleton-shimmer absolute inset-0"
+      />
+      <img
+        src={imageUrl}
+        alt={`${name} 封面图`}
+        loading="lazy"
+        data-skeleton
+        class="absolute inset-0 h-full w-full object-cover opacity-0 transition-[opacity,transform] duration-300 group-hover:scale-105"
+      />
+    </Fragment>
   ) : (
     <div class="absolute inset-0 bg-foreground/20" />
   )

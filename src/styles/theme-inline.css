@@ -19,6 +19,7 @@
  *  11. 复选框 — 任务列表
  *  12. 代码 — 代码块/行内代码
  *  13. 表格 — 正文表格
+ *  14. 骨架屏 — 加载占位
  *
  * 新增类别时：
  *   - 根据语义确定应插入的序号位置；
@@ -98,4 +99,8 @@
   /* ===== 表格 ===== */
   --color-table-header-border: var(--table-header-border);
   --color-table-row-border: var(--table-row-border);
+
+  /* ===== 骨架屏 ===== */
+  --color-skeleton-base: var(--skeleton-base);
+  --color-skeleton-highlight: var(--skeleton-highlight);
 }

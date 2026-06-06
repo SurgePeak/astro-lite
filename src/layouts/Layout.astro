@@ -3,6 +3,7 @@ import { ClientRouter } from "astro:transitions";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { resolveDefaultOgImagePath } from "@/utils/resolveDefaultOgImagePath";
 import { getAssetPath } from "@/utils/withBase";
+import NavigationSkeleton from "@/components/skeleton/NavigationSkeleton.astro";
 import config from "@/config";
 import "@/styles/global.css";
 
@@ -75,6 +76,18 @@ const rssHref = getRelativeLocaleUrl(
 
     <!-- Filled at runtime by theme.ts to match the current background colour -->
     <meta name="theme-color" content="" />
+
+    <!-- 无 JS 兜底：强制显示带骨架占位的图片，隐藏占位块 -->
+    <noscript>
+      <style>
+        img[data-skeleton] {
+          opacity: 1 !important;
+        }
+        [data-skeleton-ph] {
+          display: none !important;
+        }
+      </style>
+    </noscript>
 
     <!-- Extra head content injected by child layouts (e.g. JSON-LD, article meta) -->
     <slot name="head" />
@@ -155,8 +168,15 @@ const rssHref = getRelativeLocaleUrl(
     >
       <slot />
     </div>
+
+    <!-- 页面切换骨架屏覆盖层（仅慢导航 >250ms 时显示） -->
+    <NavigationSkeleton />
+
     <script>
       import "@/scripts/theme";
+      import { revealLoadedImages } from "@/scripts/imageSkeleton";
+      // 每次页面加载/切换后，揭示已带骨架占位的远程图片
+      document.addEventListener("astro:page-load", () => revealLoadedImages());
     </script>
   </body>
 </html>
