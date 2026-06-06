@@ -47,22 +47,24 @@ function createCard(item: FriendsItem): HTMLLIElement {
   a.target = "_blank";
   a.rel = "noopener noreferrer";
   a.className =
-    "inline-block text-base font-normal decoration-solid underline-offset-4 hover:underline";
+    "inline-block text-base font-normal decoration-solid underline-offset-4 hover:underline post-title";
 
   const heading = document.createElement("h2");
   heading.textContent = item.title;
   a.appendChild(heading);
 
-const dateDiv = document.createElement("div");
-dateDiv.className = "text-muted-foreground flex items-center gap-x-2 text-sm";
-const time = document.createElement("time");
-time.textContent = relativeTime(item.published, rt);
-time.setAttribute("datetime", parseDate(item.published).toISOString());
-dateDiv.appendChild(time);
+  const dateDiv = document.createElement("div");
+  dateDiv.className = "text-muted-foreground flex items-center gap-x-2";
+  const time = document.createElement("time");
+  time.className = "text-xs";
+  time.textContent = relativeTime(item.published, rt);
+  time.setAttribute("datetime", parseDate(item.published).toISOString());
+  dateDiv.appendChild(time);
 
   if (item.blog_name) {
     const separator = document.createTextNode(" ");
     const authorSpan = document.createElement("span");
+    authorSpan.className = "text-xs";
     authorSpan.textContent = item.blog_name;
     dateDiv.appendChild(separator);
     dateDiv.appendChild(authorSpan);
