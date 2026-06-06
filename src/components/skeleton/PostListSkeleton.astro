@@ -6,14 +6,15 @@
  * 由 N 个 PostCardSkeleton 组成，标题宽度按数组轮换以增加真实感。
  *
  * @example
- *   <PostListSkeleton count={6} />
+ *   <PostListSkeleton count={config.posts.perPage} />
  */
 import PostCardSkeleton from "./PostCardSkeleton.astro";
+import config from "@/config";
 
 type Animation = "shimmer" | "pulse" | "none";
 
 interface Props {
-  /** 卡片数量，默认 4（与 config.posts.perPage 一致） */
+  /** 卡片数量，默认从 config.posts.perPage 读取 */
   count?: number;
   /** 是否显示封面占位，默认 true */
   showCover?: boolean;
@@ -24,7 +25,7 @@ interface Props {
 }
 
 const {
-  count = 4,
+  count = config.posts.perPage,
   showCover = true,
   animation = "shimmer",
   class: className,

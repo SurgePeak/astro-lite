@@ -36,7 +36,7 @@ import config from "@/config";
 
     <main class="app-layout pb-4">
       <div data-route="home" hidden>
-        <PostListSkeleton count={5} />
+        <PostListSkeleton count={config.posts.perPage} />
       </div>
       <div data-route="categories" hidden>
         <CategoryGridSkeleton count={config.posts.perPage} />
@@ -45,13 +45,13 @@ import config from "@/config";
         <TagCloudSkeleton count={18} />
       </div>
       <div data-route="friends" hidden>
-        <PostListSkeleton count={6} />
+        <PostListSkeleton count={config.posts.perPage} />
       </div>
       <div data-route="about" hidden>
         <AboutSkeleton />
       </div>
       <div data-route="list" hidden>
-        <PostListSkeleton count={5} />
+        <PostListSkeleton count={config.posts.perPage} />
       </div>
     </main>
 
