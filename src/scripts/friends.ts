@@ -28,7 +28,7 @@ function createCard(item: FriendsItem): HTMLLIElement {
   const li = document.createElement("li");
 
   const outerDiv = document.createElement("div");
-  outerDiv.className = "flex items-start gap-3";
+  outerDiv.className = "flex items-center gap-3";
 
   // 头像占位：底层 shimmer 骨架 + 上层淡入图片
   const avatar = document.createElement("div");
