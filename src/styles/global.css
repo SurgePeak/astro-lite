@@ -74,11 +74,13 @@
 }
 
 /* 导航栏文字配色 */
-nav a {
+nav a,
+nav button {
   @apply text-nav-link;
 }
 nav a:hover,
-nav a.active-nav {
+nav a.active-nav,
+nav button:hover {
   @apply text-nav-link-active;
 }
 
