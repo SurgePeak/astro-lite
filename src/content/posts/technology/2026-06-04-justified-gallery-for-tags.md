@@ -159,8 +159,6 @@ const widths = items.map(li => li.getBoundingClientRect().width);
 
 跑起来之后，每一行最右边的标签都正好贴着容器边缘，左右两条线干干净净。稀疏的末行保持自然宽度左对齐，不会被强行拉开
 
-![标签页新效果](after.png)
-
 完整代码在 [`src/pages/tags/index.astro`](https://github.com/achuanya/astro-lhasa)，三十几行就搞定了，比想象中简单
 
 写完这个我又想起 Flickr 当年那篇讲相册布局的博客 [Flickr's New Justified Layout](https://code.flickr.net/2014/05/05/flickr-justified-layout-implementation/)，作者把同样的思路用在了图片宽高比上 —— 图片的"自然宽度"就是 `targetRowHeight × aspectRatio`，剩下的几乎一模一样。算法这东西，换个皮就能跨领域复用，挺有意思

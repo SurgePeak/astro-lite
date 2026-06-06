@@ -35,7 +35,7 @@
   /* 页面背景色 */
   --background: #ffffff;
   /* 外层画布色 */
-  --page-background: #f5f5f7;
+  --page-background: #7db9de;
   /* 主要文字色 */
   --foreground: #1d1d1f;
   /* 强调色（链接、高亮） */
@@ -45,27 +45,27 @@
   /* 次要背景色（标签等） */
   --muted: #e6e6e6;
   /* 次要文字色（时间、描述等） */
-  --muted-foreground: #6e6e73;
+  --muted-foreground: #969696;
   /* 边框色 */
   --border: #1f1e1d;
 
   /* ===== 年度进度条 ===== */
   /* 用强调色高亮已过去的部分 */
-  --year-progress-fill: var(--accent);
+  --year-progress-fill: var(--page-background);
   /* 未到部分的轨道色，该变量不能像 dark 继承 --border */
   --year-progress-track: color-mix(in oklab, #e5e9f0 70%, transparent);
 
   /* ===== 导航栏 ===== */
   /* 导航栏链接默认色 */
-  --nav-link: var(--foreground);
+  --nav-link: #2ea9df;
   /* 导航栏链接悬停/激活色 */
-  --nav-link-active: #1a1a1a;
+  --nav-link-active: var(--foreground);
   /* 导航栏标题色 */
-  --nav-title: var(--foreground);
+  --nav-title: var(--nav-link);
 
   /* ===== 文章标题 ===== */
   /* 文章标题色 */
-  --post-title: var(--foreground);
+  --post-title: #2ea9df;
 
   /* ===== 标签 ===== */
   /* 标签背景色 */
