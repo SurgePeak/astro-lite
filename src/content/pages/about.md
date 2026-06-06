@@ -3,7 +3,7 @@ title: "关于"
 description: "关于我和我的博客"
 ---
 
-自 <span id="start-year" class="inline-block font-normal text-accent">0</span>年<span id="start-month" class="inline-block font-normal text-accent">0</span>月<span id="start-day" class="inline-block font-normal text-accent">0</span>日起，本站已运行<span id="running-days" class="inline-block font-normal text-accent">0</span> 天，一路走来，记录了 <span id="total-posts" class="inline-block font-normal text-accent">0</span>篇日志，累计<span id="total-words" class="inline-block font-normal text-accent">0</span> 万字
+自<span id="start-year" class="inline-block font-normal text-accent">0</span>年<span id="start-month" class="inline-block font-normal text-accent">0</span>月<span id="start-day" class="inline-block font-normal text-accent">0</span>日起，本站已运行<span id="running-days" class="inline-block font-normal text-accent">0</span>天，一路走来，记录了<span id="total-posts" class="inline-block font-normal text-accent">0</span>篇日志，累计<span id="total-words" class="inline-block font-normal text-accent">0</span>万字
 
 起初，我的博客只是用来写编程笔记，方便在日后查阅
 

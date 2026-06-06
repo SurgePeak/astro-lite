@@ -20,6 +20,7 @@
  *  12. 代码 — 代码块/行内代码
  *  13. 表格 — 正文表格
  *  14. 骨架屏 — 加载占位
+ *  15. 滚动条 — 页面滚动条
  *
  * 新增类别时：
  *   - 根据语义确定应插入的序号位置；
@@ -103,4 +104,8 @@
   /* ===== 骨架屏 ===== */
   --color-skeleton-base: var(--skeleton-base);
   --color-skeleton-highlight: var(--skeleton-highlight);
+
+  /* ===== 滚动条 ===== */
+  --color-scrollbar-thumb: var(--scrollbar-thumb);
+  --color-scrollbar-thumb-hover: var(--scrollbar-thumb-hover);
 }

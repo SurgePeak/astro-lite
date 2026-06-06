@@ -39,13 +39,13 @@ const href = getRelativeLocaleUrl(locale, `categories/${slug}/`);
 }
 <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
 <div class="absolute inset-x-0 bottom-0 p-3 text-category-cover-text sm:p-4">
-    <p class="text-xs opacity-90 sm:text-sm">
+    <p class="truncate text-xs opacity-90 sm:text-sm">
       {name}
       {t.pages.categoryPostCount(count)}
     </p>
     {
       latestTitle && (
-          <p class="mt-0.5 line-clamp-2 text-sm font-medium sm:text-base">
+          <p class="mt-0.5 truncate text-sm font-medium sm:text-base">
             {latestTitle}
           </p>
       )

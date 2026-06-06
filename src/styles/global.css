@@ -21,7 +21,13 @@
   * {
     @apply border-border outline-accent/75;
     scrollbar-width: auto;
-    scrollbar-color: var(--color-muted) transparent;
+    scrollbar-color: var(--color-scrollbar-thumb) transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--color-scrollbar-thumb);
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--color-scrollbar-thumb-hover);
   }
   h1 {
     font-family: var(--font-heading);

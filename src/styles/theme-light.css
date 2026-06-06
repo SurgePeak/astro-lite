@@ -19,6 +19,7 @@
  *  12. 代码 — 代码块/行内代码
  *  13. 表格 — 正文表格
  *  14. 骨架屏 — 加载占位
+ *  15. 滚动条 — 页面滚动条
  *
  * 新增类别时：
  *   - 根据语义确定应插入的序号位置；
@@ -134,4 +135,10 @@
   --skeleton-base: #e9e9ec;
   /* shimmer 光泽高光色（自左向右扫过） */
   --skeleton-highlight: rgba(255, 255, 255, 0.6);
+
+  /* ===== 滚动条 ===== */
+  /* 滚动条滑块默认色（与外层画布一致） */
+  --scrollbar-thumb: var(--page-background);
+  /* 滚动条滑块悬停/拖动色 */
+  --scrollbar-thumb-hover: color-mix(in oklab, var(--page-background) 70%, white);
 }
