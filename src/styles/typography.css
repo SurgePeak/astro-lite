@@ -47,6 +47,11 @@
        vertical rhythm unit between block-level elements. */
     --block-gap: 0.75rem;
 
+    /* Heading-to-content gap — space between a heading and the
+       content that follows it. Ensures visual breathing room
+       so headings feel separated from body text. */
+    --heading-gap: 0.75rem;
+
     /* Prose measure — narrow column for comfortable reading.
        Typora uses 752px; 720px = 45rem = widely accepted optimal
        line length (45-75 characters). */
@@ -65,41 +70,47 @@
      * Top margins follow a natural Fibonacci-like sequence (6-5-4-3).
      */
     h1 {
-      @apply text-foreground mb-1 mt-6 font-medium border-l-prose-heading-border;
+      @apply text-foreground mt-6 font-medium border-l-prose-heading-border;
       font-family: var(--font-ui);
       font-size: var(--text-h1);
       line-height: var(--leading-heading);
+      margin-bottom: var(--heading-gap);
       border-left-width: 4px;
       padding-left: 1rem;
     }
     h2 {
-      @apply text-foreground mb-1 mt-5 font-medium border-l-prose-heading-border;
+      @apply text-foreground mt-5 font-medium border-l-prose-heading-border;
       font-size: var(--text-h2);
       line-height: var(--leading-heading);
+      margin-bottom: var(--heading-gap);
       border-left-width: 4px;
       padding-left: 1rem;
     }
     h3 {
-      @apply text-foreground mb-1 mt-4 font-medium border-l-prose-heading-border;
+      @apply text-foreground mt-4 font-medium border-l-prose-heading-border;
       font-size: var(--text-h3);
       line-height: var(--leading-heading);
+      margin-bottom: var(--heading-gap);
       border-left-width: 4px;
       padding-left: 1rem;
     }
     h4 {
-      @apply text-foreground mb-1 mt-4 font-medium;
+      @apply text-foreground mt-4 font-medium;
       font-size: var(--text-h4);
       line-height: var(--leading-heading);
+      margin-bottom: var(--heading-gap);
     }
     h5 {
-      @apply text-foreground mb-1 mt-3 font-medium;
+      @apply text-foreground mt-3 font-medium;
       font-size: var(--text-h5);
       line-height: var(--leading-heading);
+      margin-bottom: var(--heading-gap);
     }
     h6 {
-      @apply text-foreground mb-1 mt-3 font-medium;
+      @apply text-foreground mt-3 font-medium;
       font-size: var(--text-h6);
       line-height: var(--leading-heading);
+      margin-bottom: var(--heading-gap);
     }
 
     /*
