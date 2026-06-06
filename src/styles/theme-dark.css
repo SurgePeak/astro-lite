@@ -40,15 +40,15 @@
   /* 外层画布色 */
   --page-background: #2a2a28;
   /* 主要文字色 */
-  --foreground: #d4d0c8;
+  --foreground: #d0d3d8;
   /* 强调色（链接、高亮） */
-  --accent: #b8b0a5;
+  --accent: #E6E1D6;
   /* 强调色上的文字色 */
-  --accent-foreground: #ffffff;
+  --accent-foreground: #D4C9A8;
   /* 次要背景色（标签等） */
   --muted: #302d28;
   /* 次要文字色（时间、描述等） */
-  --muted-foreground: #b8b3a8;
+  --muted-foreground: #8a8c90;
   /* 边框色 */
   --border: #48443c;
 
@@ -62,17 +62,17 @@
   /* 导航栏链接默认色 */
   --nav-link: var(--foreground);
   /* 导航栏链接悬停/激活色 */
-  --nav-link-active: #f0ede6;
+  --nav-link-active: var(--foreground);
   /* 导航栏标题色 */
   --nav-title: var(--foreground);
 
   /* ===== 文章标题 ===== */
   /* 文章标题色 */
-  --post-title: var(--foreground);
+  --post-title: var(--nav-link);
 
   /* ===== 正文标题 ===== */
   /* 正文 H1-H3 左边框色（继承自引用块边框色） */
-  --prose-heading-border: var(--blockquote-border);
+  --prose-heading-border: rgb(217, 119, 87);
 
   /* ===== 标签 ===== */
   /* 标签背景色 */
@@ -86,7 +86,7 @@
 
   /* ===== 引用块 ===== */
   /* 引用块左边框色 */
-  --blockquote-border: var(--border);
+  --blockquote-border: #dedcd126;
   /* 引用块文字色 */
   --blockquote-text: var(--muted-foreground);
 

@@ -40,9 +40,9 @@
   /* 外层画布色 */
   --page-background: #7db9de;
   /* 主要文字色 */
-  --foreground: #1d1d1f;
+  --foreground: #0d141e;
   /* 强调色（链接、高亮） */
-  --accent: #1d1d1f;
+  --accent: #212832;
   /* 强调色上的文字色 */
   --accent-foreground: #ffffff;
   /* 次要背景色（标签等） */
@@ -68,7 +68,7 @@
 
   /* ===== 文章标题 ===== */
   /* 文章标题色 */
-  --post-title: #2ea9df;
+  --post-title: var(--nav-link);
 
   /* ===== 正文标题 ===== */
   /* 正文 H1-H3 左边框色（继承自引用块边框色） */
