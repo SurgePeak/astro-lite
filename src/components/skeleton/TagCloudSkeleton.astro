@@ -6,20 +6,20 @@
  * 由宽度轮换的 h-8 圆角药丸组成，模拟不同长度的标签。
  *
  * @example
- *   <TagCloudSkeleton count={18} />
+ *   <TagCloudSkeleton count={50} />
  */
 import Skeleton from "./Skeleton.astro";
 
 type Animation = "shimmer" | "pulse" | "none";
 
 interface Props {
-  /** 药丸数量，默认 18 */
+  /** 药丸数量，默认 50 */
   count?: number;
   /** 动画类型，默认 shimmer */
   animation?: Animation;
 }
 
-const { count = 18, animation = "shimmer" } = Astro.props;
+const { count = 50, animation = "shimmer" } = Astro.props;
 
 // 宽度轮换，模拟长短不一的标签名
 const widths = [

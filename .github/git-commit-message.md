@@ -1,8 +1,3 @@
----
-alwaysApply: true
-scene: git_message
----
-
 # Git 提交消息规范
 
 生成 Git 提交消息时必须严格遵守以下规则。
