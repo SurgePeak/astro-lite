@@ -20,7 +20,7 @@ const t = useTranslations(locale);
     <section id="recent-posts" class="pb-0">
       {/* 初始加载骨架屏：friends.ts fetch 成功后会清空并替换为真实列表 */}
       <ul id="post-list" class="space-y-4">
-        {Array.from({ length: 6 }).map(() => <PostCardSkeleton />)}
+        {Array.from({ length: config.posts.perPage }).map(() => <PostCardSkeleton />)}
       </ul>
       <div id="infinite-scroll-sentinel" />
     </section>
