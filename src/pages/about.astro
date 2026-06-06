@@ -76,44 +76,53 @@ const blogStats = await getPostsMetrics();
     requestAnimationFrame(updateNumber);
   }
 
-  function startAnimations() {
+  function readStats() {
     const statsData = document.getElementById("blog-stats-data");
-    if (!statsData) return;
-
-    const runningDays = parseInt(statsData.dataset.runningDays || "0");
-    const totalPosts = parseInt(statsData.dataset.totalPosts || "0");
-    const totalWords = parseFloat(statsData.dataset.totalWords || "0");
-    const startYear = parseInt(statsData.dataset.startYear || "2018");
-    const startMonth = parseInt(statsData.dataset.startMonth || "8");
-    const startDay = parseInt(statsData.dataset.startDay || "31");
-
-    const elements = [
-      { id: "start-year", value: startYear, duration: 1000 },
-      { id: "start-month", value: startMonth, duration: 800 },
-      { id: "start-day", value: startDay, duration: 600 },
-      { id: "running-days", value: runningDays, duration: 2000 },
-      { id: "total-posts", value: totalPosts, duration: 1500 },
-      { id: "total-words", value: totalWords, duration: 2500, isDecimal: true },
-    ];
-
-    const setMinWidth = (el: HTMLElement, len: number) => {
-      el.style.display = "inline-block";
-      el.style.minWidth = `${len}ch`;
-      el.style.textAlign = "center";
+    if (!statsData) return null;
+    return {
+      runningDays: parseInt(statsData.dataset.runningDays || "0"),
+      totalPosts: parseInt(statsData.dataset.totalPosts || "0"),
+      totalWords: parseFloat(statsData.dataset.totalWords || "0"),
+      startYear: parseInt(statsData.dataset.startYear || "2018"),
+      startMonth: parseInt(statsData.dataset.startMonth || "8"),
+      startDay: parseInt(statsData.dataset.startDay || "31"),
     };
+  }
+
+  function reserveWidths() {
+    const s = readStats();
+    if (!s) return;
 
     const widths: Array<[string, number]> = [
-      ["start-year", String(startYear).length],
-      ["start-month", String(startMonth).length],
-      ["start-day", String(startDay).length],
-      ["running-days", String(runningDays).length],
-      ["total-posts", String(totalPosts).length],
-      ["total-words", totalWords.toFixed(1).length],
+      ["start-year", String(s.startYear).length],
+      ["start-month", String(s.startMonth).length],
+      ["start-day", String(s.startDay).length],
+      ["running-days", String(s.runningDays).length],
+      ["total-posts", String(s.totalPosts).length],
+      ["total-words", s.totalWords.toFixed(1).length],
     ];
     widths.forEach(([id, len]) => {
       const el = document.getElementById(id);
-      if (el) setMinWidth(el, len);
+      if (!el) return;
+      el.style.display = "inline-block";
+      el.style.minWidth = `${len}ch`;
+      el.style.textAlign = "center";
+      el.style.fontVariantNumeric = "tabular-nums";
     });
+  }
+
+  function startAnimations() {
+    const s = readStats();
+    if (!s) return;
+
+    const elements = [
+      { id: "start-year", value: s.startYear, duration: 1000 },
+      { id: "start-month", value: s.startMonth, duration: 800 },
+      { id: "start-day", value: s.startDay, duration: 600 },
+      { id: "running-days", value: s.runningDays, duration: 2000 },
+      { id: "total-posts", value: s.totalPosts, duration: 1500 },
+      { id: "total-words", value: s.totalWords, duration: 2500, isDecimal: true },
+    ];
 
     elements.forEach((item, index) => {
       const element = document.getElementById(item.id);
@@ -168,11 +177,14 @@ const blogStats = await getPostsMetrics();
     }
   }
 
+  function initializeImmediate() {
+    reserveWidths();
+    renderTimeline();
+  }
+
   function initializeAnimations() {
-    setTimeout(() => {
-      startAnimations();
-      renderTimeline();
-    }, 300);
+    initializeImmediate();
+    setTimeout(startAnimations, 300);
   }
 
   document.addEventListener("astro:page-load", initializeAnimations);
