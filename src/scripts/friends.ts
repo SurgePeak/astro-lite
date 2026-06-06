@@ -61,7 +61,7 @@ time.setAttribute("datetime", parseDate(item.published).toISOString());
 dateDiv.appendChild(time);
 
   if (item.blog_name) {
-    const separator = document.createTextNode(" - ");
+    const separator = document.createTextNode(" ");
     const authorSpan = document.createElement("span");
     authorSpan.textContent = item.blog_name;
     dateDiv.appendChild(separator);
@@ -125,6 +125,9 @@ function setupScroll(): void {
 }
 
 export async function initFriends(): Promise<void> {
+  const main = document.getElementById("main-content");
+  if (main?.dataset.layout !== "friends") return;
+
   const sentinel = document.getElementById("infinite-scroll-sentinel");
   const list = document.getElementById("post-list");
   if (!sentinel || !list) return;
