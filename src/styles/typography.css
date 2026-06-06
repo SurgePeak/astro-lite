@@ -65,7 +65,8 @@
      * Top margins follow a natural Fibonacci-like sequence (6-5-4-3).
      */
     h1 {
-      @apply text-foreground mb-1 mt-6 font-bold border-l-prose-heading-border;
+      @apply text-foreground mb-1 mt-6 font-medium border-l-prose-heading-border;
+      font-family: var(--font-ui);
       font-size: var(--text-h1);
       line-height: var(--leading-heading);
       border-left-width: 4px;

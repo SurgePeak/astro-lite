@@ -62,7 +62,7 @@
   /* 导航栏链接悬停/激活色 */
   --nav-link-active: var(--foreground);
   /* 导航栏标题色 */
-  --nav-title: var(--nav-link);
+  --nav-title: var(--foreground);
 
   /* ===== 文章标题 ===== */
   /* 文章标题色 */
