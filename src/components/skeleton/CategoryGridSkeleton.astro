@@ -7,20 +7,21 @@
  * 与 CategoryCard.astro 的最终视觉保持一致（封面图 + 渐变 + 浅色标题）。
  *
  * @example
- *   <CategoryGridSkeleton count={6} />
+ *   <CategoryGridSkeleton count={config.posts.perPage} />
  */
 import Skeleton from "./Skeleton.astro";
+import config from "@/config";
 
 type Animation = "shimmer" | "pulse" | "none";
 
 interface Props {
-  /** 分类卡片数量，默认 6 */
+  /** 分类卡片数量，默认从 config.posts.perPage 读取 */
   count?: number;
   /** 动画类型，默认 shimmer */
   animation?: Animation;
 }
 
-const { count = 6, animation = "shimmer" } = Astro.props;
+const { count = config.posts.perPage, animation = "shimmer" } = Astro.props;
 ---
 
 <div class="grid grid-cols-2 gap-0.5" aria-hidden="true">

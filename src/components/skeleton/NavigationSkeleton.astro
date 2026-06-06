@@ -19,6 +19,7 @@ import CategoryGridSkeleton from "./CategoryGridSkeleton.astro";
 import TagCloudSkeleton from "./TagCloudSkeleton.astro";
 import AboutSkeleton from "./AboutSkeleton.astro";
 import Skeleton from "./Skeleton.astro";
+import config from "@/config";
 ---
 
 <div
@@ -38,7 +39,7 @@ import Skeleton from "./Skeleton.astro";
         <PostListSkeleton count={5} />
       </div>
       <div data-route="categories" hidden>
-        <CategoryGridSkeleton count={6} />
+        <CategoryGridSkeleton count={config.posts.perPage} />
       </div>
       <div data-route="tags" hidden>
         <TagCloudSkeleton count={18} />
