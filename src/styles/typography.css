@@ -65,19 +65,25 @@
      * Top margins follow a natural Fibonacci-like sequence (6-5-4-3).
      */
     h1 {
-      @apply text-foreground mb-1 mt-6 font-bold;
+      @apply text-foreground mb-1 mt-6 font-bold border-l-prose-heading-border;
       font-size: var(--text-h1);
       line-height: var(--leading-heading);
+      border-left-width: 4px;
+      padding-left: 1rem;
     }
     h2 {
-      @apply text-foreground mb-1 mt-5 font-medium;
+      @apply text-foreground mb-1 mt-5 font-medium border-l-prose-heading-border;
       font-size: var(--text-h2);
       line-height: var(--leading-heading);
+      border-left-width: 4px;
+      padding-left: 1rem;
     }
     h3 {
-      @apply text-foreground mb-1 mt-4 font-medium;
+      @apply text-foreground mb-1 mt-4 font-medium border-l-prose-heading-border;
       font-size: var(--text-h3);
       line-height: var(--leading-heading);
+      border-left-width: 4px;
+      padding-left: 1rem;
     }
     h4 {
       @apply text-foreground mb-1 mt-4 font-medium;
