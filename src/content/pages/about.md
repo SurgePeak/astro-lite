@@ -11,7 +11,7 @@ description: "关于我和我的博客"
 
 ## 博主
 
-千禧年小孩、长途骑行小学生、徒步登山爱好者、野钓路亚、振出并继、古典乐痴、笛箫学徒、野生程序员
+千禧年小孩、长途骑行小学生、徒步登山爱好者、路亚振出、古典乐、笛箫、野生程序员
 
 ![游钓四方的骑行照，拍摄于第17届马自骑资格认证赛（余姚站）](https://cos.lhasa.icu/StylePictures/my-photo.jpg "游钓四方的骑行照，拍摄于第17届马自骑资格认证赛（余姚站）")
 
@@ -43,11 +43,13 @@ description: "关于我和我的博客"
   { "date": "2026-06-04", "text": "更换为自研主题 Astro Lite" }
 ]
 </script>
-
 ## LICENSE
 
-本博客前端源码基于 <a href="https://github.com/satnaing/astro-paper" target="_blank" rel="noopener noreferrer">Astro Paper</a> 项目构建，遵循 MIT License 发布：
 
-> Copyright (c) 2023 Sat Naing 本软件可自由使用、复制、修改、分发，前提是保留原始版权声明。软件按“原样”提供，不附带任何明示或暗示的担保。
 
-> <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-hans" target="_blank" rel="noopener noreferrer">CC BY-NC-ND 4.0 国际许可协议</a>，转载请务必注明出处，禁止商用及修改。
+本博客主题 [Astro Lite](https://github.com/achuanya/astro-lite) 基于开源项目 [Astro Paper](https://github.com/satnaing/astro-paper)  二次开发
+
+| 对象                 | 许可                                                         | 是否允许商用 |      | 是否允许修改     |
+| -------------------- | ------------------------------------------------------------ | ------------ | ---- | ---------------- |
+| 前端源码 / 主题代码  | [MIT License](https://github.com/achuanya/astro-lhasa)        | 允许         |      | 允许             |
+| 原创文章、图片、内容 | [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) | 不允许       |      | 不允许发布修改版 |
