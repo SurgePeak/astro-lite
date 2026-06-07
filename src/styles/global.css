@@ -5,12 +5,20 @@
 @import "./typography.css";
 @import "./skeleton.css";
 
-@import "../assets/fonts/SF-Pro-Display-Bold/result.css";
-@import "../assets/fonts/SF-Pro-Text-Regular/result.css";
-@import "../assets/fonts/SF-Pro-Text-Bold/result.css";
-@import "../assets/fonts/PingFangSC-Regular/result.css";
-@import "../assets/fonts/PingFangSC-Medium/result.css";
+/* 切片字体：英文 Merriweather + 中文思源宋体 */
+@import "../assets/fonts/Merriweather/result.css";
+@import "../assets/fonts/SourceHanSerifSC-Regular/result.css";
+@import "../assets/fonts/SourceHanSerifSC-Bold/result.css";
 @import "rehype-callouts/theme/obsidian";
+
+/* 代码字体：Fira Code 可变字体单文件 */
+@font-face {
+  font-family: "FiraCode";
+  src: url("../assets/fonts/FiraCode-VF.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 

@@ -33,13 +33,23 @@
  * - 字体变量（--font-*）直接在此定义，不依赖外部主题文件。
  */
 @theme inline {
-  /* ===== 字体 ===== */
-  --font-app: "SF Pro Text", "苹方_中等", sans-serif;
-  --font-heading: "SF Pro Display", "苹方_粗体", sans-serif;
-  --font-heading-sub: "PingFang SC", "苹方_中等", "SF Pro Display", "苹方_粗体", sans-serif;
-  --font-ui: "PingFang SC", "苹方_中等", "SF Pro Text", sans-serif;
-  --font-code: "SF Pro Text", monospace;
-  --font-bold: "SF Pro Text", "苹方_粗体", sans-serif;
+  /* ===== 字体 =====
+   * 中英文混排栈：英文优先 Merriweather，中文回退思源宋体，最后系统 serif。
+   * 注意：切片工具为思源宋体 Regular(400) 与 Bold(700) 使用了同一个
+   *       family 名 "Source Han Serif SC"，由元素的 font-weight 自动选择字重，
+   *       因此 heading/bold 与正文共用同一字体栈，粗细由权重决定。
+   */
+  --font-app: "Merriweather Light", "Source Han Serif SC", serif;
+  --font-heading: "Merriweather Light", "Source Han Serif SC", serif;
+  --font-heading-sub: "Merriweather Light", "Source Han Serif SC", serif;
+  --font-ui: "Merriweather Light", "Source Han Serif SC", serif;
+  --font-bold: "Merriweather Light", "Source Han Serif SC", serif;
+  --font-code: "FiraCode", "Source Han Serif SC", monospace;
+
+  /* Tailwind 默认字体 token 覆盖，确保 font-sans/serif/mono 与全站一致 */
+  --font-sans: var(--font-app);
+  --font-serif: var(--font-app);
+  --font-mono: var(--font-code);
 
   /* ===== 基础 ===== */
   --color-background: var(--background);
