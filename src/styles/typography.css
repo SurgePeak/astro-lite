@@ -269,8 +269,7 @@
       @apply border-b border-b-table-row-border;
     }
 
-    /* Details / summaries — kept as-is for AstroPaper compatibility */
-    details {
+    details:not(.callout) {
       @apply text-foreground inline-block cursor-pointer select-none [&_p]:hidden [&_ul]:my-0!;
     }
     summary {

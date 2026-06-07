@@ -48,7 +48,9 @@ let isTransitioning = false;
 let themeBtnHandler: (() => void) | null = null;
 
 function reflect(): void {
-  document.firstElementChild?.setAttribute("data-theme", themeValue);
+  const root = document.firstElementChild;
+  root?.setAttribute("data-theme", themeValue);
+  root?.classList.toggle("dark", themeValue === DARK);
   document.querySelector("#theme-btn")?.setAttribute("aria-label", themeValue);
 
   // Fill <meta name="theme-color"> with the computed background colour so
