@@ -43,11 +43,8 @@ description: "关于我和我的博客"
   { "date": "2026-06-04", "text": "更换为自研主题 Astro Lite" }
 ]
 </script>
-## LICENSE
-
-
-
-本博客主题 [Astro Lite](https://github.com/achuanya/astro-lite) 基于开源项目 [Astro Paper](https://github.com/satnaing/astro-paper)  二次开发
+> LICENSE[!NOTE]
+> 本博客主题 [Astro Lite](https://github.com/achuanya/astro-lite) 基于开源项目 [Astro Paper](https://github.com/satnaing/astro-paper)  二次开发
 
 | 对象                 | 许可                                                         | 是否允许商用 |      | 是否允许修改     |
 | -------------------- | ------------------------------------------------------------ | ------------ | ---- | ---------------- |
