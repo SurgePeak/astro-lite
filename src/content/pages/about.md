@@ -1,6 +1,7 @@
 ---
 title: "关于"
 description: "关于我和我的博客"
+exif: false
 ---
 
 自<span id="start-year" class="inline-block font-normal text-accent">0</span>年<span id="start-month" class="inline-block font-normal text-accent">0</span>月<span id="start-day" class="inline-block font-normal text-accent">0</span>日起，本站已运行<span id="running-days" class="inline-block font-normal text-accent">0</span>天，一路走来，记录了<span id="total-posts" class="inline-block font-normal text-accent">0</span>篇日志，累计<span id="total-words" class="inline-block font-normal text-accent">0</span>万字
@@ -10,10 +11,9 @@ description: "关于我和我的博客"
 但随着时间的推移，博客逐渐成为了我生活的一部分。这里不止于技术，更记录着我对生活、户外、音乐和阅读的感悟。也让我在思考和记录的过程中，感受到文字的力量
 
 
-
 > 零零后 ｜ 野生程序员 ｜ 徒步登山爱好者 ｜ 长途骑行小学生 ｜ 路亚振出 ｜ 古典乐 & 笛箫
 
-![游钓四方的骑行照](https://cos.lhasa.icu/dist/images/2025-06-01-dragon-boat-cycling-beiyuxian/20250531195440.jpg)
+![游钓四方的骑行照](https://cos.lhasa.icu/dist/images/2025-06-01-dragon-boat-cycling-beiyuxian/20250531195440.jpg "游钓四方的骑行照")
 
 ## 博客进程
 
