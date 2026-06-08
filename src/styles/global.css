@@ -34,8 +34,17 @@
   }
   *::-webkit-scrollbar-thumb {
     background: var(--color-scrollbar-thumb);
+    transition: background-color 0.18s ease;
   }
   *::-webkit-scrollbar-thumb:hover {
+    background: var(--color-scrollbar-thumb-hover);
+  }
+  /* 鼠标接近视口右边缘时，提前显示滚动条滑块 */
+  html.scrollbar-near,
+  html.scrollbar-near * {
+    scrollbar-color: var(--color-scrollbar-thumb-hover) transparent;
+  }
+  html.scrollbar-near *::-webkit-scrollbar-thumb {
     background: var(--color-scrollbar-thumb-hover);
   }
   h1 {
