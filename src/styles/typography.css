@@ -189,6 +189,12 @@
     pre {
       @apply rounded-lg;
       padding: 0;
+      /* 隐藏代码块横向滚动条，保留滚动能力 */
+      scrollbar-width: none;          /* Firefox */
+      -ms-overflow-style: none;       /* 旧版 Edge / IE */
+    }
+    pre::-webkit-scrollbar {
+      display: none;                  /* WebKit / Blink */
     }
     .astro-code code {
       @apply flex-[1_0_100%] bg-inherit;

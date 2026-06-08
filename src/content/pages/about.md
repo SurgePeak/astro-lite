@@ -37,9 +37,9 @@ description: "关于我和我的博客"
   { "date": "2024-07-22", "text": "通过腾讯云 COS 叠加 CDN 架构，进一步优化加载速度" },
   { "date": "2025-05-25", "text": "舍弃 Jekyll 架构，Fork Astro Paper 主题" },
   { "date": "2025-05-25", "text": "将评论系统从 Disqus 迁移至 Artalk" },
-  { "date": "2025-05-31", "text": "更换为自研主题 Astro Lhasa" },
+  { "date": "2025-05-31", "text": "更换为自开发主题 Astro Lhasa" },
   { "date": "2025-11-03", "text": "调整博客域名为子域名 blog.lhasa.icu" },
-  { "date": "2026-06-04", "text": "更换为自研主题 Astro Lite" }
+  { "date": "2026-06-04", "text": "更换为自开发主题 Astro Lite" }
 ]
 </script>
 
