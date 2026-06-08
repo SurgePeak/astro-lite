@@ -107,12 +107,14 @@
   --checkbox-check: #3b3b3b;
 
   /* ===== 代码 ===== */
-  /* 代码块背景色 */
-  --code-block-bg: rgba(43, 43, 41, 0.5);
+  /* 代码块背景色（不透明，避免与文件名标签叠加产生色差） */
+  --code-block-bg: #262524;
   /* 行内代码背景色 */
   --code-inline-bg: var(--code-block-bg);
   /* 复制按钮背景色 */
   --code-copy-bg: var(--code-block-bg);
+  /* 文件名标签文字色 */
+  --code-filename-text: #637777;
   /* 文件名标签绿点色 */
   --code-filename-dot: #22c55e;
   /* 代码高亮行背景色 */

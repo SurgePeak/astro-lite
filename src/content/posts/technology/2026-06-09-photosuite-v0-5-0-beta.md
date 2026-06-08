@@ -92,7 +92,7 @@ Photosuite 走的是构建期解析图片 EXIF 的路子
 
 如果 CDN 不支持 Range（返回 200 而不是 206），Photosuite  会自动回退到完整下载模式
 
-> 目前主流 CDN（Cloudflare、阿里云 OSS、腾讯云 COS、AWS S3 等）
+> 目前主流 CDN 和存储服务（Cloudflare、阿里云 OSS、腾讯云 COS、AWS S3 等）
 >
 > 和大多数现代静态文件服务器（OpenResty、Nginx、Apache 等）
 >
