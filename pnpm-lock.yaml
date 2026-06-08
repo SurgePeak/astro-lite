@@ -30,8 +30,8 @@ importers:
         specifier: ^4.1.1
         version: 4.1.1
       photosuite:
-        specifier: ^0.4.0
-        version: 0.4.0
+        specifier: 0.5.0-beta
+        version: 0.5.0-beta
       rehype-callouts:
         specifier: ^2.1.2
         version: 2.1.2
@@ -2172,8 +2172,8 @@ packages:
     resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==}
     engines: {node: '>=8'}
 
-  photosuite@0.4.0:
-    resolution: {integrity: sha512-Abu6vxxG/9z+bcK2qFuMiMQCHoI+l7OzJXvK/w6NP47BZE2SkG/zosQIV4bCnYRyIdQoWJuzUBqiWgUyyiBigA==}
+  photosuite@0.5.0-beta:
+    resolution: {integrity: sha512-9ALK7AKsw/rpM2yWI8EzDosr1GsUP+mVW6dK2uST2Elf4eiG0y3ZTMqVMOwiU89trf5HgbzGl7m+LoQGoqS/sg==}
 
   piccolore@0.1.3:
     resolution: {integrity: sha512-o8bTeDWjE086iwKrROaDf31K0qC/BENdm15/uH9usSC/uZjJOKb2YGiVHfLY4GhwsERiPI1jmwI2XrA7ACOxVw==}
@@ -5317,7 +5317,7 @@ snapshots:
 
   path-key@3.1.1: {}
 
-  photosuite@0.4.0:
+  photosuite@0.5.0-beta:
     dependencies:
       '@fancyapps/ui': 6.1.8
       exiftool-vendored: 35.21.0

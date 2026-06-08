@@ -178,6 +178,7 @@
       @apply text-foreground bg-code-inline-bg rounded wrap-break-word before:content-none after:content-none;
       font-size: 0.9em;
       padding: 0.125rem 0.375rem;
+      font-weight: 400;
     }
 
     /*
