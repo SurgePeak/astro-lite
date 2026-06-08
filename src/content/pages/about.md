@@ -18,7 +18,7 @@ description: "关于我和我的博客"
 
 <ul
   id="blog-timeline"
-  class="mt-1 space-y-1 pl-0 list-none"
+  class="mt-1 space-y-1 pl-0 pb-4 list-none"
   data-theme="auto"
 ></ul>
 
