@@ -163,7 +163,7 @@ const blogStats = await getPostsMetrics();
         sep.textContent = "»";
 
         const text = document.createElement("span");
-        text.className = "flex-1 text-sm text-accent truncate";
+        text.className = "flex-1 text-sm text-foreground truncate";
         text.textContent = evt.text;
 
         li.append(date, sep, text);
