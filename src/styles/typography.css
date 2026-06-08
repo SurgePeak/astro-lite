@@ -352,3 +352,73 @@
     }
   }
 }
+
+/*
+ * ===== Callouts (rehype-callouts / Obsidian theme) =====
+ *
+ * 注意：这些规则需置于 @layer base 之外（unlayered），否则会被
+ * global.css 中 `@import "rehype-callouts/theme/obsidian"` 引入的
+ * 同名 `.callout` 规则覆盖（unlayered 在级联中始终优先于 @layer）。
+ *
+ * 默认主题给 .callout 设置了 padding 12px 12px 12px 24px、margin 1em 0；
+ * 而 .app-prose 下的 <p> 仍然继承了 var(--block-gap)，叠加后内部段落松散。
+ * 这里覆盖外框节奏、收紧内部段落间距，并消除首尾段落的边距重叠。
+ *
+ * DOM 结构（rehype-callouts 生成）：
+ *   .callout
+ *     ├── .callout-title (summary / div)
+ *     │     ├── .callout-title-icon
+ *     │     ├── .callout-title-text
+ *     │     └── .callout-fold-icon (可折叠时)
+ *     └── .callout-content (div)
+ *           └── <p> / <ul> / <pre> ...
+ */
+.app-prose {
+  --callout-inner-gap: 0.4rem;
+}
+
+.app-prose .callout {
+  margin-top: var(--block-gap);
+  margin-bottom: var(--block-gap);
+  padding: 0.625rem 1rem 0.625rem 1.125rem;
+  line-height: var(--leading-body);
+}
+
+.app-prose .callout-title {
+  line-height: var(--leading-heading);
+  margin-bottom: var(--callout-inner-gap);
+}
+
+/* 只有标题、没有内容时，标题不应制造底部空间 */
+.app-prose .callout-title:last-child {
+  margin-bottom: 0;
+}
+
+/* 折叠状态下闭合时，移除标题与未展开内容之间的多余间距 */
+.app-prose .callout[data-collapsible="true"]:not([open]) > .callout-title {
+  margin-bottom: 0;
+}
+
+/* 内部段落与块元素 — 显著小于正文 block-gap，营造紧凑节奏 */
+.app-prose .callout-content > p,
+.app-prose .callout-content > ul,
+.app-prose .callout-content > ol,
+.app-prose .callout-content > blockquote,
+.app-prose .callout-content > pre,
+.app-prose .callout-content > table {
+  margin-top: 0;
+  margin-bottom: var(--callout-inner-gap);
+}
+
+/* 首尾子元素归零，避免与 .callout 外框 padding 叠加 / 边距重叠 */
+.app-prose .callout-content > :first-child {
+  margin-top: 0;
+}
+.app-prose .callout-content > :last-child {
+  margin-bottom: 0;
+}
+
+/* 处理 Markdown 中 `>` 空行渲染出的空段落，避免双重视觉间距 */
+.app-prose .callout-content > p:empty {
+  display: none;
+}

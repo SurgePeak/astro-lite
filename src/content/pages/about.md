@@ -9,11 +9,11 @@ description: "关于我和我的博客"
 
 但随着时间的推移，博客逐渐成为了我生活的一部分。这里不止于技术，更记录着我对生活、户外、音乐和阅读的感悟。也让我在思考和记录的过程中，感受到文字的力量
 
-## 博主
 
-千禧年小孩、长途骑行小学生、徒步登山爱好者、路亚振出、古典乐、笛箫、野生程序员
 
-![游钓四方的骑行照，拍摄于第17届马自骑资格认证赛（余姚站）](https://cos.lhasa.icu/StylePictures/my-photo.jpg "游钓四方的骑行照，拍摄于第17届马自骑资格认证赛（余姚站）")
+> 零零后 ｜ 野生程序员 ｜ 徒步登山爱好者 ｜ 长途骑行小学生 ｜ 路亚振出 ｜ 古典乐 & 笛箫
+
+![游钓四方的骑行照](https://cos.lhasa.icu/dist/images/2025-06-01-dragon-boat-cycling-beiyuxian/20250531195440.jpg)
 
 ## 博客进程
 
@@ -43,6 +43,7 @@ description: "关于我和我的博客"
   { "date": "2026-06-04", "text": "更换为自研主题 Astro Lite" }
 ]
 </script>
+
 
 > [!NOTE] 版权与许可协议
 > 本博客主题 [Astro Lite](https://github.com/achuanya/astro-lite) 基于开源项目 [Astro Paper](https://github.com/satnaing/astro-paper) 二次开发，欢迎自由使用
