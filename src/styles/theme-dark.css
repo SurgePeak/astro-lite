@@ -42,15 +42,17 @@
   /* 主要文字色 */
   --foreground: #d0d3d8;
   /* 强调色（链接、高亮） */
-  --accent: #E6E1D6;
+  --accent: #FFFFFF;
   /* 强调色上的文字色 */
-  --accent-foreground: #D4C9A8;
+  --accent-foreground: #0d141e;
   /* 次要背景色（标签等） */
   --muted: #302d28;
   /* 次要文字色（时间、描述等） */
   --muted-foreground: #8a8c90;
   /* 边框色 */
   --border: #48443c;
+  /* 文字选中背景色（基于 --accent 主色调，20% 透明度，柔和不刺眼） */
+  --selection-bg: color-mix(in oklab, var(--accent) 20%, transparent);
 
   /* ===== 年度进度条 ===== */
   /* 暗色下直接用强调色高亮 */

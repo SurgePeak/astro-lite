@@ -32,6 +32,15 @@
     scrollbar-width: auto;
     scrollbar-color: var(--color-scrollbar-thumb) transparent;
   }
+  /* 全局文字选中样式：使用主题色的半透明背景，文字颜色保持原样避免反色 */
+  ::selection {
+    background-color: var(--color-selection-bg);
+    color: inherit;
+  }
+  ::-moz-selection {
+    background-color: var(--color-selection-bg);
+    color: inherit;
+  }
   *::-webkit-scrollbar-thumb {
     background: var(--color-scrollbar-thumb);
     transition: background-color 0.18s ease;

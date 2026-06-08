@@ -51,6 +51,8 @@
   --muted-foreground: #969696;
   /* 边框色 */
   --border: #1f1e1d;
+  /* 文字选中背景色（基于 --nav-link 主色调，20% 透明度，柔和不刺眼） */
+  --selection-bg: color-mix(in oklab, #2ea9df 20%, transparent);
 
   /* ===== 年度进度条 ===== */
   /* 用强调色高亮已过去的部分 */

@@ -60,6 +60,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+  --color-selection-bg: var(--selection-bg);
 
   /* ===== 年度进度条 ===== */
   --color-year-progress-fill: var(--year-progress-fill);
