@@ -187,7 +187,7 @@
      * Border/shiki colors are handled by .astro-code rule below.
      */
     pre {
-      @apply rounded-lg;
+      @apply rounded-lg border border-code-block-border;
       padding: 0;
       /* 隐藏代码块横向滚动条，保留滚动能力 */
       scrollbar-width: none;          /* Firefox */
@@ -336,9 +336,9 @@
     display: none;
   }
   
-  /* 移除代码块文件名标签的边框 */
+  /* 代码块文件名标签的边框 */
   .astro-code span.absolute {
-    @apply !border-0;
+    @apply border border-code-block-border rounded-t-lg;
   }
 
   /* Shiki transformer visual styles — diff, highlight, error */

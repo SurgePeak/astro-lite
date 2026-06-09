@@ -96,6 +96,7 @@
   --color-checkbox-check: var(--checkbox-check);
 
   /* ===== 代码 ===== */
+  --color-code-block-border: var(--code-block-border);
   --color-code-block-bg: var(--code-block-bg);
   --color-code-inline-bg: var(--code-inline-bg);
   --color-code-copy-bg: var(--code-copy-bg);

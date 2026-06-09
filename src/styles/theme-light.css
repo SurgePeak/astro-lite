@@ -107,6 +107,8 @@
   --checkbox-check: #6b6b6b;
 
   /* ===== 代码 ===== */
+  /* 代码块边框色 */
+  --code-block-border: #e5e5e6;
   /* 代码块背景色（不透明，避免与文件名标签叠加产生色差） */
   --code-block-bg: #fafafb;
   /* 行内代码背景色 */
