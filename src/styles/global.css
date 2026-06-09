@@ -5,8 +5,7 @@
 @import "./typography.css";
 @import "./skeleton.css";
 
-/* 切片字体：英文 Merriweather + 中文思源宋体 */
-@import "../assets/fonts/Merriweather/result.css";
+/* 切片字体：思源宋体（含中英文） */
 @import "../assets/fonts/SourceHanSerifSC-Regular/result.css";
 @import "../assets/fonts/SourceHanSerifSC-Bold/result.css";
 @import "rehype-callouts/theme/obsidian";

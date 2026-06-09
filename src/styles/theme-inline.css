@@ -34,16 +34,14 @@
  */
 @theme inline {
   /* ===== 字体 =====
-   * 中英文混排栈：英文优先 Merriweather，中文回退思源宋体，最后系统 serif。
-   * 注意：切片工具为思源宋体 Regular(400) 与 Bold(700) 使用了同一个
-   *       family 名 "Source Han Serif SC"，由元素的 font-weight 自动选择字重，
-   *       因此 heading/bold 与正文共用同一字体栈，粗细由权重决定。
+   * 思源宋体同时覆盖中英文；Regular(400) 与 Bold(700) 共用
+   * family 名 "Source Han Serif SC"，由 font-weight 自动择字重。
    */
-  --font-app: "Merriweather Light", "Source Han Serif SC", serif;
-  --font-heading: "Merriweather Light", "Source Han Serif SC", serif;
-  --font-heading-sub: "Merriweather Light", "Source Han Serif SC", serif;
-  --font-ui: "Merriweather Light", "Source Han Serif SC", serif;
-  --font-bold: "Merriweather Light", "Source Han Serif SC", serif;
+  --font-app: "Source Han Serif SC", serif;
+  --font-heading: "Source Han Serif SC", serif;
+  --font-heading-sub: "Source Han Serif SC", serif;
+  --font-ui: "Source Han Serif SC", serif;
+  --font-bold: "Source Han Serif SC", serif;
   --font-code: "FiraCode", "Source Han Serif SC", monospace;
 
   /* Tailwind 默认字体 token 覆盖，确保 font-sans/serif/mono 与全站一致 */
