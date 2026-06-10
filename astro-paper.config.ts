@@ -34,6 +34,10 @@ export default defineAstroPaperConfig({
     dataUrl: "https://cos.lhasa.icu/lhasaRSS/data.json",
     defaultAvatar: "https://cos.lhasa.icu/dist/avatar/default.png",
   },
+  comments: {
+    server: "https://artalk.lhasa.icu",
+    site: "游钓四方的博客",
+  },
   timeBasedTheme: {
     enabled: true,
     lightStart: "08:00",

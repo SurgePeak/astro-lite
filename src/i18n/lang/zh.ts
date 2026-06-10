@@ -10,6 +10,7 @@ export default {
     about: "关于",
     archives: "归档",
     search: "搜索",
+    guestbook: "留言",
   },
   post: {
     publishedAt: "发布于",
@@ -91,5 +92,9 @@ export default {
     title: "404 页面未找到",
     message: "页面未找到",
     goHome: "返回首页",
+  },
+  comments: {
+    title: "评论",
+    loading: "评论加载中…",
   },
 } satisfies UIStrings;

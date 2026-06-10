@@ -8,6 +8,7 @@ export interface UIStrings {
     about: string;
     archives: string;
     search: string;
+    guestbook: string;
   };
   post: {
     publishedAt: string;
@@ -89,5 +90,9 @@ export interface UIStrings {
     title: string;
     message: string;
     goHome: string;
+  };
+  comments: {
+    title: string;
+    loading: string;
   };
 }

@@ -45,6 +45,15 @@ const config: ResolvedAstroPaperConfig = {
     lightStart: userConfig.timeBasedTheme?.lightStart ?? "08:00",
     darkStart: userConfig.timeBasedTheme?.darkStart ?? "18:00",
   },
+  comments: userConfig.comments
+    ? {
+        server: userConfig.comments.server,
+        site: userConfig.comments.site,
+        assetsUrl:
+          userConfig.comments.assetsUrl ??
+          `${userConfig.comments.server.replace(/\/$/, "")}/dist`,
+      }
+    : undefined,
   socials: userConfig.socials ?? [],
   shareLinks: userConfig.shareLinks ?? [],
 };

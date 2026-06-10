@@ -125,6 +125,17 @@ const rssHref = `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`;
       </li>
       <li>
         <a
+          href={getRelativeLocaleUrl(locale, "guestbook")}
+          class:list={[
+            "hover:text-accent inline-block py-1",
+            { "active-nav": isActive("/guestbook") },
+          ]}
+        >
+          {t.nav.guestbook}
+        </a>
+      </li>
+      <li>
+        <a
           href={getRelativeLocaleUrl(locale, "about")}
           class:list={[
             "hover:text-accent inline-block py-1",

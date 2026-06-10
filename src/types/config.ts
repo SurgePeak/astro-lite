@@ -118,6 +118,21 @@ interface FriendsConfig {
   defaultAvatar?: string;
 }
 
+interface CommentsConfig {
+  /** Artalk backend server URL, e.g. "https://artalk.example.com" */
+  server: string;
+  /** Site name registered in the Artalk admin panel */
+  site: string;
+  /**
+   * Directory hosting `Artalk.js` and `Artalk.css`.
+   * Defaults to `${server}/dist` — works out of the box for self-hosted
+   * Artalk, since the backend already serves its own bundle. Override with a
+   * CDN base (e.g. "https://cdn.jsdelivr.net/npm/artalk@2.9/dist") if you'd
+   * rather pull from a CDN.
+   */
+  assetsUrl?: string;
+}
+
 interface AstroPaperConfig {
   site: SiteConfig;
   posts?: PostsConfig;
@@ -129,6 +144,8 @@ interface AstroPaperConfig {
   timeBasedTheme?: TimeBasedThemeConfig;
   /** Friends page config */
   friends?: FriendsConfig;
+  /** Artalk comment system config */
+  comments?: CommentsConfig;
   /** Social profile links shown in header/footer */
   socials?: SocialLink[];
   /** Share links shown on post detail pages */
@@ -156,6 +173,7 @@ export interface ResolvedAstroPaperConfig {
   features: Required<FeaturesConfig>;
   timeBasedTheme: Required<TimeBasedThemeConfig>;
   friends: Required<FriendsConfig>;
+  comments?: Required<CommentsConfig>;
   socials: SocialLink[];
   shareLinks: ShareLink[];
 }

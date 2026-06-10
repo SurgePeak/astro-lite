@@ -10,6 +10,7 @@ export default {
     about: "About",
     archives: "Archives",
     search: "Search",
+    guestbook: "Guestbook",
   },
   post: {
     publishedAt: "Published at",
@@ -91,5 +92,9 @@ export default {
     title: "404 Not Found",
     message: "Page Not Found",
     goHome: "Go back home",
+  },
+  comments: {
+    title: "Comments",
+    loading: "Loading comments…",
   },
 } satisfies UIStrings;

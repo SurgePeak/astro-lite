@@ -1,0 +1,186 @@
+---
+import config from "@/config";
+import { useTranslations } from "@/i18n";
+
+type Props = {
+  /** Container selector or bare id. Defaults to "#artalk-comments". */
+  el?: string;
+  /** Override the Artalk server URL (defaults to astro-paper.config.comments.server). */
+  server?: string;
+  /** Override the Artalk site name (defaults to astro-paper.config.comments.site). */
+  site?: string;
+  /** Override pageKey. Defaults to the current pathname at runtime. */
+  pageKey?: string;
+  /** Override pageTitle. Defaults to document.title at runtime. */
+  pageTitle?: string;
+  /**
+   * Directory hosting `Artalk.js` and `Artalk.css`.
+   * Defaults to `${server}/dist` (works with self-hosted Artalk out of the box).
+   */
+  assetsUrl?: string;
+  /** Show a localised "Comments" heading above the widget. Defaults to false. */
+  showTitle?: boolean;
+  /** Extra class names for the wrapper section. */
+  class?: string;
+};
+
+const {
+  el = "#artalk-comments",
+  server = config.comments?.server,
+  site = config.comments?.site,
+  pageKey,
+  pageTitle,
+  assetsUrl,
+  showTitle = false,
+  class: className,
+} = Astro.props;
+
+if (!server || !site) {
+  throw new Error(
+    "[Artalk] `server` and `site` are required — set them in astro-paper.config.ts under `comments`, or pass props."
+  );
+}
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+
+const resolvedAssetsBase = (
+  assetsUrl ??
+  config.comments?.assetsUrl ??
+  `${server.replace(/\/$/, "")}/dist`
+).replace(/\/$/, "");
+const cssHref = `${resolvedAssetsBase}/Artalk.css`;
+const jsSrc = `${resolvedAssetsBase}/Artalk.js`;
+const containerId = el.startsWith("#") ? el.slice(1) : el;
+const elSelector =
+  el.startsWith("#") || el.startsWith(".") ? el : `#${el}`;
+---
+
+<link rel="stylesheet" href={cssHref} />
+
+<section class:list={["artalk-section", className]}>
+  {
+    showTitle && (
+      <h2 class="text-foreground mb-4 text-xl font-semibold">
+        {t.comments.title}
+      </h2>
+    )
+  }
+  <div id={containerId} class="artalk-host">
+    <p
+      class="text-foreground/60 py-6 text-center text-sm"
+      data-artalk-placeholder
+    >
+      {t.comments.loading}
+    </p>
+  </div>
+</section>
+
+<script
+  is:inline
+  data-astro-rerun
+  define:vars={{ elSelector, server, site, pageKey, pageTitle, jsSrc }}
+>
+  (function () {
+    var W = window;
+    var D = document;
+
+    function isDark() {
+      return D.documentElement.getAttribute("data-theme") === "dark";
+    }
+
+    function destroyArtalk() {
+      if (W.__artalkInstance) {
+        try {
+          W.__artalkInstance.destroy();
+        } catch (e) {
+          /* noop */
+        }
+        W.__artalkInstance = null;
+      }
+      // Artalk renders these into <body>; clean up so they don't leak across pages.
+      D.querySelectorAll(".atk-sidebar, .atk-layer-wrap").forEach(function (n) {
+        n.remove();
+      });
+      if (W.__artalkThemeObserver) {
+        W.__artalkThemeObserver.disconnect();
+        W.__artalkThemeObserver = null;
+      }
+    }
+
+    function loadArtalkScript() {
+      return new Promise(function (resolve, reject) {
+        if (W.Artalk) return resolve(W.Artalk);
+        var existing = D.querySelector("script[data-artalk-script]");
+        if (existing) {
+          existing.addEventListener("load", function () {
+            resolve(W.Artalk);
+          });
+          existing.addEventListener("error", reject);
+          return;
+        }
+        var s = D.createElement("script");
+        s.src = jsSrc;
+        s.async = true;
+        s.setAttribute("data-artalk-script", "");
+        s.onload = function () {
+          resolve(W.Artalk);
+        };
+        s.onerror = reject;
+        D.head.appendChild(s);
+      });
+    }
+
+    function initArtalk() {
+      var container = D.querySelector(elSelector);
+      if (!container) return;
+      destroyArtalk();
+
+      loadArtalkScript()
+        .then(function (Artalk) {
+          var fresh = D.querySelector(elSelector);
+          if (!Artalk || !fresh) return;
+          // Clear the loading placeholder before Artalk takes over.
+          var ph = fresh.querySelector("[data-artalk-placeholder]");
+          if (ph) ph.remove();
+
+          var instance = Artalk.init({
+            el: elSelector,
+            pageKey: pageKey || W.location.pathname,
+            pageTitle: pageTitle || D.title,
+            server: server,
+            site: site,
+            darkMode: isDark(),
+          });
+          W.__artalkInstance = instance;
+
+          var obs = new MutationObserver(function () {
+            if (W.__artalkInstance) {
+              W.__artalkInstance.setDarkMode(isDark());
+            }
+          });
+          obs.observe(D.documentElement, {
+            attributes: true,
+            attributeFilter: ["data-theme"],
+          });
+          W.__artalkThemeObserver = obs;
+        })
+        .catch(function (err) {
+          console.error("[Artalk] load failed:", err);
+        });
+    }
+
+    // Tear down on every navigation. document-level listener survives swaps,
+    // so wire it once per window.
+    if (!W.__artalkLifecycleWired) {
+      W.__artalkLifecycleWired = true;
+      D.addEventListener("astro:before-swap", destroyArtalk);
+    }
+
+    if (D.readyState === "loading") {
+      D.addEventListener("DOMContentLoaded", initArtalk);
+    } else {
+      initArtalk();
+    }
+  })();
+</script>
